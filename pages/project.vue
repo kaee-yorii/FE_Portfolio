@@ -1,19 +1,19 @@
 <template>
-    <div>
-        PROJECT
-    </div>
+    project
 </template>
 
-<script>
-export default {
-    setup () {
-        
-
-        return {}
-    }
-}
+<script setup lang="ts">
 </script>
-
+export default {
+    data() {
+        return {
+            
+        }
+    },
+    methods: {
+        
+}
+}
 <style lang="scss" scoped>
 
 </style>
