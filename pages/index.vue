@@ -15,9 +15,9 @@
     </div>
 
     <!-- SIDE MENU -->
-    <div class="min-h-screen w-28 flex-none mx-md:hidden">
-      <div class="fixed min-h-screen flex items-center">
-        <div class="border border-neutral p-4 rounded-full flex flex-col gap-4">
+    <div class="min-h-screen w-28 flex-none max-md:hidden relative">
+      <div class="mx-md:hidden fixed min-h-screen flex items-center">
+        <div class="border border-neutral p-5 rounded-full flex flex-col gap-4">
           <div class="tooltip tooltip-top" data-tip="Home">
             <LucideHome :size="22" class="text-accent" />
           </div>
@@ -38,11 +38,12 @@
           </div>
         </div>
       </div>
-      <div class="drawer-content fixed">
-        <label for="my-drawer-4" class="btn btn-outline btn-circle mt-8">
-          <LucideMenu :size="22" />
-        </label>
-      </div>
+    </div>
+    <!-- SIDE MENU DRAWER TOGGLE BUTTON -->
+    <div class="md:hidden drawer-content fixed right-8">
+      <label for="my-drawer-4" class="btn btn-outline btn-circle mt-8">
+        <LucideMenu :size="22" />
+      </label>
     </div>
   </div>
 
