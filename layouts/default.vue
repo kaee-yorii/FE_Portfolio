@@ -1,5 +1,5 @@
 <template>
-  <div data-theme="autumn" class="min-h-screen flex text-default">
+  <div data-theme="forest" class="min-h-screen flex text-default">
     <!-- MAIN CONTENT -->
     <div class="min-h-screen grow grid grid-cols-10">
       <slot />
@@ -10,24 +10,44 @@
       <div class="mx-md:hidden fixed min-h-screen flex items-center">
         <!-- update padding-->
         <div class="border border-neutral p-5 rounded-full flex flex-col gap-4">
-          <a href="#" class="tooltip tooltip-top" data-tip="Home">
-            <LucideHome :size="22" class="text-secondary" />
-          </a>
-          <a href="#" class="tooltip tooltip-right" data-tip="UserRound">
-            <LucideUserRound :size="22" class="text-secondary" />
-          </a>
-          <a href="#" class="tooltip tooltip-left" data-tip="LayoutPanelLeft">
-            <LucideLayoutPanelLeft :size="22" class="text-secondary" />
-          </a>
-          <a href="#" class="tooltip tooltip-right" data-tip="Project">
-            <LucideBriefcase :size="22" class="text-secondary" />
-          </a>
-          <a href="#" class="tooltip tooltip-left" data-tip="Testimonial">
-            <LucideUserRound :size="22" class="text-secondary" />
-          </a>
-          <a href="#" class="tooltip tooltip-bottom" data-tip="Mail">
-            <LucideMail :size="22" class="text-secondary" />
-          </a>
+          <NuxtLink to="/" class="tooltip tooltip-top" data-tip="Home">
+            <LucideHome :size="16" class="text-secondary" />
+          </NuxtLink>
+          <NuxtLink
+            :to="{ path: '/', hash: '#about' }"
+            class="tooltip tooltip-right"
+            data-tip="About"
+          >
+            <LucideUserRound :size="16" class="text-secondary" />
+          </NuxtLink>
+          <NuxtLink
+            :to="{ path: '/', hash: '#resume' }"
+            class="tooltip tooltip-left"
+            data-tip="Resume"
+          >
+            <LucideLayoutPanelLeft :size="16" class="text-secondary" />
+          </NuxtLink>
+          <NuxtLink
+            :to="{ path: '/', hash: '#project' }"
+            class="tooltip tooltip-right"
+            data-tip="Project"
+          >
+            <LucideBriefcase :size="16" class="text-secondary" />
+          </NuxtLink>
+          <NuxtLink
+            :to="{ path: '/', hash: '#testimonial' }"
+            class="tooltip tooltip-left"
+            data-tip="Testimonial"
+          >
+            <LucideUserRound :size="16" class="text-secondary" />
+          </NuxtLink>
+          <NuxtLink
+            :to="{ path: '/', hash: '#contact' }"
+            class="tooltip tooltip-bottom"
+            data-tip="Contact"
+          >
+            <LucideMail :size="16" class="text-secondary" />
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -99,3 +119,9 @@
     </div>
   </div>
 </template>
+
+<style>
+html {
+  scroll-behavior: smooth;
+}
+</style>

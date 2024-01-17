@@ -1,19 +1,6 @@
 <template>
-    <div>
-        ini halaman about
-    </div>
+  <div>
+    INI HALAMAN ABOUT
+    <NuxtLink to="/" class="btn btn-info">Ke Halaman Index</NuxtLink>
+  </div>
 </template>
-
-<script>
-export default {
-    setup () {
-        
-
-        return {}
-    }
-}
-</script>
-
-<style lang="scss" scoped>
-
-</style>
