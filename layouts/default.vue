@@ -1,7 +1,7 @@
 <template>
-  <div data-theme="valentine" class="min-h-screen flex text-default">
+  <div data-theme="dracula" class="min-h-screen flex text-default">
     <!-- MAIN CONTENT -->
-    <div class="min-h-screen grow grid grid-cols-10">
+    <div class="min-h-screen grow">
       <slot />
     </div>
 
@@ -65,11 +65,11 @@
           <NuxtLink to="https://www.instagram.com/kaeropiii.__/">
             <LucideInstagram :size="16" class="text-secondary" />
           </NuxtLink>
-          <NuxtLink to="#">
-            <LucideTwitter :size="16" class="text-secondary" />
+          <NuxtLink to="https://github.com/kaee-yorii/kaee-portfolio-vueJs">
+            <LucideGithub :size="16" class="text-secondary" />
           </NuxtLink>
           <NuxtLink to="https://discord.gg/6WmVveH2">
-            <LucideGithub :size="16" class="text-secondary" />
+            <LucideTwitter :size="16" class="text-secondary" />
           </NuxtLink>
         </div>
       </div>
@@ -97,15 +97,33 @@ const menus = [
   },
   {
     path: "/",
+    hash: "#blog",
+    title: "Blog",
+    icon: resolveComponent("LucideNewsPaper"),
+  },
+  {
+    path: "/",
     hash: "#resume",
     title: "Resume",
     icon: resolveComponent("LucideLayoutPanelLeft"),
   },
   {
     path: "/",
+    hash: "#education",
+    title: "Education",
+    icon: resolveComponent("LucideGraduationCap"),
+  },
+  {
+    path: "/",
     hash: "#project",
     title: "Project",
     icon: resolveComponent("LucideBriefcase"),
+  },
+  {
+    path: "/",
+    hash: "#skill",
+    title: "Skill",
+    icon: resolveComponent("LucideUserRound"),
   },
   {
     path: "/",
