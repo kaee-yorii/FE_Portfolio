@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen" id="testimonial">
+  <div class="min-h-screen" id="education">
     <div>Education</div>
     <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ullam.
