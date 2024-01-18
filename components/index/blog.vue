@@ -14,7 +14,7 @@
         <div
           class="aspect-video bg-neutral col-span-4 xl:col-span-3 rounded-lg"
         ></div>
-        <div class="lg:col-span-7">
+        <div class="col-span-6 xl:col-span-7">
           <div class="text-2xl font-semibold">Judul Blog</div>
           <div class="font-light line-clamp-2 xl:line-clamp-3">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit

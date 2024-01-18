@@ -15,7 +15,7 @@
       <IndexResume />
       <IndexEducation />
       <IndexProject />
-      <IndexContact />
+      <IndexSkill />
     </div>
   </div>
 </template>
