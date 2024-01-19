@@ -13,14 +13,15 @@
       <!-- list projects -->
       <div class="grid grid-cols-2 gap-6 mt-8">
         <!-- PROJECT ITEM -->
-        <div class="col-span md:col-span-1" v-for="j in 4" :key="j">
+        <div class="col-span md:col-span-1 group" v-for="j in 4" :key="j">
           <div class="flex justify-between items-end">
-            <div class="font-semibold text-xl text-secondary">
+            <div class="font-semibold text-xl group-hover:text-secondary">
               JUDUL PROJECT
             </div>
             <div>20 Jan 2020 - Present</div>
           </div>
           <div class="aspect-video bg-neutral rounded-xl"></div>
+          <!-- Image -->
           <div class="flex flex-nowrap gap-2 mt-2 overflow-hidden">
             <div
               v-for="n in 10"

@@ -18,7 +18,7 @@
         <div>Jakarta, Indonesia</div>
       </div>
       <!-- COPYRIGHT -->
-      <div class="text-center font-thin text-thin/50">
+      <div class="text-center font-thin text-slate-400">
         &copy; 2022 Drake. All Rights Reserved
       </div>
       <!-- SOCIAL BUTTON -->
