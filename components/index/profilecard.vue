@@ -24,31 +24,33 @@
       <!-- SOCIAL BUTTON -->
       <div class="flex justify-between">
         <div
-          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent"
+          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-secondary"
         >
-          <LucideInstagram :size="20" class="text-accent" />
+          <LucideInstagram :size="20" class="text-secondary" />
         </div>
 
         <div
-          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent"
+          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-secondary"
         >
-          <LucideTwitter :size="20" class="text-accent" />
+          <LucideTwitter :size="20" class="text-secondary" />
         </div>
 
         <div
-          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent"
+          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-secondary"
         >
-          <LucideGithub :size="20" class="text-accent" />
+          <LucideGithub :size="20" class="text-secondary" />
         </div>
 
         <div
-          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-accent"
+          class="btn btn-outline btn-circle border-neutral hover:bg-transparent hover:border-secondary"
         >
-          <LucideGlobe :size="20" class="text-accent" />
+          <LucideGlobe :size="20" class="text-secondary" />
         </div>
       </div>
       <!-- HIRE ME BUTTON -->
-      <button class="btn btn-accent w-full rounded-2xl">
+      <button
+        class="btn btn-secondary text-default hover:text-secondary hover:bg-transparent w-full rounded-2xl"
+      >
         <LucideMail />
         <div>HIRE ME</div>
       </button>

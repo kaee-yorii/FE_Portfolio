@@ -3,7 +3,7 @@
     <div
       class="rounded-2xl border border-neutral w-fit px-4 py-1 flex items-center gap-2"
     >
-      <LucideUserRound :size="16" />
+      <LucideAlbum :size="16" />
       <div class="uppercase text-sm font-light">BLOG</div>
     </div>
     <div class="flex flex-col gap-6 mt-10">

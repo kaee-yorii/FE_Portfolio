@@ -99,7 +99,7 @@ const menus = [
     path: "/",
     hash: "#blog",
     title: "Blog",
-    icon: resolveComponent("LucideNewsPaper"),
+    icon: resolveComponent("LucideAlbum"),
   },
   {
     path: "/",
@@ -124,18 +124,6 @@ const menus = [
     hash: "#skill",
     title: "Skill",
     icon: resolveComponent("LucideUserRound"),
-  },
-  {
-    path: "/",
-    hash: "#testimonial",
-    title: "Testimonial",
-    icon: resolveComponent("LucideUserRound"),
-  },
-  {
-    path: "/",
-    hash: "#contact",
-    title: "Contact",
-    icon: resolveComponent("LucideMail"),
   },
 ];
 </script>
