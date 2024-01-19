@@ -103,8 +103,8 @@ const menus = [
   },
   {
     path: "/",
-    hash: "#resume",
-    title: "Resume",
+    hash: "#experience",
+    title: "Experience",
     icon: resolveComponent("LucideLayoutPanelLeft"),
   },
   {
