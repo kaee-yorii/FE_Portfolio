@@ -21,14 +21,14 @@
         business and consumer use. I'm quietly confident, naturally curious, and
         perpetually working on improving my chopsone design problem at a time.
       </div>
-      <div class="flex items-end gap-20 grow pb-20">
+      <div class="flex items-end gap-20 pb-10 grow">
         <div>
-          <div class="text-4xl text-secondary">10+</div>
-          <div>YEARS OF<br />EXPERIENCE</div>
+          <div class="text-4xl font-bold text-secondary">10+</div>
+          <div class="font-semibold">YEARS OF<br />EXPERIENCE</div>
         </div>
         <div>
-          <div class="text-4xl text-secondary">10+</div>
-          <div>PROJECTS<br />COMPLITED</div>
+          <div class="text-4xl font-bold text-secondary">10+</div>
+          <div class="font-semibold">PROJECTS<br />COMPLITED</div>
         </div>
       </div>
     </div>
