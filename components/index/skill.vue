@@ -16,7 +16,7 @@
       <div v-for="n in 4" :key="n" class="mb-6">
         <!-- category -->
         <div class="font-semibold uppercase text-secondary">SKILL CATEGORY</div>
-        <div class="flex gap-6">
+        <div class="flex flex-wrap gap-6">
           <!-- list of skills -->
           <div v-for="n in 10" :key="n" class="group">
             <div
