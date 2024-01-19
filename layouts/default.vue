@@ -125,12 +125,6 @@ const menus = [
     title: "Skill",
     icon: resolveComponent("LucideUserRound"),
   },
-  {
-    path: "/",
-    hash: "#contact",
-    title: "Contact",
-    icon: resolveComponent("LucideMail"),
-  },
 ];
 </script>
 

@@ -22,13 +22,15 @@
             <div class="group-hover:text-secondary">2020 - Present</div>
             <div class="flex flex-col gap-4">
               <div>
-                <div class="text-4xl font-semibold mt-5">
+                <div
+                  class="text-2xl md:text-3xl xl:text-4xl font-semibold mt-5"
+                >
                   Framer Designer & Developer
                 </div>
                 <div class="text-light">Brunodee Agency</div>
               </div>
               <div>
-                <div class="text-4xl font-semibold">
+                <div class="text-2xl md:text-3xl xl:text-4xl font-semibold">
                   Front-End WordPress Developer
                 </div>
                 <div class="font-light">Envato Market</div>
