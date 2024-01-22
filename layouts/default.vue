@@ -1,5 +1,5 @@
 <template>
-  <div data-theme="dracula" class="min-h-screen flex text-default">
+  <div data-theme="nord" class="min-h-screen flex text-default">
     <!-- MAIN CONTENT -->
     <div class="min-h-screen grow">
       <slot />
@@ -21,6 +21,9 @@
 
   <!-- MOBILE MENU DRAWER -->
   <IndexDefaultlayoutMenudrawer :toggleDrawer="toggleDrawer" :menus="menus" />
+
+  <!-- FOOTER -->
+  <IndexDefaultlayoutFooter :menu="menus" />
 </template>
 
 <script setup>
