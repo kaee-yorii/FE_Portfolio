@@ -19,3 +19,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+// manggul data dari Back End test
+
+ const data = await useFetch('http://localhost:5000/kaee-portfolio');
+  console.log(data)
+</script>
