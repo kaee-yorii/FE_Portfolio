@@ -7,19 +7,22 @@
     >
       <!-- NAME & TITLE -->
       <div class="flex justify-between items-end">
-        <div class="text-3xl font-bold">DRAKE</div>
-        <div class="text-right">Framer Designer <br />& Developer</div>
+        <div class="text-3xl font-bold">{{ profile.firstName }} {{ profile.lastName }}</div>
+        <div class="text-right">{{ profile.job }}</div>
       </div>
       <!-- IMAGE / FOTO -->
-      <div class="aspect-square bg-neutral rounded-2xl"></div>
+      <div v-if="profile.avatar" class="aspect-square rounded-2xl">
+        <img :src="apiUri + profile.avatar" alt="">
+      </div>
+      <!-- <div class="aspect-square bg-neutral rounded-2xl"></div> -->
       <!-- EMAIL & LOKASI -->
       <div class="text-2xl font-semibold text-center">
-        <div>email@example.com</div>
-        <div>Jakarta, Indonesia</div>
+        <div>{{ profile.email }}</div>
+        <div>{{ profile.city }}, {{ profile.country }}</div>
       </div>
       <!-- COPYRIGHT -->
       <div class="text-center font-thin text-slate-400">
-        &copy; 2022 Drake. All Rights Reserved
+        &copy; {{ year }} {{ profile.lastName }}, All Rights Reserved
       </div>
       <!-- SOCIAL BUTTON -->
       <div class="flex justify-between">
@@ -58,10 +61,14 @@
   </div>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
+<script setup>
+
+defineProps({
+  profile: Object
+})
+
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
+
+const year = new Date().getFullYear();
 </script>

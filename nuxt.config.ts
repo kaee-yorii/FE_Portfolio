@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  css: [ '~/assets/css/main.css' ],
+  css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -10,5 +10,11 @@ export default defineNuxtConfig({
   },
   modules: [
     'nuxt-lucide-icons'
-  ]
+  ],
+  runtimeConfig: {
+    apiUri: '', // can be overridden by NEXT_API_URI environment variable
+    public: {
+      apiUri: '', // can be overridden by NEXT_PUBLIC_API_URI environment variable
+    }
+  }
 })

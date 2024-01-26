@@ -8,7 +8,7 @@
     </div>
     <div class="flex flex-col gap-6 mt-10 grow">
       <div class="text-6xl">
-        Say Hi from <span class="text-secondary">Drake</span>, Webflow Desiger
+        Say Hi from <span class="text-secondary">Kaee</span>, Webflow Desiger
         and Developer
       </div>
       <div class="text-4xl font-semibold">
@@ -34,3 +34,9 @@
     </div>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  profile: Object
+})
+</script>
