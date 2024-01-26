@@ -11,7 +11,7 @@
       class="col-span-10 md:col-span-5 lg:col-span-6 xl:col-span-7 p-6 lg:px-20 md:px-40"
     >
       <IndexAbout :profile="profile" />
-      <IndexBlog />
+      <IndexBlog :blogs="blogs" />
       <IndexExperience />
       <IndexEducation />
       <IndexProject />

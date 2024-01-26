@@ -11,33 +11,31 @@
       <!-- LIST BLOG -->
       <div
         class="grid grid-cols-10 gap-3 group hover:bg-secondary p-2 rounded-xl"
-        v-for="n in 4"
-        :key="n"
+        v-for="(blog, i) in blogs"
+        :key="i"
       >
         <!-- IMAGE -->
         <div
           class="aspect-video bg-neutral col-span-4 xl:col-span-3 rounded-lg group-hover:scale-105 duration-300"
         ></div>
         <div class="col-span-6 xl:col-span-7">
-          <div class="text-2xl font-semibold group-hover:text-accent">
-            Judul Blog
+          <!-- TITLE -->
+          <div class="flex-none text-2xl font-semibold group-hover:text-accent">
+            {{ blog.title }}
           </div>
-          <div class="font-light line-clamp-2 xl:line-clamp-3">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit
-            reprehenderit minima pariatur error voluptatem vero quae atque
-            voluptatum quas eligendi?
+          <div class="grow font-light line-clamp-2 xl:line-clamp-3">
+            {{ blog.content }}
           </div>
-          <div>TEXT</div>
+          <!-- CREATED AT -->
+          <div class="flex-none text-xs text-slate-600">{{ blog.createdAt }}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
+<script setup>
+defineProps({
+  blogs: Array
+})
 </script>
