@@ -6,11 +6,13 @@
       class="border border-neutral rounded-3xl p-12 w-full flex flex-col gap-6"
     >
       <!-- NAME & TITLE -->
+
       <div class="flex justify-between items-end">
-        <div class="text-3xl font-bold">{{ profile.firstName }} {{ profile.lastName }}</div>
+        <div class="text-3xl font-bold">{{ fullName }}</div>
         <div class="text-right">{{ profile.job }}</div>
       </div>
       <!-- IMAGE / FOTO -->
+
       <div v-if="profile.avatar" class="aspect-square rounded-2xl overflow-hidden">
         <img :src="apiUri + profile.avatar" alt="" class="object-cover min-h-full min-w-full">
       </div>
@@ -66,7 +68,12 @@
 const props = defineProps({
   profile: Object
 });
-console.log(props.profile);
+
+// computed fullName
+const fullName = computed(() => {
+  return `${props.profile.firstName} ${props.profile.lastName}`
+  // return props.profile.firstName + ' ' + props.profile.lastName
+})
 
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
