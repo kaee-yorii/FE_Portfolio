@@ -10,7 +10,7 @@
       <div class="text-4xl font-semibold">Experience</div>
       <div>
         <!-- list experience -->
-        <div class="flex gap-12 group" v-for="n in 2" :key="n">
+        <div class="flex gap-12 group" v-for="(exp, i) in experiences" :key="i">
           <div class="flex flex-col items-center">
             <LucideCircle
               :size="12"
@@ -19,7 +19,7 @@
             <div class="grow w-px bg-neutral"></div>
           </div>
           <div class="mb-10">
-            <div class="group-hover:text-secondary">2020 - Present</div>
+            <div class="group-hover:text-secondary">{{ exp.startDate }} - {{ exp.endDate ? exp.endDate : 'Present' }}</div>
             <div class="flex flex-col gap-4">
               <div>
                 <div
@@ -27,13 +27,13 @@
                 >
                   Framer Designer & Developer
                 </div>
-                <div class="text-light">Brunodee Agency</div>
+                <div class="text-light">{{ exp.title }}</div>
               </div>
               <div>
                 <div class="text-2xl md:text-3xl xl:text-4xl font-semibold">
-                  Front-End WordPress Developer
+                 {{ exp.company }}
                 </div>
-                <div class="font-light">Envato Market</div>
+                <div class="font-light">{{ exp.description }}</div>
               </div>
             </div>
           </div>
@@ -42,3 +42,9 @@
     </div>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  experiences: Array
+})
+</script>

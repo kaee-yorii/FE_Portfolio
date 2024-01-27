@@ -12,9 +12,9 @@
     >
       <IndexAbout :profile="profile" />
       <IndexBlog :blogs="blogs" />
-      <IndexExperience />
-      <IndexEducation />
-      <IndexProject />
+      <IndexExperience :experiences="experiences" />
+      <IndexEducation :educations="educations" />
+      <IndexProject  />
       <IndexSkill />
     </div>
   </div>
@@ -28,6 +28,8 @@
   // // KLO DI EXTRACT
   const { data } = await $fetch('http://localhost:5000/portfolio');
   
+  console.log(data)
+
   const profile = data.profile;
   const projects = data.projects;
   const educations = data.educations;

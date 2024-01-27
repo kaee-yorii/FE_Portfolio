@@ -18,7 +18,7 @@
         <div
           class="aspect-video bg-neutral col-span-4 xl:col-span-3 rounded-lg group-hover:scale-105 duration-300"
         ></div>
-        <div class="col-span-6 xl:col-span-7">
+        <div class="group col-span-6 xl:col-span-7">
           <!-- TITLE -->
           <div class="flex-none text-2xl font-semibold group-hover:text-accent">
             {{ blog.title }}
@@ -27,7 +27,7 @@
             {{ blog.content }}
           </div>
           <!-- CREATED AT -->
-          <div class="flex-none text-xs text-slate-600">{{ blog.createdAt }}</div>
+          <div class="pb-10 grow flex-none text-xs text-slate-600">{{ blog.createdAt }}</div>
         </div>
       </div>
     </div>
