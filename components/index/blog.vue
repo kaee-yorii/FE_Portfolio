@@ -27,7 +27,7 @@
             {{ blog.content }}
           </div>
           <!-- CREATED AT -->
-          <div class="pb-10 grow flex-none text-xs text-slate-600">{{ blog.createdAt }}</div>
+          <div class="pb-10 grow flex-none text-xs text-slate-600">{{ blog.shortDateTime }}</div>
         </div>
       </div>
     </div>
