@@ -19,12 +19,12 @@
       </div>
       <div class="flex items-end gap-20 pb-10 grow">
         <div>
-          <div class="text-4xl font-bold text-secondary">10+</div>
+          <div class="text-4xl font-bold text-secondary">{{ profile.year_of_experience }}+</div>
           <div class="font-semibold">YEARS OF<br />EXPERIENCE</div>
         </div>
         <div>
-          <div class="text-4xl font-bold text-secondary">10+</div>
-          <div class="font-semibold">PROJECTS<br />COMPLITED</div>
+          <div class="text-4xl font-bold text-secondary">{{ profile.count_project }}+</div>
+          <div class="font-semibold">PROJECTS<br />COMPLETED</div>
         </div>
       </div>
     </div>

@@ -14,8 +14,8 @@
       <IndexBlog :blogs="blogs" />
       <IndexExperience :experiences="experiences" />
       <IndexEducation :educations="educations" />
-      <IndexProject  />
-      <IndexSkill />
+      <IndexProject :projects="projects" />
+      <IndexSkill :skills="skills" />
     </div>
   </div>
 </template>

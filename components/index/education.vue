@@ -44,5 +44,7 @@
 </template>
 
 <script setup>
+defineProps({
   educations: Array
+})
 </script>

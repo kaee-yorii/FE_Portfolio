@@ -25,15 +25,15 @@
                 <div
                   class="text-2xl md:text-3xl xl:text-4xl font-semibold mt-5"
                 >
-                  Framer Designer & Developer
+                  {{ exp.title }}
                 </div>
-                <div class="text-light">{{ exp.title }}</div>
+                <div class="text-light">{{ exp.company }}</div>
               </div>
               <div>
                 <div class="text-2xl md:text-3xl xl:text-4xl font-semibold">
-                 {{ exp.company }}
+                 {{ exp.decription }}
                 </div>
-                <div class="font-light">{{ exp.description }}</div>
+                <div class="font-light">{{ exp.content }}</div>
               </div>
             </div>
           </div>

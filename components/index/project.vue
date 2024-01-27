@@ -13,12 +13,12 @@
       <!-- list projects -->
       <div class="grid grid-cols-2 gap-6 mt-8">
         <!-- PROJECT ITEM -->
-        <div class="col-span md:col-span-1 group" v-for="j in 4" :key="j">
+        <div class="col-span md:col-span-1 group" v-for="(project, i) in projects " :key="i">
           <div class="flex justify-between items-end">
             <div class="font-semibold text-xl group-hover:text-secondary">
-              JUDUL PROJECT
+              {{ project.title }}
             </div>
-            <div>20 Jan 2020 - Present</div>
+            <div>{{ project.startDate }} - {{ project.endDate ? project.endDate : 'Present' }}</div>
           </div>
           <div class="aspect-video bg-neutral rounded-xl"></div>
           <!-- Image -->
@@ -36,3 +36,9 @@
     </div>
   </div>
 </template>
+
+<script setup>
+  defineProps({
+    projects : Array
+  })
+</script>
