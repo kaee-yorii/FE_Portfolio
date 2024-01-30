@@ -19,7 +19,7 @@
       </div>
       <div class="flex items-end gap-20 pb-10 grow">
         <div>
-          <div class="text-4xl font-bold text-secondary">{{ profile.year_of_experience }}+</div>
+          <div class="text-4xl font-bold text-secondary">{{ profile.month_of_experience }}+</div>
           <div class="font-semibold">YEARS OF<br />EXPERIENCE</div>
         </div>
         <div>

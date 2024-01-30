@@ -18,7 +18,7 @@
             <div class="font-semibold text-xl group-hover:text-secondary">
               {{ project.title }}
             </div>
-            <div>{{ project.startDate }} - {{ project.endDate ? project.endDate : 'Present' }}</div>
+            <div>{{ project.readStartDate }} - {{ project.readEndDate }}</div>
           </div>
           <div class="aspect-video bg-neutral rounded-xl"></div>
           <!-- Image -->
