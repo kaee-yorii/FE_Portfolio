@@ -47,16 +47,16 @@
   // const experiences = response.data.experiences;
   // const blogs = response.data.blogs;
 
-  console.log("profile")
-  console.log(profile)
-  console.log("projects")
-  console.log(projects)
-  console.log("educations")
-  console.log(educations)
-  console.log("skills")
-  console.log(skills)
-  console.log("experiences")
-  console.log(experiences)
+  // console.log("profile")
+  // console.log(profile)
+  // console.log("projects")
+  // console.log(projects)
+  // console.log("educations")
+  // console.log(educations)
+  // console.log("skills")
+  // console.log(skills)
+  // console.log("experiences")
+  // console.log(experiences)
   console.log("blogs")
   console.log(blogs)
 

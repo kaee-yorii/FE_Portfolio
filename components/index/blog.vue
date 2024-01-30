@@ -14,10 +14,17 @@
         v-for="(blog, i) in blogs"
         :key="i"
       >
-        <!-- IMAGE -->
-        <div
-          class="aspect-video bg-neutral col-span-4 xl:col-span-3 rounded-lg group-hover:scale-105 duration-300"
-        ></div>
+        <!-- TODO IMAGE -->
+        <div class="col-span-4 xl:col-span-3 rounded-lg">
+          <div  v-if="!blog.photos.length"
+            class="
+            aspect-video bg-neutral  group-hover:scale-105 duration-300"
+          ></div>
+
+          <!-- photo pertama -->
+          <img v-else :src="apiUri + blog.photos[0].path" alt="blog.title" class="bg-hover">
+
+        </div>
         <div class="group col-span-6 xl:col-span-7">
           <!-- TITLE -->
           <div class="flex-none text-2xl font-semibold group-hover:text-accent">
@@ -37,5 +44,9 @@
 <script setup>
 defineProps({
   blogs: Array
-})
+});
+
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
+console.log(apiUri)
 </script>
