@@ -20,16 +20,23 @@
             </div>
             <div>{{ project.readStartDate }} - {{ project.readEndDate }}</div>
           </div>
-          <div class="aspect-video bg-neutral rounded-xl"></div>
           <!-- Image -->
+        <div class="rounded-xl aspect-video overflow-hidden group-hover:scale-105 duration-300">
+          <!-- tampilkan foto pertama -->
+          <img v-if="project.photos.length" :src="apiUri + project.photos[0].path" :alt="project.title">
+          <!-- tampilkan dummy -->
+          <div v-else class="aspect-video bg-neutral group-hover:scale-110 duration-300"></div>
+        </div>
+
+        <!-- SKILL -->
+          <!-- <div class="aspect-video bg-neutral rounded-xl"></div> -->
           <div class="flex flex-nowrap gap-2 mt-2 overflow-hidden">
-            <div
-              v-for="n in 10"
-              :key="n"
+            <!-- TODO make skill relationship -->
+            <!-- <div
+              v-for="skill in project.skills" :key="skill"
               class="border border-neutral rounded-xl px-3 text-nowrap"
-            >
-              Skill {{ n }}
-            </div>
+            > {{ skill.Skill.title }}
+            </div> -->
           </div>
         </div>
       </div>
@@ -38,7 +45,12 @@
 </template>
 
 <script setup>
-  defineProps({
+  const props = defineProps({
     projects : Array
-  })
+  });
+
+  const config = useRuntimeConfig();
+  const apiUri = config.public.apiUri;
+
+  console.log(props.projects)
 </script>
