@@ -23,8 +23,6 @@
 <script setup>
 // manggul data dari Back End test
 
-  // const data_usefetch = await useFetch('http://localhost:5000/kaee-portfolio');
-
   // // KLO DI EXTRACT
   const { data } = await $fetch('http://localhost:5000/portfolio');
   
@@ -40,24 +38,5 @@
   // KLO GA DI EXTRACT
   // const { response } = await $fetch('http://localhost:5000/portfolio');
 
-  // const profile = response.data.profile;
-  // const projects = response.data.projects;
-  // const educations = response.data.educations;
-  // const skills = response.data.skills;
-  // const experiences = response.data.experiences;
-  // const blogs = response.data.blogs;
-
-  // console.log("profile")
-  // console.log(profile)
-  // console.log("projects")
-  // console.log(projects)
-  // console.log("educations")
-  // console.log(educations)
-  // console.log("skills")
-  // console.log(skills)
-  // console.log("experiences")
-  // console.log(experiences)
-  console.log("blogs")
-  console.log(blogs)
 
 </script>
