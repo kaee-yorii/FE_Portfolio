@@ -21,22 +21,17 @@
 </template>
 
 <script setup>
-// manggul data dari Back End test
-
-  // // KLO DI EXTRACT
-  const { data } = await $fetch('http://localhost:5000/portfolio');
+  const getProfile = async () => {
+    try {
+      return await $fetch('/api/portfolio');
+    } catch {
+      throw createError ({
+        statusCode: 500,
+        statusMessage: error.message
+      })
+    }
+  }
   
-  console.log(data)
-
-  const profile = data.profile;
-  const projects = data.projects;
-  const educations = data.educations;
-  const skills = data.skills;
-  const experiences = data.experiences;
-  const blogs = data.blogs;
-
-  // KLO GA DI EXTRACT
-  // const { response } = await $fetch('http://localhost:5000/portfolio');
-
-
-</script>
+  const { profile, blogs, experiences, educations, skills, projects } = await getProfile();
+  
+ </script>
