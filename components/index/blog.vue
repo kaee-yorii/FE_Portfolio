@@ -10,7 +10,7 @@
       <div class="text-4xl font-semibold">Latest Blog</div>
 
       <!-- LIST BLOG -->
-      <a :href="'/blog/' + blog.id"
+      <NuxtLink :to="'/blog/' + blog.id"
         class="grid grid-cols-10 gap-3 group hover:bg-secondary p-2 rounded-xl"
         v-for="(blog, i) in blogs"
         :key="i"
@@ -31,13 +31,12 @@
           <div class="flex-none text-2xl font-semibold group-hover:text-accent">
             {{ blog.title }}
           </div>
-          <div class="grow font-light line-clamp-2 xl:line-clamp-3">
-            {{ blog.content }}
+          <div class="grow font-light line-clamp-2 xl:line-clamp-3">{{ blog.content }}
           </div>
           <!-- CREATED AT -->
           <div class="pb-10 grow flex-none text-xs text-slate-600">{{ blog.shortDateTime }}</div>
         </div>
-      </a>
+      </NuxtLink>
 
     </div>
   </div>
