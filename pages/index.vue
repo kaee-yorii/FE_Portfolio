@@ -25,13 +25,10 @@
     try {
       return await $fetch('/api/portfolio');
     } catch {
-      throw createError ({
-        statusCode: 500,
-        statusMessage: error.message
-      })
+      throw createError(Error);
     }
   }
   
   const { profile, blogs, experiences, educations, skills, projects } = await getProfile();
   
- </script>
+</script>
