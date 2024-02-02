@@ -8,13 +8,14 @@
     </div>
     <div class="flex flex-col gap-6 mt-10">
       <div class="text-4xl font-semibold">Latest Blog</div>
+
       <!-- LIST BLOG -->
-      <div
+      <a :href="'/blog/' + blog.id"
         class="grid grid-cols-10 gap-3 group hover:bg-secondary p-2 rounded-xl"
         v-for="(blog, i) in blogs"
         :key="i"
       >
-        <!-- TODO IMAGE -->
+        <!-- IMAGE -->
         <div class="col-span-4 xl:col-span-3 rounded-lg">
           <div  v-if="!blog.photos.length"
             class="
@@ -36,7 +37,8 @@
           <!-- CREATED AT -->
           <div class="pb-10 grow flex-none text-xs text-slate-600">{{ blog.shortDateTime }}</div>
         </div>
-      </div>
+      </a>
+
     </div>
   </div>
 </template>
