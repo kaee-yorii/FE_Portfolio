@@ -27,10 +27,23 @@
         
         <!-- title -->
         <div class="text-4-xl font-semibold my-4 text-accent">{{ project.title }}</div>
-        <div class="font-light text-sm">{{ project.shortDateTime }}</div>
-        
-        <!-- content -->
-        <div class="my-4 text-justify">{{ project.content }}</div>
+        <div class="flex justify-between">
+            <div class="font-light text-sm">{{ project.readStartDate }} - {{ project.readEndDate }}</div>
+            <div>{{ status }}</div>
+        </div>
+
+        <!-- FIXME HARI SENEN BENERIN CODINGAN !! -->
+        <!-- TODO DRAW SKILL -->
+        <!-- description -->
+        <div class="mt-2">
+            <div v-if="project.company">
+                <span class="font-semibold">Company:</span> {{ project.company }}
+            </div>
+            <div v-if="project.url">
+                <span class="font-semibold">Url:</span> <a :href="project.url" target="__blank">{{ project.url }}</a>
+            </div>
+            <div class="my-4 text-justify">{{ project.descripton }}</div>
+        </div>
         </div>
 </template>
 
