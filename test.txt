@@ -1,0 +1,13 @@
+HALAMAN PROJECT
+
+SETUP SERVER
+server/project/
+        index.ts
+        [id].ts
+
+PAGE
+pages/projects/
+        index.vue
+        [id].vue
+
+/#project -> ke halaman detail project

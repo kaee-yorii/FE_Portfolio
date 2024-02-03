@@ -8,45 +8,30 @@
     </div>
     <div>
       <div class="mt-10">
-        <div class="text-4xl font-semibold">LatestProject</div>
+        <div class="text-4xl font-semibold">Latest Project</div>
       </div>
+
       <!-- list projects -->
       <div class="grid grid-cols-2 gap-6 mt-8">
         <!-- PROJECT ITEM -->
-        <div class="col-span md:col-span-1 group" v-for="(project, i) in projects " :key="i">
-          <div class="flex justify-between items-end">
-            <div class="font-semibold text-xl group-hover:text-secondary">
-              {{ project.title }}
-            </div>
-            <div>{{ project.readStartDate }} - {{ project.readEndDate }}</div>
-          </div>
+          
+          <NuxtLink :to="'/project/' + project.id" v-for="(project, i) in projects" :key="i" class="w-full group'">
+            <IndexProjectThumbnail :project="project"/>
+        </NuxtLink>
 
-          <!-- Image -->
-        <div class="rounded-xl aspect-video overflow-hidden group-hover:scale-105 duration-300">
-          <!-- tampilkan foto pertama -->
-          <img v-if="project.photos.length" :src="apiUri + project.photos[0].path" :alt="project.title">
-          <!-- tampilkan dummy -->
-          <div v-else class="aspect-video bg-neutral group-hover:scale-110 duration-300"></div>
-        </div>
-
-        <div class="flex flex-nowrap overflow-hidden gap-2 mt-2">
-          <div v-for="skill in project.skills" :key="skill.id" class="boder border-neutral rounded-xl px-3 text-nowrap">
-            {{ skill.title }}
           </div>
         </div>
-        </div>
-      </div>
+
+      <NuxtLink to="/project" class="btn btn-accent w-min truncate px-8 justify-center items-center">See All Projects</NuxtLink>
+
     </div>
-  </div>
+
+
 </template>
 
 <script setup>
-  const props = defineProps({
-    projects : Array
+  defineProps({
+    projects: Array
   });
-
-  const config = useRuntimeConfig();
-  const apiUri = config.public.apiUri;
-
-  console.log(props.projects)
+  
 </script>
