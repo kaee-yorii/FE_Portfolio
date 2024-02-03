@@ -1,4 +1,5 @@
 <template>
+  <!-- biru = nord -->
   <div data-theme="nord" class="min-h-screen flex text-default">
     <!-- MAIN CONTENT -->
     <div class="min-h-screen grow">
