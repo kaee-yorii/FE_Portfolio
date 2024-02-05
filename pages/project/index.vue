@@ -1,10 +1,8 @@
 <template>
     <div class="max-w-7xl mx-auto px-4 pb-16">
         <!-- HEADER -->
-        <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-20 pb-3">
-            <div class="text-4xl font-bold">{{ fullname }}</div>
-            <div class="text-xl">project</div>
-        </div>
+        <IndexHeader :title="'Projects'" :url="'/project'" />
+
 
         <template v-if="projects">
             <!-- PAGINATION TOP -->
@@ -66,10 +64,5 @@ watchEffect(async () => {
     await fetchData();
 });
 
-// get data profile from state
-const useProfile = useState('profile');
-const profile = await $fetch('/api/profile');
-const fullname = computed(() => {
-    return `${profile.firstName} ${profile.lastName}`
-});
+
 </script>

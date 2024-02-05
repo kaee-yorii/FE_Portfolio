@@ -1,10 +1,8 @@
 <template>
     <div class="max-w-7xl mx-auto px-4">
         <!-- HEADER -->
-        <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-10 pb-3">
-            <div class="text-4xl font-bold">{{ fullname }}</div>
-            <NuxtLink to="/project" class="text-xl">Project</NuxtLink>
-        </div>
+        <IndexHeader :title="'Projects'" :url="'/project'" />
+
 
         <!-- CONTENT PROJECT -->
         <div class="grid grid-cols-10 gap-6">
@@ -98,12 +96,6 @@ const status = computed(() => {
     return project.status.replaceAll('_', '')
 })
 
-// get data profile from state
-const useProfile = useState('profile');
-const profile = await $fetch('/api/profile');
-const fullname = computed(() => {
-    return `${profile.firstName} ${profile.lastName}`
-});
 </script>
 
 <style>
