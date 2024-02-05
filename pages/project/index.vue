@@ -66,14 +66,8 @@ watchEffect(async () => {
     await fetchData();
 });
 
-// fetch profile with nuxt state
+// get data profile from state
 const useProfile = useState('profile');
-
-if (!useProfile.value) {
-    const fetchProfile = await $fetch('/api/profile');
-    useProfile.value = fetchProfile;
-}
-
 const profile = await $fetch('/api/profile');
 const fullname = computed(() => {
     return `${profile.firstName} ${profile.lastName}`
