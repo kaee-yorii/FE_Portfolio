@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <!-- HEADER -->
         <div class="flex justify-between items-end my-4 border-b border-b-neutral pt-10 pb-3">
-            <div class="text-4xl font-bold">FULLNAME</div>
+            <div class="text-4xl font-bold">{{ fullname }}</div>
             <NuxtLink to="/project" class="text-xl">Project</NuxtLink>
         </div>
 
@@ -77,6 +77,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+    middleware: ['profile']
+})
+
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 
@@ -94,10 +98,18 @@ const status = computed(() => {
     return project.status.replaceAll('_', '')
 })
 
-// ambil data project, melalui server nuxt
+// fetch profile with nuxt state
+const useProfile = useState('profile');
 
+if (!useProfile.value) {
+    const fetchProfile = await $fetch('/api/profile');
+    useProfile.value = fetchProfile;
+}
 
-
+const profile = await $fetch('/api/profile');
+const fullname = computed(() => {
+    return `${profile.firstName} ${profile.lastName}`
+}); 
 </script>
 
 <style>
