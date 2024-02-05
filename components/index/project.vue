@@ -17,7 +17,7 @@
           
           <NuxtLink :to="'/project/' + project.id" v-for="(project, i) in projects" :key="i" class="w-full group'">
             <IndexProjectThumbnail :project="project"/>
-        </NuxtLink>
+          </NuxtLink>
 
           </div>
         </div>
