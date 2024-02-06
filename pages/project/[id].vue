@@ -81,13 +81,29 @@ definePageMeta({
 
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { IndexProject } from '#build/components';
 
 
 const route = useRoute();
 const projectID = route.params.id;
 
+// SEO and META
+const { value: useProfile } = useState('profile');
+const fullname = `${useProfile.lastName} ${useProfile.firstName}`
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
+
+const firstPhoto = project.photos.length ? (apiUri + project.photos[0].path) : '';
+useSeoMeta({
+    title: `${project.title} = ${fullname} project`,
+    description: project.description,
+    ogTitle: `${project.title} = ${fullname} project`,
+    ogDescription: project.description,
+    ogImage: apiUri + useProfile.avatar,
+    twitterCard: 'summary_large_image',
+
+})
+// END: // SEO and META
 
 const project = await $fetch('/api/project/' + projectID);
 console.log(project)

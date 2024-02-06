@@ -43,10 +43,26 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 const route = useRoute();
 const blogID = route.params.id;
 
+const blog = await $fetch('/api/blog/' + blogID);
+
+// SEO and META
+const { value: useProfile } = useState('profile');
+const fullname = `${useProfile.lastName} ${useProfile.firstName}`
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
 
-const blog = await $fetch('/api/blog/' + blogID);
+const firstPhoto = blog.photos.length ? (apiUri + blog.photos[0].path) : '';
+useSeoMeta({
+    title: `${blog.title} = ${fullname} Blog`,
+    description: blog.description,
+    ogTitle: `${blog.title} = ${fullname} Blog`,
+    ogDescription: blog.description,
+    ogImage: apiUri + useProfile.avatar,
+    twitterCard: 'summary_large_image',
+
+})
+// END: // SEO and META
+
 
 </script>
 

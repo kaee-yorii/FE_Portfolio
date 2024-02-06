@@ -41,8 +41,22 @@ definePageMeta({
     middleware: ['profile']
 })
 
+// SEO and META
+const { value: useProfile } = useState('profile');
+const fullname = `${useProfile.lastName} ${useProfile.firstName}`
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
+
+useSeoMeta({
+    title: useProfile.lastName + ' Projects !',
+    description: useProfile.bio,
+    ogTitle: fullname + ' Projects !',
+    ogDescription: useProfile.bio,
+    ogImage: apiUri + useProfile.avatar,
+    twitterCard: 'summary_large_image',
+
+})
+// END: // SEO and META
 
 // ambil data projects melalui server nuxt
 const projects = ref(null);
