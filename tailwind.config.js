@@ -10,6 +10,11 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'bungee-shade': ['Bungee Shade', 'Helvetica', 'Arial', 'sans-serif'],
+      'arc-daughter': ['Architects Daughter', 'Helvetica', 'Arial', 'sans-serif'],
+      'baloo-bhai': ['Baloo Bhai', 'Helvetica', 'Arial', 'sans-serif'],
+    }
   },
   plugins: [require("daisyui")],
   daisyui: {

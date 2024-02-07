@@ -1,8 +1,6 @@
 <template>
   <div class="min-h-screen py-12 flex flex-col" id="about">
-    <div
-      class="rounded-2xl border border-neutral w-fit px-4 py-1 flex items-center gap-2"
-    >
+    <div class="rounded-2xl border border-neutral w-fit px-4 py-1 flex items-center gap-2">
       <LucideUserRound :size="16" />
       <div>About</div>
     </div>
@@ -20,7 +18,7 @@
       <div class="flex items-end gap-20 pb-10 grow">
         <div>
           <div class="text-4xl font-bold text-secondary">{{ profile.month_of_experience }}+</div>
-          <div class="font-semibold">YEARS OF<br />EXPERIENCE</div>
+          <div class="font-semibold">MONTH OF<br />EXPERIENCE</div>
         </div>
         <div>
           <div class="text-4xl font-bold text-secondary">{{ profile.count_project }}+</div>
