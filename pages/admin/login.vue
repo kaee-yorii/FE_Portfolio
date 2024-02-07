@@ -52,21 +52,14 @@ const dologin = async () => {
     const jsonData = JSON.stringify(formData.value);
     console.log
 
-    // const response = await $fetch(apiUri + '/login', {
-    //     method: 'POST',
-    //     data: jsonData,
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    // });
-
     const response = await $fetch(apiUri + '/login', {
         method: 'POST',
         body: jsonData,
         headers: {
             'Content-Type': 'application/json'
-        }
-    }); s
+        },
+        credentials: 'include'
+    });
     console.log(response)
 
     // sementara redirect ke halaman home
