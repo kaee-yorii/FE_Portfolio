@@ -13,16 +13,17 @@
                 <!-- input email -->
                 <div class="w-full font-arc-daughter text-xl md:text-2xl ">
                     <label class=" text-slate-700">Email</label>
-                    <input type="text" placeholder="Email" class="input w-full bg-[#D3C7C7]" />
+                    <input v-model="formData.email" type="text" placeholder="Email" class="input w-full bg-[#D3C7C7]" />
                 </div>
                 <!-- input password -->
                 <div class="w-full font-arc-daughter text-xl md:text-2xl">
                     <label class=" text-slate-700">Password</label>
-                    <input type="text" placeholder="Password" class="input w-full bg-[#D3C7C7]" />
+                    <input v-model="formData.password" type="text" placeholder="Password"
+                        class="input w-full bg-[#D3C7C7]" />
                 </div>
 
                 <!-- login button -->
-                <button
+                <button @click="dologin"
                     class="font-baloo-bhai btn border-0 text-xl md:text-2xl bg-[#D3C7C7] p-10 md:px-20 lg:px-32 py-0 h-min text-nowrap">
                     LOGIN NOW</button>
             </div>
@@ -38,4 +39,39 @@ definePageMeta({
 
 const { value: useProfile } = useState('profile');
 const fullname = `${useProfile.lastName} ${useProfile.firstName}`
+
+const formData = ref({
+    email: '',
+    password: ''
+});
+
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
+const dologin = async () => {
+    // convert data to json
+    const jsonData = JSON.stringify(formData.value);
+    console.log
+
+    // const response = await $fetch(apiUri + '/login', {
+    //     method: 'POST',
+    //     data: jsonData,
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    // });
+
+    const response = await $fetch(apiUri + '/login', {
+        method: 'POST',
+        body: jsonData,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }); s
+    console.log(response)
+
+    // sementara redirect ke halaman home
+    navigateTo('/')
+};
+
+
 </script>
