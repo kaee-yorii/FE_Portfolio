@@ -1,13 +1,27 @@
 <template>
-    <div data-teme="light" class="w-screen h-screen max-w-screen min-h-screen  bg-indigo-400">
-        <!-- HEADER -->
-        <div class="h-[70px] z-[51] relative border-b border-white/[0.08] px-3 sm:px-8 md:py-0 mb-12">
+    <div data-theme="light" class="w-screen h-screen max-w-screen min-h-screen  bg-indigo-400">
+
+        <!-- MOBILE HEADER -->
+        <div class="lg:hidden h-[70px] relative border-b border-white/20 px-3 sm:px-8">
+            <div class="h-full flex justify-between items-center">
+                <a href="" class="flex-none flex gap-4 items-center">
+                    <LucideSparkles class="h-8" />
+                    <div>Kaeeng</div>
+                </a>
+
+                <LucideAlignRight :size="24" />
+            </div>
+        </div>
+
+
+        <!-- MAIN HEADER -->
+        <div class="h-[70px] relative border-b border-white/[0.08] px-3 sm:px-8 md:py-0 mb-12">
             <div class="h-full flex items-center divide-x divide-white/20">
 
                 <!-- sisi kiri -->
-                <a href="" class="flex-none flex gap-4 items-center pr-4 text-black">
-                    <LucideCandy class="mx-1" />
-                    <div>KAEE</div>
+                <a href="" class="max-lg:hidden flex-none flex gap-4 items-center pr-4 text-black">
+                    <LucideRocket class="mx-1 h-8" />
+                    <div>Kaede Yori</div>
                 </a>
 
                 <!-- sisi kanan -->
@@ -28,7 +42,7 @@
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn w-10 h-10 min-h-10 btn-circle">
                         <div class="flex justify-center items-center">
-                            <Lucideuser :size="26" class="text-primary" />
+                            <LucideUser :size="26" class="text-primary" />
                         </div>
                     </div>
                     <div class="dropdown-content z-[1] menu bg-base-100 shadow rounded w-52">
