@@ -1,6 +1,6 @@
 <template>
     <div>
-        Ini halaman index
+        Ini halaman Register
     </div>
 </template>
 

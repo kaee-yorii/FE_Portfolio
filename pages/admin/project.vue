@@ -1,6 +1,6 @@
 <template>
     <div>
-        Ini halaman index
+        Ini halaman Project
     </div>
 </template>
 
