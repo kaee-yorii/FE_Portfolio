@@ -1,143 +1,143 @@
 <template>
-<!-- TODO change bg color based on theme -->
-<div data-theme="light" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden bg-indigo-400">
-    <!-- MOBILE HEADER -->
-    <div class="lg:hidden h-[70px] relative border-b border-white/20 px-3">
-        <div class="h-full flex justify-between items-center">
-            <a href="" class="flex-none flex gap-4 items-center">
-                <ImagesMonas class="h-8" />
-            </a>
+    <!-- TODO change bg color based on theme -->
+    <div data-theme="autumn" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden">
+        <!-- MOBILE HEADER -->
+        <div class="lg:hidden h-[70px] relative border-b border-white/20 px-3">
+            <div class="h-full flex justify-between items-center">
+                <a href="" class="flex-none flex gap-4 items-center">
+                    <ImagesMonas class="h-8" />
+                </a>
 
-            <label for="menu-toggle" class="btn btn-ghost">
-                <LucideAlignRight :size="24" />
-            </label>
+                <label for="menu-toggle" class="btn btn-ghost">
+                    <LucideAlignRight :size="24" />
+                </label>
+            </div>
         </div>
-    </div>
 
-    <!-- MAIN HEADER -->
-    <div class="h-[70px] relative border-b border-white/20 px-3 lg:px-8 md:py-0 mb-12">
-        <div class="h-full flex items-center lg:divide-x divide-white/20">
+        <!-- MAIN HEADER -->
+        <div class="h-[70px] relative border-b border-white/20 px-3 lg:px-8 md:py-0 mb-12">
+            <div class="h-full flex items-center lg:divide-x divide-white/20">
 
-            <!-- sisi kiri -->
-            <a href="" class="max-lg:hidden flex-none flex gap-4 items-center pr-4">
-                <ImagesMonas class="h-8" />
-                <div>UDA PUTERA</div>
-            </a>
+                <!-- sisi kiri -->
+                <a href="" class="max-lg:hidden flex-none flex gap-4 items-center pr-4">
+                    <LucideRocket :size="24" />
+                    <div>Yori Kaede</div>
+                </a>
 
-            <!-- sisi kanan -->
-            <div class="grow flex justify-between items-center lg:pl-4">
-                <!-- breadcrumb -->
-                <div class="text-sm breadcrumbs">
-                    <ul>
-                        <li><a>Home</a></li>
-                        <li><a>Documents</a></li>
-                        <li>Add Document</li>
-                    </ul>
-                </div>
+                <!-- sisi kanan -->
+                <div class="grow flex justify-between items-center lg:pl-4">
+                    <!-- breadcrumb -->
+                    <div class="text-sm breadcrumbs">
+                        <ul>
+                            <li><a>Home</a></li>
+                            <li><a>Documents</a></li>
+                            <li>Add Document</li>
+                        </ul>
+                    </div>
 
-                <!-- avatar / account -->
-                <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn w-10 h-10 min-h-10 btn-circle">
-                        <div class="flex justify-center items-center">
-                            <LucideUser :size="24" class="text-primary" />
+                    <!-- avatar / account -->
+                    <div class="dropdown dropdown-end">
+                        <div tabindex="0" role="button" class="btn w-10 h-10 min-h-10 btn-circle">
+                            <div class="flex justify-center items-center">
+                                <LucideUser :size="24" class="text-primary" />
+                            </div>
+                        </div>
+                        <div class="dropdown-content z-[1] menu bg-base-100 shadow rounded w-52">
+                            <div class="p-2 border-b">
+                                <div class="font-semibold">Uda Putera</div>
+                                <div class="text-xs">Administrator</div>
+                            </div>
+                            <ul tabindex="0" class="p-2">
+                                <li>
+                                    <a>
+                                        <LucideUser :size="16" /> User
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <LucideLogOut :size="16" />
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="dropdown-content z-[1] menu bg-base-100 shadow rounded w-52">
-                        <div class="p-2 border-b">
-                            <div class="font-semibold">Uda Putera</div>
-                            <div class="text-xs">Administrator</div>
-                        </div>
-                        <ul tabindex="0" class="p-2">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="w-full min-h-screen px-3 lg:px-8">
+            <div class="wrapper drawer lg:drawer-open rounded-2xl lg:rounded-3xl">
+                <input id="menu-toggle" type="checkbox" class="drawer-toggle" />
+                <!-- MAIN CONTENT -->
+                <div class="lg:z-[1] drawer-content bg-neutral max-lg:rounded-2xl rounded-r-2xl lg:rounded-r-3xl">
+                    <div class="w-full min-h-[70vh] lg:min-h-full bg-base-200 rounded-2xl lg:rounded-3xl p-3 lg:p-8">
+                        <slot />
+                    </div>
+                </div>
+                <div class="drawer-side !inline-table lg:bg-neutral rounded-l-2xl lg:rounded-l-3xl">
+                    <label for="menu-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
+                    <div class="lg:w-full min-h-full lg:z-[1]">
+                        <!-- NAVIGATION -->
+                        <ul class="menu bg-neutral rounded-box p-4 w-[250px] min-h-full text-white">
+                            <li class="my-2 font-light">MAIN MENU</li>
                             <li>
-                                <a>
-                                    <LucideUser :size="16" /> User
-                                </a>
+                                <NuxtLink to="/admin">
+                                    <LucideApple :size="20" />Home
+                                </NuxtLink>
                             </li>
                             <li>
-                                <a>
-                                    <LucideLogOut :size="16" />
-                                    Logout
+                                <details open>
+                                    <summary>
+                                        <LucideAnvil :size="20" />Authentication
+                                    </summary>
+                                    <ul>
+                                        <li>
+                                            <NuxtLink to="/admin/project">
+                                                <LucideAnchor :size="20" />
+                                                Project
+                                            </NuxtLink>
+                                        </li>
+                                        <li>
+                                            <NuxtLink to="/admin/register">
+                                                <LucideBinary :size="20" />
+                                                Register
+                                            </NuxtLink>
+                                        </li>
+                                        <li>
+                                            <details>
+                                                <summary>
+                                                    <LucideAperture :size="20" />
+                                                    Parent
+                                                </summary>
+                                                <ul>
+                                                    <li><a>
+                                                            <LucideActivitySquare :size="20" />
+                                                            Submenu 1
+                                                        </a></li>
+                                                    <li><a>
+                                                            <LucideAlertTriangle :size="20" />
+                                                            Submenu 2
+                                                        </a></li>
+                                                </ul>
+                                            </details>
+                                        </li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li><a>
+                                    <LucideBeef :size="20" />
+                                    Item 3
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
-    <!-- CONTENT -->
-    <div class="w-full min-h-screen px-3 lg:px-8">
-        <div class="wrapper drawer lg:drawer-open rounded-2xl lg:rounded-3xl">
-            <input id="menu-toggle" type="checkbox" class="drawer-toggle" />
-            <!-- MAIN CONTENT -->
-            <div class="lg:z-[1] drawer-content bg-neutral max-lg:rounded-2xl rounded-r-2xl lg:rounded-r-3xl">
-                <div class="w-full min-h-[70vh] lg:min-h-full bg-base-200 rounded-2xl lg:rounded-3xl p-3 lg:p-8">
-                    <slot />
-                </div>
-            </div>
-            <div class="drawer-side !inline-table lg:bg-neutral rounded-l-2xl lg:rounded-l-3xl">
-                <label for="menu-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
-                <div class="lg:w-full min-h-full lg:z-[1]">
-                    <!-- NAVIGATION -->
-                    <ul class="menu bg-neutral rounded-box p-4 w-[250px] min-h-full text-white">
-                        <li class="my-2 font-light">MAIN MENU</li>
-                        <li>
-                            <NuxtLink to="/admin">
-                                <LucideApple :size="20" />Home
-                            </NuxtLink>
-                        </li>
-                        <li>
-                            <details open>
-                                <summary>
-                                    <LucideAnvil :size="20" />Authentication
-                                </summary>
-                                <ul>
-                                    <li>
-                                        <NuxtLink to="/admin/project">
-                                            <LucideAnchor :size="20" />
-                                            Project
-                                        </NuxtLink>
-                                    </li>
-                                    <li>
-                                        <NuxtLink to="/admin/register">
-                                            <LucideBinary :size="20" />
-                                            Register
-                                        </NuxtLink>
-                                    </li>
-                                    <li>
-                                        <details>
-                                            <summary>
-                                                <LucideAperture :size="20" />
-                                                Parent
-                                            </summary>
-                                            <ul>
-                                                <li><a>
-                                                        <LucideActivitySquare :size="20" />
-                                                        Submenu 1
-                                                    </a></li>
-                                                <li><a>
-                                                        <LucideAlertTriangle :size="20" />
-                                                        Submenu 2
-                                                    </a></li>
-                                            </ul>
-                                        </details>
-                                    </li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li><a>
-                                <LucideBeef :size="20" />
-                                Item 3
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </template>
 
 <script setup>
