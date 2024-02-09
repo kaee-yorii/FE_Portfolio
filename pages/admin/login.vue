@@ -63,7 +63,7 @@ const dologin = async () => {
     console.log(response)
 
     // sementara redirect ke halaman home
-    navigateTo('/')
+    navigateTo('/admin')
 };
 
 
