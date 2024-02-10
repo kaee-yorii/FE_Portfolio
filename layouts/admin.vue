@@ -1,6 +1,6 @@
 <template>
     <!-- TODO change bg color based on theme -->
-    <div data-theme="fantasy" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden">
+    <div data-theme="nord" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden">
         <!-- MOBILE HEADER -->
         <div class="lg:hidden h-[70px] relative border-b border-gray/20 px-3">
             <div class="h-full flex justify-between items-center">
@@ -147,9 +147,8 @@ definePageMeta({
 
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
-const logout = async () => {
-    console.log('handle logout');
 
+const logout = async () => {
     await $fetch(apiUri + '/logout', {
         method: 'DELETE',
         headers: {
