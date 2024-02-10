@@ -14,6 +14,7 @@ export default {
       'bungee-shade': ['Bungee Shade', 'Helvetica', 'Arial', 'sans-serif'],
       'arc-daughter': ['Architects Daughter', 'Helvetica', 'Arial', 'sans-serif'],
       'baloo-bhai': ['Baloo Bhai', 'Helvetica', 'Arial', 'sans-serif'],
+      'josefin-sans': ['Josefin Sans', 'sans-serif']
     }
   },
   plugins: [require("daisyui")],
