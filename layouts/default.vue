@@ -1,6 +1,6 @@
 <template>
   <!-- biru = nord -->
-  <div data-theme="nord" class="min-h-screen flex text-default">
+  <div data-theme="retro" class="min-h-screen flex text-default">
     <!-- MAIN CONTENT -->
     <div class="min-h-screen grow">
       <slot />
@@ -11,10 +11,7 @@
 
     <!-- SIDE MENU DRAWER TOGGLE BUTTON -->
     <div class="z-10 md:hidden drawer-content fixed right-8">
-      <label
-        @click="toggleDrawer = !toggleDrawer"
-        class="btn btn-outline btn-circle mt-8"
-      >
+      <label @click="toggleDrawer = !toggleDrawer" class="btn btn-outline btn-circle mt-8">
         <LucideMenu :size="22" />
       </label>
     </div>
