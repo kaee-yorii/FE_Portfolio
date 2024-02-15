@@ -27,7 +27,7 @@
                     </div>
 
                     <!-- login button -->
-                    <button @click="dologin"
+                    <button @click="AuthStore.login(formData)"
                         class="font-semibold btn border-1 text-xl md:text-2xl text-white bg-indigo-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
                         SUBMIT</button>
                 </div>
@@ -51,26 +51,7 @@ const formData = ref({
     password: ''
 });
 
-const config = useRuntimeConfig();
-const apiUri = config.public.apiUri;
-const dologin = async () => {
-    // convert data to json
-    const jsonData = JSON.stringify(formData.value);
-    console.log
-
-    const response = await $fetch(apiUri + '/login', {
-        method: 'POST',
-        body: jsonData,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-    });
-    console.log(response)
-
-    // sementara redirect ke halaman home
-    navigateTo('/admin')
-};
-
+// AUTH STATE / PINIA
+const AuthStore = useAuthStore();
 
 </script>

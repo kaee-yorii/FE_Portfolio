@@ -20,7 +20,7 @@
 
                 <!-- sisi kiri -->
                 <a href="" class="max-lg:hidden flex-none flex gap-4 items-center pr-4">
-                    <LucideAudioLines :size="26" />
+                    <LucideAudioLines size="26" />
                     <div>Kaede Yori</div>
                 </a>
 
