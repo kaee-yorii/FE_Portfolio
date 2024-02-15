@@ -2,7 +2,7 @@
     <!-- TODO change bg color based on theme -->
     <div data-theme="nord" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden">
         <!-- MOBILE HEADER -->
-        <div class="lg:hidden h-[70px] relative border-b border-gray/20 px-3">
+        <div class="lg:hidden h-[70px] relative shadow-lg border-b border-gray/20 px-3">
             <div class="h-full flex justify-between items-center">
                 <a href="" class="flex-none flex gap-4 items-center">
                     <LucideFan :size="24" />
@@ -15,7 +15,7 @@
         </div>
 
         <!-- MAIN HEADER -->
-        <div class="h-[70px] relative border-b border-gray/20 px-3 lg:px-8 md:py-0 mb-12">
+        <div class="h-[70px] relative shadow-lg border-b border-gray/20 px-3 lg:px-8 md:py-0 mb-12">
             <div class="h-full flex items-center lg:divide-x divide-gray/20">
 
                 <!-- sisi kiri -->

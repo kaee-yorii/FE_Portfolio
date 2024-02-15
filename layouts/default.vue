@@ -1,6 +1,6 @@
 <template>
   <!-- biru = nord -->
-  <div data-theme="retro" class="min-h-screen flex text-default">
+  <div data-theme="nord" class="min-h-screen flex text-default">
     <!-- MAIN CONTENT -->
     <div class="min-h-screen grow">
       <slot />

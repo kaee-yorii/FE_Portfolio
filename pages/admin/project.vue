@@ -5,7 +5,7 @@
     <div>
         Counter: {{ CounterStore.count }}
     </div>
-    <buuton class="btn btn-primary" @click="to10">To 10</buuton>
+    <button class="btn btn-primary" @click="to10">To 10</button>
 </template>
 
 <script setup>
