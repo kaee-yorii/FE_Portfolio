@@ -19,19 +19,15 @@
 
                 <!-- sisi kiri -->
                 <a href="" class="max-lg:hidden flex-none flex gap-4 items-center pr-4">
-                    <LucideSunMoon size="26" />
+                    <LucideAudioLines size="26" />
                     <div>Kaede Yori</div>
                 </a>
 
                 <!-- sisi kanan -->
                 <div class="grow flex justify-end items-center lg:pl-4">
-                    <!-- breadcrumb -->
-                    <!-- <div class="text-sm breadcrumbs">
-                        <ul>
-                            <li><a>Home</a></li>
-                            <li><a>Documents</a></li>
-                            <li>Add Document</li>
-                        </ul>
+
+                    <!-- <div class="p-3 pt-4">
+                        <IndexDefaultlayoutThemeController />
                     </div> -->
 
                     <!-- avatar / account -->
