@@ -54,7 +54,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <button @click="logout">
+                                    <button @click="AuthStore.logout(FormData)">
                                         <LucideLogOut :size="16" />
                                         Logout
                                     </button>
@@ -90,25 +90,8 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: false
-});
-
-const config = useRuntimeConfig();
-const apiUri = config.public.apiUri;
-
-const logout = async () => {
-    await $fetch(apiUri + '/logout', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-    });
-
-    //redirect ke home halaman login
-    navigateTo('/admin/login')
-}
+// AUTH STORE
+const AuthStore = useAuthStore();
 </script>
 
 <style scoped>
