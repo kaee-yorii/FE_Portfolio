@@ -40,7 +40,7 @@
 <script setup>
 definePageMeta({
     layout: false,
-    middleware: ['profile']
+    middleware: ['profile', 'auth']
 })
 
 const { value: useProfile } = useState('profile');

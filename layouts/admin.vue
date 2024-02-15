@@ -4,11 +4,11 @@
         <div class="lg:hidden h-[70px] relative shadow-lg border-b border-gray/20 px-3">
             <div class="h-full flex justify-between items-center">
                 <a href="" class="flex-none flex gap-4 items-center">
-                    <LucideFan :size="24" />
+                    <LucideMoonStar :size="24" />
                 </a>
 
                 <label for="menu-toggle" class="btn btn-ghost">
-                    <LucideAlignRight :size="24" />
+                    <LucideAlignRight :size="22" />
                 </label>
             </div>
         </div>
@@ -19,7 +19,7 @@
 
                 <!-- sisi kiri -->
                 <a href="" class="max-lg:hidden flex-none flex gap-4 items-center pr-4">
-                    <LucideAudioLines size="26" />
+                    <LucideSunMoon size="26" />
                     <div>Kaede Yori</div>
                 </a>
 
@@ -35,9 +35,9 @@
                     </div> -->
 
                     <!-- avatar / account -->
-                    <div class="dropdown dropdown-end">
+                    <div class="dropdown dropdown-end max-md:hidden">
                         <div tabindex="0" role="button" class="btn w-10 h-10 min-h-10 btn-circle">
-                            <div class="flex justify-center items-center">
+                            <div class="flex  justify-center items-center">
                                 <LucideUser :size="24" class="text-primary" />
                             </div>
                         </div>
