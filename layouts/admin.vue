@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO change bg color based on theme -->
     <div data-theme="nord" class="w-screen h-screen max-w-screen min-h-scren overflow-x-hidden">
         <!-- MOBILE HEADER -->
         <div class="lg:hidden h-[70px] relative shadow-lg border-b border-gray/20 px-3">
@@ -54,7 +53,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <button @click="AuthStore.logout(FormData)">
+                                    <button @click="AuthStore.logout">
                                         <LucideLogOut :size="16" />
                                         Logout
                                     </button>

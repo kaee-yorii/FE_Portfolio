@@ -2,7 +2,10 @@ import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-
+        user: {
+            name: '',
+            email: ''
+        }
     }),
     actions: {
         async login(formData) {
@@ -13,7 +16,7 @@ export const useAuthStore = defineStore('auth', {
             // convert to json
             const jsonData = JSON.stringify(formData);
 
-            await $fetch(apiUri + '/login', {
+            const user = await $fetch(apiUri + '/login', {
                 method: 'POST',
                 body: jsonData,
                 headers: {
@@ -22,13 +25,16 @@ export const useAuthStore = defineStore('auth', {
                 credentials: 'include'
             });
 
+            // isis state user
+            this.user = user;
+
             // redirect ke home admin
             navigateTo('/admin')
 
         },
-        async logout(formData) {
+        async logout() {
             // get apiUri
-            const config = useRuntimeConfig(formData);
+            const config = useRuntimeConfig();
             const apiUri = config.public.apiUri;
 
             await $fetch(apiUri + '/logout', {
