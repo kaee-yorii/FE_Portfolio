@@ -7,17 +7,21 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         async login(data) {
-            const Api = useApiStore();
+            try {
+                const Api = useApiStore();
 
-            // isi state user
-            this.user = await Api.post('/login', data);
+                // isi state user
+                this.user = await Api.post('/login', data);
 
-            // redirect ke home admin
-            navigateTo('/admin')
+                // redirect ke home admin
+                navigateTo('/admin')
+
+            } catch (error) {
+                throw error;
+            }
 
         },
         async logout() {
-            // get apiUri
             const Api = useApiStore();
             await Api.delete('/logout');
 
@@ -25,7 +29,6 @@ export const useAuthStore = defineStore('auth', {
             navigateTo('/admin/login')
         },
         async getUser() {
-            // get api Uri
             const Api = useApiStore();
 
             // fetch data using Api method
