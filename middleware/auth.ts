@@ -1,8 +1,8 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
     // CHECK TOKEN -> melalui cookie
-    const AuthStore = useAuthStore();
-
     const token = useCookie('token');
+
+    const AuthStore = useAuthStore();
 
     if (to.path != '/admin/login') {
         // bukan halaman login
@@ -20,12 +20,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             // kalo error, atau data tetap null, balik ke halaman login
 
             if (!AuthStore.user) {
+                // clear cookie, prevent infinite loading
+                token.value = '';
+
                 return navigateTo('/admin/login');
             }
         }
     } else {
         // ke halaman login
-
         // check token, kalo ada, return ke halaman index
         if (token.value) {
             return navigateTo('/admin');

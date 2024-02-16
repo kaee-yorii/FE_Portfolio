@@ -1,29 +1,16 @@
 import { defineStore } from 'pinia';
+import { useApiStore } from './apiStore';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null
     }),
     actions: {
-        async login(formData) {
-            // get apiUri
-            const config = useRuntimeConfig();
-            const apiUri = config.public.apiUri;
+        async login(data) {
+            const Api = useApiStore();
 
-            // convert to json
-            const jsonData = JSON.stringify(formData);
-
-            const user = await $fetch(apiUri + '/login', {
-                method: 'POST',
-                body: jsonData,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            });
-
-            // isis state user
-            this.user = user;
+            // isi state user
+            this.user = await Api.post('/login', data);
 
             // redirect ke home admin
             navigateTo('/admin')
@@ -31,39 +18,20 @@ export const useAuthStore = defineStore('auth', {
         },
         async logout() {
             // get apiUri
-            const config = useRuntimeConfig();
-            const apiUri = config.public.apiUri;
-
-            await $fetch(apiUri + '/logout', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            });
+            const Api = useApiStore();
+            await Api.delete('/logout');
 
             //redirect ke home halaman login
             navigateTo('/admin/login')
         },
         async getUser() {
-            // const Api
-            const config = useRuntimeConfig();
-            const apiUri = config.public.apiUri;
+            // get api Uri
+            const Api = useApiStore();
 
-            try {
-                const user = await $fetch(apiUri + '/user', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include'
-                });
+            // fetch data using Api method
+            // return data, ditaro ke state
+            this.user = await Api.get('/user');
+        },
 
-                this.user = user;
-            } catch (error) {
-                console.log('error');
-                console.log(error);
-            }
-        }
     }
-})
+});
