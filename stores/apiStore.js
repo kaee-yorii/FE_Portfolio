@@ -35,6 +35,7 @@ export const useApiStore = defineStore('api', {
             try {
                 const data = await $fetch(apiUri + path, {
                     method: 'POST',
+                    body: jsonData,
                     headers: {
                         'Content-Type': 'application/json'
                     },

@@ -38,7 +38,9 @@
                     <!-- login button -->
                     <button @click="handleLogin"
                         class="font-semibold btn border-1 text-xl md:text-2xl text-white bg-indigo-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
-                        SUBMIT</button>
+                        SUBMIT
+                        <IndexImagesLoading class="w-2 h-12" v-if="isLoading" />
+                    </button>
                     <div class="text-error text-sm text-right mr-2 mt-2">{{ fetchError }}</div>
                 </div>
 
@@ -68,11 +70,18 @@ const AuthStore = useAuthStore();
 
 const errorMessages = ref({});
 const fetchError = ref('');
+const isLoading = ref(false);
+
 const handleLogin = async () => {
+
+    // halangi jika dengan loading
+    if (isLoading.value) return;
+
     // reset error message
     errorMessages.value = {};
     fetchError.value = '';
 
+    isLoading.value = true;
     try {
         // copy dari backend
         const loginValidation = Joi.object({
@@ -97,6 +106,8 @@ const handleLogin = async () => {
             console.log('error server')
             fetchError.value = error.data.message;
         }
+
+        isLoading.value = false;
     }
 
 }
