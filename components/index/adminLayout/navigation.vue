@@ -1,5 +1,5 @@
 <template>
-    <ul class="menu bg-neutral lg:rounded-box p-4 w-[250px] min-h-screen lg:min-h-full text-white">
+    <ul class="side-menu menu bg-neutral lg:rounded-box p-4 w-[250px] min-h-screen lg:min-h-full text-white">
         <li class="my-2 font-light">MAIN MENU</li>
         <template v-for="(menu, i) in menus" :key="i">
             <IndexAdminLayoutNavigationItem :menu="menu" />
@@ -58,7 +58,7 @@ body>div>div[data-theme] {
     z-index: 0;
 }
 
-.menu a,
+side-menu.menu a,
 .menu summary {
     position: relative;
     margin-bottom: 0.25rem;
@@ -69,12 +69,12 @@ body>div>div[data-theme] {
     padding-left: 1.25rem;
 }
 
-.menu a:focus {
+.side-menu.menu a:focus {
     color: #fff;
 }
 
-.menu a.router-link-exact-active::before,
-.menu details[open]>summary::before {
+.side-menu.menu a.router-link-exact-active::before,
+.side-menu.menu details[open]>summary::before {
     content: "";
     position: absolute;
     top: 0px;
