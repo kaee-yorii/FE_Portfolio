@@ -29,4 +29,7 @@ definePageMeta({
 import { useCounterStore } from '../../stores/counterStore';
 const CounterStore = useCounterStore();
 const AuthStore = useAuthStore();
+
+AuthStore.getUser();
+
 </script>

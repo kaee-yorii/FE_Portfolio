@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export const useApiStore = defineStore('api', {
     actions: {
-        // get
+        // GET
         async get(path) {
             // get api Uri
             const config = useRuntimeConfig();
@@ -20,11 +20,11 @@ export const useApiStore = defineStore('api', {
                 // return data
                 return data
             } catch (error) {
-                console.log('error');
-                console.log(error);
+                this.handleError(error)
             }
         },
-        // post
+
+        // POST
         async post(path, data) {
             // get api Uri
             const config = useRuntimeConfig();
@@ -42,15 +42,68 @@ export const useApiStore = defineStore('api', {
                     credentials: 'include'
                 });
 
-                // return data
+                // RETURN DATA
                 return data
             } catch (error) {
-                throw error;
+                this.handleError(error)
+
+                // SELAIN 401
+
             }
         },
-        // put
-        // patch
-        // delete
+        // HANDLE PUT & PATCH -> COPY DARI POST, KARENA PUT & PATCH ADA PARAMETER DATA
+        // JAN LUPA GANTI METHOD ! 
+
+        // PUT
+        async put(path, data) {
+            // get api Uri
+            const config = useRuntimeConfig();
+            const apiUri = config.public.apiUri;
+
+            const jsonData = JSON.stringify(data);
+
+            try {
+                const data = await $fetch(apiUri + path, {
+                    method: 'PUT',
+                    body: jsonData,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                // RETURN DATA
+                return data
+            } catch (error) {
+                this.handleError(error)
+            }
+        },
+        // PATCH
+        async patch(path, data) {
+            // get api Uri
+            const config = useRuntimeConfig();
+            const apiUri = config.public.apiUri;
+
+            const jsonData = JSON.stringify(data);
+
+            try {
+                const data = await $fetch(apiUri + path, {
+                    method: 'PATCH',
+                    body: jsonData,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                // RETURN DATA
+                return data
+            } catch (error) {
+                this.handleError(error)
+            }
+        },
+        // DELETE
+
         async delete(path) {
             // get api Uri
             const config = useRuntimeConfig();
@@ -68,9 +121,32 @@ export const useApiStore = defineStore('api', {
                 // RETURN DATA
                 return data
             } catch (error) {
-                console.log('error');
-                console.log(error);
+                this.handleError(error)
             }
+        },
+        handleError(error) {
+            // 401 UNAUTHORIZED
+            if (error.status == 401) {
+                // hapus token dari cookie
+                const token = useCookie('token');
+                token.value = '';
+
+                // lempar ke hal login
+                return navigateTo('/admin/login');
+
+            }
+            // BAD REQUEST
+            if (error.status == 400) {
+                throw error;
+            }
+
+            // UPDATE statusMessage -> error.data.message
+
+            // selain 401 & 400
+            throw createError({
+                statusCode: error.status || 500,
+                statusMessage: error.message || 'Internal Server Error!'
+            });
         }
     }
 })
