@@ -38,9 +38,13 @@
                             </div>
                         </div>
                         <div class="dropdown-content z-[2] menu bg-base-100 shadow rounded w-52">
+
+                            <!-- BACA STATE DATA UNTUK DRAW USER DETAIL DI LAYOUT -->
+
                             <div class="p-2 border-b">
-                                <div class="font-semibold">Uda Putera</div>
-                                <div class="text-xs">Administrator</div>
+                                <!-- GANTI NAMA USER SESUAI STATE -->
+                                <div class="font-semibold">{{ AuthStore.user.name }}</div> <!-- state user name -->
+                                <div class="text-xs">{{ AuthStore.user.email }}</div> <!-- state user email -->
                             </div>
                             <ul tabindex="0" class="p-2">
                                 <li>
