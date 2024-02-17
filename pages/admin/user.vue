@@ -42,8 +42,8 @@
             <h3 class="font-bold text-lg">Hello!</h3>
             <p class="py-4">Are You Sure?</p>
             <div class="modal-action">
-                <label for="confirm" class="btn">Close!</label>
-                <label for="confirm" @click="handleUpdate" class="btn btn-neutra">Update</label>
+                <label for="confirm" class="btn">No !</label>
+                <label for="confirm" @click="handleUpdate" class="btn btn-neutral">Update</label>
             </div>
 
         </div>
