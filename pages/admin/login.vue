@@ -27,7 +27,7 @@
                     <!-- input password -->
                     <div class="w-full pt-7 pb-14 font-josefin-sans text-xl md:text-2xl">
                         <label class=" text-black">Password</label>
-                        <input v-model="formData.password" type="text" placeholder="Password"
+                        <input v-model="formData.password" type="password" placeholder="Password"
                             class="input w-full text-slate-800 bg-white" />
 
                         <!-- error message -->
@@ -37,9 +37,9 @@
 
                     <!-- login button -->
                     <button @click="handleLogin"
-                        class="flex font-semibold btn border-1 text-xl md:text-2xl text-white bg-indigo-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
+                        class="flex flex-col font-semibold btn border-1 text-xl md:text-2xl text-white bg-indigo-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
                         SUBMIT
-                        <IndexImagesLoading class="w-12 h-12" v-if="isLoading" />
+                        <IndexImagesLoading class="w-12" v-if="isLoading" />
                     </button>
                     <div class="text-error text-sm text-right mr-2 mt-2">{{ fetchError }}</div>
                 </div>
@@ -73,7 +73,6 @@ const fetchError = ref('');
 const isLoading = ref(false);
 
 const handleLogin = async () => {
-
     // halangi jika dengan loading
     if (isLoading.value) return;
 
@@ -83,27 +82,13 @@ const handleLogin = async () => {
 
     isLoading.value = true;
     try {
-        // copy dari backend
-        const loginValidation = Joi.object({
-            email: Joi.string().email({
-                tlds: {
-                    allow: false
-                }
-            }).required().label("Email"),
-            password: Joi.string().min(6).max(100).required().label("Password")
-        });
-
-        // throw jika error
-        const data = Validate(loginValidation, formData.value);
-
         // fetch login
-        await AuthStore.login(data);
+        await AuthStore.login(formData.value);
     } catch (error) {
 
         if (error instanceof Joi.ValidationError) {
             errorMessages.value = joiError(error);
         } else {
-            console.log('error server')
             fetchError.value = error.data.message;
         }
 
