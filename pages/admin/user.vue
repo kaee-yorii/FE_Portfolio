@@ -75,7 +75,7 @@ definePageMeta({
 const AuthStore = useAuthStore();
 
 const errors = ref({});
-const fetchError = ref('test error fetch');
+const fetchError = ref('');
 
 const formData = ref({
     name: AuthStore.user.name,
