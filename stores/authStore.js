@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useApiStore } from './apiStore';
+import { updateUserValidation } from '~/utils/authValidation';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -38,6 +39,12 @@ export const useAuthStore = defineStore('auth', {
             // return data, ditaro ke state
             this.user = await Api.get('/user');
         },
+        async update(data) {
+            console.log('data sebelum validasi');
+            console.log(data);
 
+            data = Validate(updateUserValidation, data);
+
+        }
     }
 });

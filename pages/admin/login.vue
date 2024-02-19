@@ -70,6 +70,7 @@ const AuthStore = useAuthStore();
 
 const errorMessages = ref({});
 const fetchError = ref('');
+
 const isLoading = ref(false);
 
 const handleLogin = async () => {
@@ -94,6 +95,5 @@ const handleLogin = async () => {
 
         isLoading.value = false;
     }
-
 }
 </script>
