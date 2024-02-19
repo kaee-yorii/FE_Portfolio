@@ -64,28 +64,10 @@
     </div>
 
     <!-- MODAL SUCCESS -->
-    <input v-model="success" type="checkbox" id="confirm" class="modal-toggle" />
-    <div class="modal" role="dialog">
-        <div class="modal-box">
-            <!-- corner button -->
-            <form method="dialog">
-                <label for="confirm" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">×</label>
-            </form>
-            <h3 class="font-bold text-lg">SUCCESS!</h3>
-
-            <div class="modal-action">
-                <label for="confirm" @click="handleUpdate" class="btn btn-neutral">close</label>
-            </div>
-
-        </div>
-        <!-- click outside -->
-        <form method="dialog" class="modal-backdrop">
-            <label for="confirm">close</label>
-        </form>
-    </div>
+    <AdminModalSuccess :show="success" @close="success = false" />
 </template>
 
-<script setup>
+<script script setup >
 // setup layout & middleware, lihat di /admin/index
 import Joi from 'joi';
 definePageMeta({
