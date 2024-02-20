@@ -25,7 +25,7 @@ const props = defineProps({
     show: Boolean
 });
 
-defineEmits(['close'])
+defineEmits(['close']);
 
 const show_modal = ref(false);
 

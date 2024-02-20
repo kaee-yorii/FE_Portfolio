@@ -17,7 +17,7 @@
     <!-- Put this part before </body> tag -->
     <input type="checkbox" id="confirm" class="modal-toggle" />
     <div class="modal" role="dialog">
-        <AdminUserModalConfirmation />
+        <AdminUserModalConfirm />
     </div>
 
     <!-- MODAL SUCCESS -->
