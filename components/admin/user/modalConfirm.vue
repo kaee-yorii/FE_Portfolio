@@ -6,11 +6,11 @@
             <form method="dialog">
                 <label @click="$emit('close')" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">×</label>
             </form>
-            <h3 class="font-bold text-lg">Cofirm To Processed</h3>
+            <h3 class="font-bold text-lg">Confirm To Processed</h3>
             <p class="py-4">Are You Sure?</p>
             <div class="modal-action">
                 <label @click="$emit('close')" class="btn text-white btn-error">No !</label>
-                <label class="btn  text-white btn-success">Update</label>
+                <label class="btn  text-white btn-success" @click="$emit('saved')">Update</label>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
@@ -20,15 +20,43 @@
 </template>
 
 <script setup>
+// const AuthStore = useAuthStore();
+
+// const errors = ref({});
+
 const props = defineProps({
     show: Boolean
 });
 
-defineEmits(['close']);
+defineEmits(['close', 'saved']);
 
 const show_modal = ref(false);
 
 watchEffect(() => {
     show_modal.value = props.show;
 });
+
+// const handleUpdate = async () => {
+//     errors.value = {}
+//     fetchError.value = '';
+//     success.value = false;
+
+//     try {
+//         console.log('masuk handle update')
+//         await AuthStore.updateUser(formData.value);
+//         success.value = true;
+
+//     } catch (error) {
+//         console.log('ada error')
+//         console.log(error)
+//         if (error instanceof Joi.ValidationError) {
+//             // joi error
+//             errors.value = joiError(error);
+//         }
+//         else {
+//             // fetch error
+//             fetchError.value = error.data.message;
+//         }
+//     }
+// }
 </script>

@@ -1,11 +1,9 @@
 <template>
     <div>
-
-        <div class="flex flex-col gap 4">
+        <div class="flex flex-col gap-2">
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Old Password</div>
-                <input v-model="formData.current_password" type="Password" placeholder="Type here"
-                    class="input input-bordered w-full max-w-xs" />
+                <input v-model="formData.current_password" type="Password" class="input input-bordered w-full max-w-xs" />
                 <div class="text-error text-right text-sm" v-if="errors.current_password">{{ errors.current_password
                 }}
                 </div>
@@ -30,9 +28,10 @@
             </label>
         </div>
 
-        <label class="btn grow mt-3 w-[320px]" @click="confirm = true">Submit</label>
+        <label class="btn btn-secondary text-white  grow mt-5 w-[320px]" @click="confirm = true">Submit</label>
         <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
-        <AdminUserModalConfirm :show="confirm" @close="confirm = false" />
+        <AdminUserModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate" />
+        <AdminModalSuccess :show="success" @close="success = false" />
     </div>
 </template>
 
@@ -44,19 +43,17 @@ const errors = ref({});
 const fetchError = ref('');
 
 const formData = ref({
-    name: AuthStore.user.name,
-    email: AuthStore.user.email,
     current_password: '',
     password: '',
     confirm_password: ''
 });
 
-const confirm = ref();
+const confirm = ref(false);
 const success = ref(false);
 const handleUpdate = async () => {
     errors.value = {}
     fetchError.value = '';
-    success.value = false;
+    confirm.value = true;
 
     try {
         console.log('masuk handle update')

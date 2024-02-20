@@ -1,16 +1,16 @@
 <template>
     <!-- MODAL SUCCESS -->
-    <input v-model="show_modal" type="checkbox" id="success" class="modal-toggle" />
+    <input v-model="show_modal" type="checkbox" class="modal-toggle" />
     <div class="modal" role="dialog">
         <div class="modal-box">
             <!-- corner button -->
             <form method="dialog">
-                <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">×</label>
+                <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
             </form>
             <h3 class="font-bold text-lg">SUCCESS!</h3>
 
             <div class="modal-action">
-                <label @click="$emits('close')" class="btn btn-neutral">close</label>
+                <label @click="$emit('close')" class="btn btn-neutral">close</label>
             </div>
 
         </div>
