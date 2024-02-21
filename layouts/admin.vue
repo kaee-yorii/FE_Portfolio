@@ -89,6 +89,9 @@
 </template>
 
 <script setup>
+// FOR DATE PICKER
+import 'v-calendar/style.css';
+
 // AUTH STORE
 const AuthStore = useAuthStore();
 </script>
