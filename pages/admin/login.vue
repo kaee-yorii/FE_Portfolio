@@ -37,9 +37,10 @@
 
                     <!-- login button -->
                     <button @click="handleLogin"
-                        class="flex flex-col font-semibold btn border-1 text-xl md:text-2xl text-white bg-indigo-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
+                        class="flex font-semibold btn border-1 text-xl md:text-2xl text-white bg-indigo-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
                         SUBMIT
-                        <IndexImagesLoading class="w-12" v-if="isLoading" />
+                        <span class="loading loading-dots loading-md" v-if="isLoading"></span>
+                        <!-- <IndexImagesLoading class="w-12" v-if="isLoading" /> -->
                     </button>
                     <div class="text-error text-sm text-right mr-2 mt-2">{{ fetchError }}</div>
                 </div>
