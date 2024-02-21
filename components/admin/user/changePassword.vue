@@ -29,14 +29,18 @@
         </div>
 
         <div class="flex items-center gap-2">
-            <label class="btn btn-secondary text-white  grow mt-5 w-[320px]" @click="confirm = true">
+            <label class="btn btn-secondary text-white mt-5 w-[320px]" @click="confirm = true">
                 Submit
-                <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
+                <span v-show="isLoading" class="loading loading-bars loading-md"></span>
             </label>
             <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
         </div>
 
-        <AdminUserModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate" />
+        <AdminUserModalConfirm :show="confirm" text_confirm="Change Password" @close="confirm = false"
+            @saved="handleUpdate">
+            <h3 class="font-bold text-lg">Confirm To Processed</h3>
+            <p class="py-4">Are You Sure To Change Password?</p>
+        </AdminUserModalConfirm>
         <AdminModalSuccess :show="success" @close="success = false" />
     </div>
 </template>

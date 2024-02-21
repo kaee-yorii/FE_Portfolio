@@ -27,14 +27,18 @@
     </div>
 
     <div class="flex items-center gap-2">
-        <label class="btn btn-secondary text-white grow mt-5 w-[320px]" @click="confirm = true">
+        <label class="btn btn-secondary text-white mt-5 w-[320px]" @click="confirm = true">
             Submit
-            <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
+            <span v-show="isLoading" class="loading loading-bars loading-md"></span>
         </label>
         <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
     </div>
 
-    <AdminUserModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate" />
+    <AdminUserModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
+        <h3 class="font-bold text-lg">Confirm To Processed</h3>
+        <p class="py-4">Are You Sure To Update User Detail?</p>
+    </AdminUserModalConfirm>
+
     <AdminModalSuccess :show="success" @close="success = false" />
 </template>
 
@@ -46,7 +50,7 @@ const errors = ref({});
 const fetchError = ref('');
 const confirm = ref(false);
 const success = ref(false);
-const isLoading = ref(false);
+const isLoading = ref(false); // tambahin
 
 const formData = ref({
     name: AuthStore.user.name,
@@ -57,14 +61,14 @@ const handleUpdate = async () => {
     errors.value = {}
     fetchError.value = '';
     success.value = true;
-    isLoading.value = true;
+    isLoading.value = true; // tambahin
 
     try {
         console.log('masuk handle update')
 
         await AuthStore.updateUser(formData.value);
         confirm.value = false;
-        isLoading.value = false;
+        isLoading.value = false; // tambahin
 
     } catch (error) {
         console.log('ada error')

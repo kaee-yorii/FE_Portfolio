@@ -6,11 +6,12 @@
             <form method="dialog">
                 <label @click="$emit('close')" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">×</label>
             </form>
-            <h3 class="font-bold text-lg">Confirm To Processed</h3>
-            <p class="py-4">Are You Sure?</p>
+
+            <slot />
+
             <div class="modal-action">
                 <label @click="$emit('close')" class="btn text-white btn-error">No !</label>
-                <label class="btn  text-white btn-success" @click="$emit('saved')">Update</label>
+                <label class="btn  text-white btn-success" @click="$emit('saved')">{{ text_confirm || 'Update' }}</label>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
@@ -25,7 +26,8 @@
 // const errors = ref({});
 
 const props = defineProps({
-    show: Boolean
+    show: Boolean,
+    text_confirm: String
 });
 
 defineEmits(['close', 'saved']);
