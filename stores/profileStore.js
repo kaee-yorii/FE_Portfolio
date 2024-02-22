@@ -38,9 +38,23 @@ export const useProfileStore = defineStore('profile', {
                 formData.append('avatar', avatar)
             }
 
-            // CARA KEDUA
-
             this.profile = await Api.put('/profile', formData);
+        }, async update2(data, avatar) {
+            const Api = useApiStore();
+
+            // validasi
+            data = Validate(isUpdateProfile, data);
+
+            // fetch 1
+            this.profile = await Api.put('/profile', data);
+
+            if (avatar) {
+                const formData = new FormData();
+                formData.append('avatar', avatar)
+            }
+
+            // fetch 2
+            this.profile = await Api.put('/profile', FormData);
         }
     }
 });

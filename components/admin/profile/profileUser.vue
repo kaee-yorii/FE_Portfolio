@@ -185,7 +185,7 @@ const handleUpdate = async () => {
         errors.value = {};
         fetchError.value = '';
 
-        confirm.value = true;
+        confirm.value = false;
 
         try {
             await ProfileStore.update(formData.value, file_avatar);
