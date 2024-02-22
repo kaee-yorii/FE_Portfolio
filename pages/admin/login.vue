@@ -1,14 +1,14 @@
 <template>
     <div class="w-screen h-screen max-h-screen max-w-screen overflow-hidden bg-white">
-        <div class="w-full h-full grid max-lg:grid-rows-10 lg:grid-cols-2">
+        <div class="w-full h-full flex">
             <div class="max-lg:row-span-4 flex flex-col justify-center items-center">
-                <indexImagesProgrammer class="w-[125%]" />
+                <IndexImagesWhale class="w-[80%]" />
             </div>
             <div
-                class="max-lg:row-span-6 bg-blue-300 flex flex-col gap-6 lg:gap-12 justify-center items-center px-10 md:px-20 lg:px-20 xl:px-40">
+                class="max-lg:row-span-6 bg-slate-300 flex flex-col gap-6 lg:gap-12 justify-center items-center px-10 md:px-20 lg:px-20 xl:px-40">
 
                 <!-- nama -->
-                <div class="bg-indigo-300 rounded-2xl p-3 md:p-8 max-lg:p-12 lg:p-16">
+                <div class="bg-indigo-100 rounded-2xl p-3 md:p-8 max-lg:p-12 lg:p-16">
                     <div
                         class="font-josefin-sans text-center border-b-2 border-black py-2 text-nowrap text-3xl md:text-6xl lg:text-4xl xl:text-6xl text-slate-900">
                         Login</div>
@@ -38,7 +38,7 @@
                     <!-- login button -->
                     <div class="flex items-center gap-2">
                         <button @click="handleLogin"
-                            class="font-semibold btn border-1 text-xl md:text-2xl text-white bg-indigo-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
+                            class="font-semibold btn border-1 text-xl md:text-2xl text-white bg-slate-800 p-10 md:px-20 lg:px-32 py-2 h-min text-nowrap hover:bg-slate-200 hover:text-slate-800 hover:duration-300">
                             SUBMIT
                             <span v-show="isLoading" class="loading loading-bars loading-md"></span>
                             <!-- <IndexImagesLoading class="w-12" v-if="isLoading" /> -->
