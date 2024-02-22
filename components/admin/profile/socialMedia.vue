@@ -39,13 +39,22 @@
         <div class="text-error text-right text-sm" v-if="errors.discord">{{ errors.discord }}</div>
     </label>
 
-    <div class="flex items-center gap-2 mt-5">
-        <button @click="handleUpdate" class="btn btn-neutral float-right">
+    <!-- MODAL CONFIRMATION -->
+    <div class="flex items-center gap-2">
+        <label class="btn btn-neutral text-white mt-5 w-[320px]" @click="confirm = true">
             Save Changes
             <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
-        </button>
-        <div class="text-error text-tight text-sm pr-2">{{ fetchError }}</div>
+        </label>
+        <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
     </div>
+
+    <AdminUserModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
+        <h3 class="font-bold text-lg">Confirm To Processed</h3>
+        <p class="py-4">Are You Sure To Update?</p>
+    </AdminUserModalConfirm>
+
+    <!-- MODAL SUCCESS -->
+    <AdminModalSuccess :show="success" @close="success = false" />
 </template>
 
 <script setup>
@@ -63,24 +72,34 @@ const formData = ref({
 
 const fetchError = ref('');
 const isLoading = ref(false);
+const success = ref(false);
+const confirm = ref(false);
 
 const errors = ref({});
 const handleUpdate = async () => {
     // TODO confirmation, alert success
 
-    // reset error
-    errors.value = {};
-    fetchError.value = '';
-    isLoading.value = true;
+    // loading indicator
+    if (isLoading.value == false) {
+        isLoading.value == true;
 
-    try {
-        await ProfileStore.update(formData.value);
-        isLoading.value = false;
-    } catch (error) {
-        if (error instanceof Joi.ValidationError) {
-            errors.value = joiError(error);
-        } else {
-            fetchError.value = error.data.message;
+        // reset error
+        errors.value = {};
+        fetchError.value = '';
+
+        confirm.value = true;
+
+        try {
+            await ProfileStore.update(formData.value);
+            isLoading.value = false;
+            success.value = true;
+        } catch (error) {
+            isLoading.value = false;
+            if (error instanceof Joi.ValidationError) {
+                errors.value = joiError(error);
+            } else {
+                fetchError.value = error.data.message;
+            }
         }
     }
 }

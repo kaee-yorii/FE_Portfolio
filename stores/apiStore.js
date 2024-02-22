@@ -33,7 +33,7 @@ export const useApiStore = defineStore('api', {
             const jsonData = JSON.stringify(data);
 
             try {
-                const data = await $fetch(apiUri + path, {
+                const response = await $fetch(apiUri + path, {
                     method: 'POST',
                     body: jsonData,
                     headers: {
@@ -43,12 +43,9 @@ export const useApiStore = defineStore('api', {
                 });
 
                 // RETURN DATA
-                return data
+                return response
             } catch (error) {
                 this.handleError(error)
-
-                // SELAIN 401
-
             }
         },
         // HANDLE PUT & PATCH -> COPY DARI POST, KARENA PUT & PATCH ADA PARAMETER DATA
@@ -60,20 +57,23 @@ export const useApiStore = defineStore('api', {
             const config = useRuntimeConfig();
             const apiUri = config.public.apiUri;
 
-            const jsonData = JSON.stringify(data);
+            if (!(data instanceof FormData)) {
+                // jika data bukan formData, ubah ke json
+                data = JSON.stringify(data);
+            }
 
             try {
-                const data = await $fetch(apiUri + path, {
+                const response = await $fetch(apiUri + path, {
                     method: 'PUT',
-                    body: jsonData,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    body: data,
+                    // headers: {
+                    //     'Content-Type': 'application/json'
+                    // },
                     credentials: 'include'
                 });
 
                 // RETURN DATA
-                return data
+                return response
             } catch (error) {
                 this.handleError(error)
             }

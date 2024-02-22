@@ -26,6 +26,7 @@
         </label>
     </div>
 
+    <!-- MODAL CONFIRMATION -->
     <div class="flex items-center gap-2">
         <label class="btn btn-secondary text-white mt-5 w-[320px]" @click="confirm = true">
             Save Changes
