@@ -7,7 +7,7 @@
             <form method="dialog">
                 <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
             </form>
-            <h3 class="font-bold text-lg">SUCCESS!</h3>
+            <h3 class="font-bold text-lg">Done!</h3>
 
             <div class="modal-action">
                 <label @click="$emit('close')" class="btn btn-neutral">close</label>

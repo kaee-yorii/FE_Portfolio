@@ -99,7 +99,10 @@
     </div>
 
     <div class="flex items-center gap-2 mt-5">
-        <button @click="handleUpdate" class="btn btn-neutral float-right">Update</button>
+        <button @click="handleUpdate" class="btn btn-neutral float-right">
+            Save Changes
+            <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
+        </button>
         <div class="text-error text-tight text-sm pr-2">{{ fetchError }}</div>
     </div>
 </template>
@@ -113,6 +116,7 @@ const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
 
 const ProfileStore = useProfileStore();
+const isLoading = ref(false);
 
 const formData = ref({
     email: ProfileStore.profile.email,
@@ -137,9 +141,11 @@ const handleUpdate = async () => {
     // reset error
     errors.value = {};
     fetchError.value = '';
+    isLoading.value = true;
 
     try {
         await ProfileStore.update(formData.value);
+        isLoading
     } catch (error) {
         if (error instanceof Joi.ValidationError) {
             errors.value = joiError(error);

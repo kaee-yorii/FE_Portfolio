@@ -39,14 +39,19 @@
         <div class="text-error text-right text-sm" v-if="errors.discord">{{ errors.discord }}</div>
     </label>
 
-    <button class="btn btn-neutral float-right-1 py-2">Update</button>
+    <div class="flex items-center gap-2 mt-5">
+        <button @click="handleUpdate" class="btn btn-neutral float-right">
+            Save Changes
+            <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
+        </button>
+        <div class="text-error text-tight text-sm pr-2">{{ fetchError }}</div>
+    </div>
 </template>
 
 <script setup>
-
+import Joi from 'joi';
 const ProfileStore = useProfileStore();
 
-const errors = ref({});
 const formData = ref({
     github: ProfileStore.profile.github,
     instagram: ProfileStore.profile.instagram,
@@ -55,4 +60,28 @@ const formData = ref({
     linkedin: ProfileStore.profile.linkedin,
     discord: ProfileStore.profile.discord
 });
+
+const fetchError = ref('');
+const isLoading = ref(false);
+
+const errors = ref({});
+const handleUpdate = async () => {
+    // TODO confirmation, alert success
+
+    // reset error
+    errors.value = {};
+    fetchError.value = '';
+    isLoading.value = true;
+
+    try {
+        await ProfileStore.update(formData.value);
+        isLoading.value = false;
+    } catch (error) {
+        if (error instanceof Joi.ValidationError) {
+            errors.value = joiError(error);
+        } else {
+            fetchError.value = error.data.message;
+        }
+    }
+}
 </script>

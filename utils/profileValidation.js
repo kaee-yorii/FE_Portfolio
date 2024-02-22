@@ -6,6 +6,8 @@ export const isUpdateProfile = Joi.object({
     firstName: isString100,
     lastName: isString100,
     dob: Joi.date().less('now'),
+    phone: isString100,
+    job: isString100,
     address: isText,
     city: isString100,
     country: isString100,

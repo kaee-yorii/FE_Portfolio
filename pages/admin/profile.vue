@@ -2,13 +2,13 @@
     <div>
         <div class="font-semibold mb-4 border-b-neutral/25">Profile</div>
 
-        <div role="tablist" class="tabs tabs-bordered">
-            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Profile User" checked />
+        <div role="tablist" class="tabs tabs-lifted">
+            <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="User" checked />
             <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
                 <AdminProfileUser v-if="ProfileStore.profile != null" />
             </div>
 
-            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Social Media" />
+            <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Social Media" />
             <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
                 <AdminProfileSocialMedia v-if="ProfileStore.profile != null" />
             </div>

@@ -28,8 +28,8 @@
 
     <div class="flex items-center gap-2">
         <label class="btn btn-secondary text-white mt-5 w-[320px]" @click="confirm = true">
-            Submit
-            <span v-show="isLoading" class="loading loading-bars loading-md"></span>
+            Save Changes
+            <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
         </label>
         <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
     </div>
