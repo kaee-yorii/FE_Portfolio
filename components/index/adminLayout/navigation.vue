@@ -28,8 +28,12 @@ const menus = [
     {
         title: "Project",
         to: "/admin/project",
-        icon: resolveComponent("LucideLayoutDashboard"),
-
+        icon: resolveComponent("LucideBriefcase"),
+    },
+    {
+        title: "Experience",
+        to: "/admin/experience",
+        icon: resolveComponent("LucideAward"),
     },
 ]
 
