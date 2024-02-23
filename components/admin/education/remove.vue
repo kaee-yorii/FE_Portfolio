@@ -7,14 +7,12 @@
                 <label @click="$emit('close')" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">×</label>
             </form>
 
+            <!-- SLOT -->
             <slot />
 
             <div class="modal-action">
-                <label @click="$emit('close')" class="btn text-white btn-error">No !</label>
-                <label class="btn  text-white btn-success" @click="$emit('saved'); isLoading = true;">{{ text_confirm ||
-                    'Update' }}
-                    <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
-                </label>
+                <label @click="$emit('close')" class="btn text-white btn-neutral">Cancel</label>
+                <label class="btn  text-white btn-error" @click="$emit('deleted')">Delete</label>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
@@ -30,14 +28,16 @@
 
 const props = defineProps({
     show: Boolean,
-    text_confirm: String
+    data: Object
 });
 
-const isLoading = ref(false)
-
-defineEmits(['close', 'saved']);
+defineEmits(['close', 'deleted']);
 
 const show_modal = ref(false);
+
+const handleRemove = async () => {
+    console.log('masuk delete')
+}
 
 watchEffect(() => {
     show_modal.value = props.show;

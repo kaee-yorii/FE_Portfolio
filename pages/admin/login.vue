@@ -5,7 +5,7 @@
                 <IndexImagesWhale class="w-[80%]" />
             </div> -->
     <div
-        class="w-screen h-screen max-lg:row-span-6 bg-gradient-to-r from-blue-300 via-cyan-200 to-pink-200  flex gap-6 lg:gap-12 justify-center items-center px-10 md:px-20 lg:px-20 xl:px-40">
+        class="w-screen h-screen max-lg:row-span-6 bg-gradient-to-r from-slate-700 via-slate-500 to-slate-300  flex gap-6 lg:gap-12 justify-center items-center px-10 md:px-20 lg:px-20 xl:px-40">
 
         <!-- nama -->
         <div class="bg-gradient-to-r from-slate-300 to-transparent rounded-2xl p-3 md:p-8 max-lg:p-12 lg:p-16">

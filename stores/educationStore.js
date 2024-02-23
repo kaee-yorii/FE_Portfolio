@@ -10,6 +10,10 @@ export const useEducationStore = defineStore('education', {
             const Api = useApiStore();
 
             this.educations = await Api.get('/educations');
+        },
+        async remove(id) {
+            const Api = useApiStore();
+            await Api.remove('/education/' + id);
         }
     }
 });
