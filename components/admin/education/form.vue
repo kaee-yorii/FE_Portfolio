@@ -74,19 +74,13 @@ const isLoading = ref(false)
 const emits = defineEmits(['close', 'saved']);
 const show_modal = ref(false);
 
-const formData = ref({
-    institutionName: '',
-    startYear: '',
-    endYear: '',
-    major: '',
-    degree: ''
-});
+const formData = ref({})
 
 watchEffect(() => {
     show_modal.value = props.show;
 
     // reset form
-    formData = {
+    formData.value = {
         institutionName: '',
         startYear: '',
         endYear: '',
