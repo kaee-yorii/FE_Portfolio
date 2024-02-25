@@ -1,6 +1,15 @@
 <template>
     <div>
-        <div class="font-semibold text-lg mb-4 border-b-neutral/25">Experience</div>
+        <div class="font-semibold text-lg mb-4 border-b-neutral/25 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <LucideAward :size="26" />
+                Experience
+            </div>
+            <button @click="showForm = true" class="btn btn-sm btn-neutral">
+                <LucidePlus :size="16" />
+                Add Experience
+            </button>
+        </div>
 
         <input v-model="filter" type="text" placeholder="Type here" class="input input-sm input-bordered w-full max-w-xs" />
 

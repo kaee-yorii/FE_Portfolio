@@ -45,9 +45,9 @@ import type Joi from 'joi';
 
                 <div class="modal-action">
                     <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
-                    <label @click="$emit('close'); save" class="btn btn-outline btn-error">Cancel</label>
-                    <label @click=" save " class="btn btn-primary">{{ text_confirm || 'Create' }}
-                        <span v-show=" isLoading " class="loading loading-spinner loading-md"></span>
+                    <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
+                    <label @click="save" class="btn btn-primary">{{ text_confirm || 'Create' }}
+                        <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
                     </label>
                     <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
                 </div>

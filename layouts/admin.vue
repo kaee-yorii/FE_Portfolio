@@ -31,9 +31,9 @@
                     </div> -->
 
                     <!-- avatar / account -->
-                    <div class="dropdown dropdown-end max-md:hidden">
+                    <div class="dropdown dropdown-end max-md:hidden border-l-2 border-gray/20 px-2 lg:px-4 md:py-0">
                         <div tabindex="0" role="button" class="btn w-10 h-10 min-h-10 btn-circle">
-                            <div class="flex  justify-center items-center">
+                            <div class="flex  justify-center items-center ">
                                 <LucideUser :size="24" class="text-primary" />
                             </div>
                         </div>

@@ -18,7 +18,6 @@
                 <!-- head -->
                 <thead>
                     <tr>
-                        <th class="text-center">ID</th>
                         <th class="text-center">Institution</th>
                         <th class="text-center">Periode</th>
                         <th class="text-center">Major</th>
@@ -29,7 +28,6 @@
                 <tbody>
                     <!-- row 1 -->
                     <tr v-for="edu in dataTable" :key="edu.id">
-                        <th class="text-center">{{ edu.id }}</th>
                         <th class="text-center">{{ edu.institutionName }}</th>
                         <td class="text-center">{{ edu.startYear }} - {{ edu.endYear }}</td>
                         <td class="text-center">{{ edu.major }}</td>

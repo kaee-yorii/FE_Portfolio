@@ -35,6 +35,11 @@ const menus = [
         to: "/admin/experience",
         icon: resolveComponent("LucideAward"),
     },
+    {
+        title: "Skill",
+        to: "/admin/skill",
+        icon: resolveComponent("LucideWrench"),
+    },
 ]
 
 </script>
