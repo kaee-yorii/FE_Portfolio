@@ -7,38 +7,36 @@
 
             <form method="dialog">
 
-                <h3 class="font-bold text-lg">Create Education</h3>
+                <h3 class="font-bold text-lg">Create Skill</h3>
 
-                <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Insitution Name</div>
-                    <input v-model="formData.institutionName" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.institutionName">{{ errors.institutionName }}
+                <div>
+                    Avatar
+                    <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl">
+                        <div v-if="!avatar" class="w-full h-full"></div>
+                        <img v-else :src="avatar" class="object-cover min-h-full min-w-full">
                     </div>
+                    <div class="flex md:justify-center mt-2">
+                        <input @change="handleFile" accept="image/*" type="file"
+                            class="file-input file-input-bordered w-full max-w-xs" />
+                    </div>
+                </div>
+                <label class="form-control w-full max-w-xs">
+                    <div class="label label-text">Title</div>
+                    <input v-model="formData.title" type="text" placeholder="Type Here"
+                        class="input input-bordered w-full max-w-xs" />
+                    <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title }}</div>
                 </label>
                 <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Start Year</div>
-                    <input v-model="formData.startYear" type="text" placeholder="Type Here"
+                    <div class="label label-text">Category</div>
+                    <input v-model="formData.category" type="text" placeholder="Type Here"
                         class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.startYear">{{ errors.startYear }}</div>
+                    <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
                 </label>
                 <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">End Year</div>
-                    <input v-model="formData.endYear" type="text" placeholder="Type Here"
+                    <div class="label label-text">Projects</div>
+                    <input v-model="formData.projects" type="text" placeholder="Type Here"
                         class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.endYear">{{ errors.endYear }}</div>
-                </label>
-                <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Major</div>
-                    <input v-model="formData.major" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.major">{{ errors.major }}</div>
-                </label>
-                <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Degree</div>
-                    <input v-model="formData.degree" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.degree">{{ errors.degree }}</div>
+                    <div class="text-error text-right text-sm" v-if="errors.projects">{{ errors.projects }}</div>
                 </label>
 
                 <div class="modal-action">
@@ -79,10 +77,10 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        institutionName: '',
-        startYear: '',
-        endYear: '',
-        major: '',
+        svg: '',
+        title: '',
+        category: '',
+        projects: '',
         degree: ''
     }
 });

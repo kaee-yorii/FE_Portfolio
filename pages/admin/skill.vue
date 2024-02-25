@@ -48,17 +48,29 @@
                                 <button class="btn btn-circle btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
-                                <button @click="show_remove_modal = true; removeData = edu"
+                                <button @click="show_remove_modal = true; removeData = skill"
                                     class="btn btn-circle btn-error">
                                     <LucideTrash-2 :size="16" />
                                 </button>
                             </div>
-
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <!-- modal confirmation -->
+        <AdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
+            @saved="handleRemove">
+            are you sure to remove
+            <span v-if="removeData" class="font-bold">{{
+                removeData.institutionName }} ?</span>
+        </AdminUserModalConfirm>
+
+        <!-- modal success alert -->
+        <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
+
+        <AdminSkillForm :show="showForm" text_confirm="Save" @close="showForm = false" @saved="saved" />
 
     </div>
 </template>
@@ -70,11 +82,15 @@ definePageMeta({
 });
 
 const SkillStore = useSkillStore();
+const show_remove_modal = ref(false);
+const show_success_modal = ref(false);
+const removeData = ref(null)
+const filter = ref('');
+
 onBeforeMount(async () => {
     await SkillStore.get();
 });
 
-const filter = ref('');
 
 const dataTable = computed(() => {
 
@@ -92,4 +108,36 @@ const dataTable = computed(() => {
     }
 });
 
+
+const handleRemove = async () => {
+    try {
+        const id = removeData.value.id;
+
+        // prosess delete
+        await EduStore.remove(id);
+
+        // hide modal
+        show_remove_modal.value = false;
+
+        // TODO success modal
+        show_success_modal.value = true
+
+        // refresh data
+        await EduStore.get();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// CREATE
+const showForm = ref(false);
+// berhasil
+const saved = async () => {
+    showForm.value = false;
+
+    show_success_modal.value = true;
+
+    // fetch ulang data education
+    await EduStore.get();
+}
 </script>
