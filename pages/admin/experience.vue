@@ -33,7 +33,7 @@
                         <td class="text-center">{{ exp.readStartDate }} - {{ exp.readEndDate }}</td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <button class="btn btn-circle btn-neutral">
+                                <button @click="editData = exp; showForm = true" class="btn btn-circle btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
                                 <button @click="show_remove_modal = true; removeData = exp"
@@ -59,7 +59,7 @@
         <!-- modal success alert -->
         <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
 
-        <!-- <AdminEducationForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" /> -->
+        <AdminExperienceForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
     </div>
 </template>
 
@@ -121,7 +121,7 @@ const handleRemove = async () => {
 }
 
 const showForm = ref(false);
-
+const editData = ref(null)
 const saved = () => {
 
 }

@@ -13,7 +13,28 @@ export const useExperienceStore = defineStore('education', {
         },
         async remove(id) {
             const Api = useApiStore();
+
             await Api.delete('/experience/' + id);
+        },
+        async create(data) {
+            const Api = useApiStore();
+
+            // validasi
+            data = Validate(isExperience, data);
+
+            await Api.post('/experience', data);
+        },
+        async update(id, data) {
+            console.log('masuk method experience update')
+            console.log(data)
+
+            const Api = useApiStore();
+
+            // validasi
+            data = Validate(isExperience, data);
+
+            await Api.put(`/experience/${id}`, data);
         }
+
     }
 });
