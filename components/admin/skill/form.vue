@@ -32,12 +32,12 @@
                         class="input input-bordered w-full max-w-xs" />
                     <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
                 </label>
-                <label class="form-control w-full max-w-xs">
+                <!-- <label class="form-control w-full max-w-xs">
                     <div class="label label-text">Projects</div>
                     <input v-model="formData.projects" type="text" placeholder="Type Here"
                         class="input input-bordered w-full max-w-xs" />
                     <div class="text-error text-right text-sm" v-if="errors.projects">{{ errors.projects }}</div>
-                </label>
+                </label> -->
 
                 <div class="modal-action">
                     <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
@@ -80,23 +80,19 @@ watchEffect(() => {
         svg: '',
         title: '',
         category: '',
-        projects: '',
-        degree: ''
     }
 });
 
 const fetchError = ref('');
 const errors = ref({});
 
-const EduStore = useEducationStore();
+const SkillStore = useSkillStore();
 
 const save = async () => {
     try {
         isLoading.value = true;
 
-        if (!formData.value.endYear) formData.value.endYear = null
-
-        await EduStore.create(formData.value)
+        await SkillStore.create(formData.value)
 
         isLoading.value = false;
 
@@ -115,5 +111,61 @@ const save = async () => {
         }
     }
 }
+
+let file_avatar = null;
+const confirm = ref(false)
+const success = ref(false)
+
+const handleUpdate = async () => {
+    // TODO confirmation, alert success
+
+    // loading indicator
+    if (isLoading.value == false) {
+        isLoading.value == true;
+
+        // reset error
+        errors.value = {};
+        fetchError.value = '';
+
+        confirm.value = false;
+
+        try {
+            await SkillStore.update(formData.value, file_avatar);
+            isLoading.value = false;
+            success.value = true;
+
+        } catch (error) {
+            console.log(error)
+            isLoading.value = false;
+
+            if (error instanceof Joi.ValidationError) {
+                errors.value = joiError(error);
+            } else {
+                console.log(error)
+            }
+        }
+    }
+}
+
+const handleFile = (e) => {
+    console.log(e);
+    if (e.target.files.length) {
+        const file = e.target.files[0];
+        file_avatar = file;
+
+        // convert file to dataurl
+        // data yg bisa dibaca di tag <img src= />
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            avatar.value = reader.result;
+        }
+    }
+}
+const avatar = ref(
+    SkillStore.skills.avatar
+        ? apiUri + SkillStore.skills.avatar
+        : null
+)
 
 </script>

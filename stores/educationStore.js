@@ -19,16 +19,21 @@ export const useEducationStore = defineStore('education', {
         async create(data) {
             const Api = useApiStore();
 
-            console.log('data before validation');
-            console.log(data);
+            // validasi
+            data = Validate(isEducation, data);
+
+            await Api.post('/education', data);
+        },
+        async update(id, data) {
+            console.log('masuk method education update')
+            console.log(data)
+
+            const Api = useApiStore();
 
             // validasi
             data = Validate(isEducation, data);
 
-            console.log('data after validation');
-            console.log(data);
-
-            await Api.post('/education', data);
+            await Api.put(`/education/${id}`, data);
         }
     }
 });

@@ -12,23 +12,23 @@ export const useSkillStore = defineStore('skills', {
 
             this.skills = await Api.get('/skills');
         },
-        // async remove(id) {
-        //     const Api = useApiStore();
-        //     await Api.delete('/skill/' + id);
-        // },
-        // async create(data) {
-        //     const Api = useApiStore();
+        async remove(id) {
+            const Api = useApiStore();
+            await Api.delete('/skill/' + id);
+        },
+        async create(data) {
+            const Api = useApiStore();
 
-        //     console.log('data before validation');
-        //     console.log(data);
+            console.log('data before validation');
+            console.log(data);
 
-        //     // validasi
-        //     data = Validate(isSkill, data);
+            // validasi
+            data = Validate(isSkill, data);
 
-        //     console.log('data after validation');
-        //     console.log(data);
+            console.log('data after validation');
+            console.log(data);
 
-        //     await Api.post('/skill', data);
-        // }
+            await Api.post('/skill', data);
+        }
     }
 });

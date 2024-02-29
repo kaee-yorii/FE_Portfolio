@@ -60,11 +60,9 @@
         </div>
 
         <!-- modal confirmation -->
-        <AdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
-            @saved="handleRemove">
-            are you sure to remove
-            <span v-if="removeData" class="font-bold">{{
-                removeData.institutionName }} ?</span>
+        <AdminUserModalConfirm :show="confirm" @close="confirm = false" @saved="handleUpdate">
+            <h3 class="font-bold text-lg">Confirm To Processed</h3>
+            <p class="py-4">Are You Sure To Change ?</p>
         </AdminUserModalConfirm>
 
         <!-- modal success alert -->
@@ -114,7 +112,7 @@ const handleRemove = async () => {
         const id = removeData.value.id;
 
         // prosess delete
-        await EduStore.remove(id);
+        await SkillStore.remove(id);
 
         // hide modal
         show_remove_modal.value = false;
@@ -123,7 +121,7 @@ const handleRemove = async () => {
         show_success_modal.value = true
 
         // refresh data
-        await EduStore.get();
+        await SkillStore.get();
     } catch (error) {
         console.log(error);
     }
@@ -138,6 +136,6 @@ const saved = async () => {
     show_success_modal.value = true;
 
     // fetch ulang data education
-    await EduStore.get();
+    await SkillStore.get();
 }
 </script>
