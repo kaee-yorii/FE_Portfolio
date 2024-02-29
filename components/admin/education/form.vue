@@ -16,24 +16,35 @@
                     <div class="text-error text-right text-sm" v-if="errors.institutionName">{{ errors.institutionName }}
                     </div>
                 </label>
+
+                <!-- START YEAR -->
                 <label class="form-control w-full max-w-xs">
                     <div class="label label-text">Start Year</div>
-                    <input v-model="formData.startYear" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
+
+                    <div class="flex items-center gap-2">
+                        <input v-model="formData.startYear" type="text" placeholder="Start Year"
+                            class="input input-bordered w-full max-w-xs" />
+                        <input type="checkbox" v-model="isChecked" class="checkbox" @change="handlePresent" /> PRESENT
+                    </div>
+
                     <div class="text-error text-right text-sm" v-if="errors.startYear">{{ errors.startYear }}</div>
                 </label>
+
+                <!-- END YEAR -->
                 <label class="form-control w-full max-w-xs">
                     <div class="label label-text">End Year</div>
                     <input v-model="formData.endYear" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
+                        class="input input-bordered w-full max-w-xs" :disabled="isChecked" />
                     <div class="text-error text-right text-sm" v-if="errors.endYear">{{ errors.endYear }}</div>
                 </label>
+
                 <label class="form-control w-full max-w-xs">
                     <div class="label label-text">Major</div>
                     <input v-model="formData.major" type="text" placeholder="Type Here"
                         class="input input-bordered w-full max-w-xs" />
                     <div class="text-error text-right text-sm" v-if="errors.major">{{ errors.major }}</div>
                 </label>
+
                 <label class="form-control w-full max-w-xs">
                     <div class="label label-text">Degree</div>
                     <input v-model="formData.degree" type="text" placeholder="Type Here"
@@ -79,6 +90,9 @@ const show_modal = ref(false);
 const formData = ref({})
 
 const editData = ref(null);
+
+const isChecked = ref(false);
+
 watchEffect(() => {
     show_modal.value = props.show;
 
@@ -90,6 +104,8 @@ watchEffect(() => {
         major: props.data ? props.data.major : '',
         degree: props.data ? props.data.degree : ''
     }
+
+    isChecked.value = props.data ? props.data.endYear == null : false
 
     console.log('props.data')
     console.log(props.data)
@@ -134,4 +150,12 @@ const save = async () => {
     }
 }
 
+const handlePresent = (e) => {
+    isChecked = e.target.checked;
+
+    if (isChecked) {
+        formData.value.endYear = '';
+    }
+
+}
 </script>
