@@ -5,7 +5,7 @@
                 <LucideAward :size="26" />
                 Experience
             </div>
-            <button @click="showForm = true" class="btn btn-sm btn-neutral">
+            <button @click="editData = null; showForm = true" class="btn btn-sm btn-neutral">
                 <LucidePlus :size="16" />
                 Add Experience
             </button>
@@ -19,10 +19,9 @@
                 <thead>
                     <tr>
                         <th>Company</th>
-                        <th class="text-center">Location</th>
                         <th class="text-center">Title</th>
                         <th class="text-center">Periode</th>
-                        <th class="text-center">Edit</th>
+                        <th class="text-center">Action</th>
 
                     </tr>
                 </thead>
@@ -30,7 +29,6 @@
                     <!-- row 1 -->
                     <tr v-for="exp in dataTable" :key="exp.id">
                         <th>{{ exp.company }}</th>
-                        <td class="text-center">{{ exp.location }}</td>
                         <td class="text-center">{{ exp.title }}</td>
                         <td class="text-center">{{ exp.readStartDate }} - {{ exp.readEndDate }}</td>
                         <td>
@@ -61,6 +59,7 @@
         <!-- modal success alert -->
         <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
 
+        <!-- <AdminEducationForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" /> -->
     </div>
 </template>
 
@@ -120,6 +119,10 @@ const handleRemove = async () => {
         console.log(error);
     }
 }
-</script>
 
-<style lang="scss" scoped></style>
+const showForm = ref(false);
+
+const saved = () => {
+
+}
+</script>

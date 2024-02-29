@@ -17,13 +17,27 @@
                     </div>
                 </label>
 
+                <label class="form-control w-full max-w-xs">
+                    <div class="label label-text">Major</div>
+                    <input v-model="formData.major" type="text" placeholder="Type Here"
+                        class="input input-bordered w-full max-w-xs" />
+                    <div class="text-error text-right text-sm" v-if="errors.major">{{ errors.major }}</div>
+                </label>
+
+                <label class="form-control w-full max-w-xs">
+                    <div class="label label-text">Degree</div>
+                    <input v-model="formData.degree" type="text" placeholder="Type Here"
+                        class="input input-bordered w-full max-w-xs" />
+                    <div class="text-error text-right text-sm" v-if="errors.degree">{{ errors.degree }}</div>
+                </label>
+
                 <!-- START YEAR -->
                 <label class="form-control w-full max-w-xs">
                     <div class="label label-text">Start Year</div>
 
                     <div class="flex items-center gap-2">
                         <input v-model="formData.startYear" type="text" placeholder="Start Year"
-                            class="input input-bordered w-full max-w-xs" />
+                            class="input input-bordered w-40" />
                         <input type="checkbox" v-model="isChecked" class="checkbox" @change="handlePresent" /> PRESENT
                     </div>
 
@@ -38,19 +52,6 @@
                     <div class="text-error text-right text-sm" v-if="errors.endYear">{{ errors.endYear }}</div>
                 </label>
 
-                <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Major</div>
-                    <input v-model="formData.major" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.major">{{ errors.major }}</div>
-                </label>
-
-                <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Degree</div>
-                    <input v-model="formData.degree" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.degree">{{ errors.degree }}</div>
-                </label>
 
                 <div class="modal-action">
                     <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
