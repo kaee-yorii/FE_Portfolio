@@ -41,8 +41,9 @@
 
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Description</div>
-                <input v-model="formData.description" type="text" placeholder="Description"
-                    class="input input-bordered w-full max-w-xs" />
+                <textarea class="textarea textarea-bordered" placeholder="Description" rows="6"></textarea>
+                <!-- <textarea v-model="formData.description" type="text" placeholder="Description" rows="5"
+                    class="input input-bordered w-full max-w-xs" ></textarea> -->
                 <div class="text-error text-right text-sm" v-if="errors.description">{{ errors.description
                 }}
                 </div>
