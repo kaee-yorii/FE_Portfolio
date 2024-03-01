@@ -41,7 +41,8 @@
 
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Description</div>
-                <textarea v-model="formData.description" class="textarea textarea-bordered" placeholder="Description" rows="6"></textarea>
+                <textarea v-model="formData.description" class="textarea textarea-bordered" placeholder="Description"
+                    rows="6"></textarea>
                 <!-- <textarea v-model="formData.description" type="text" placeholder="Description" rows="5"
                     class="input input-bordered w-full max-w-xs" ></textarea> -->
                 <div class="text-error text-right text-sm" v-if="errors.description">{{ errors.description
@@ -68,13 +69,17 @@
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">End Date</div>
 
-                <DatePicker v-model="formData.endDate" color="indigo">
-                    <template #default="{ togglePopover }">
-                        <button @click="togglePopover" class="btn btn-outline border-neutral/25">
-                            {{ dayjs(formData.endDate).format('D MMMM YYYY') }}
-                        </button>
-                    </template>
-                </DatePicker>
+                <div class="flex items-center gap-3">
+                    <DatePicker v-model="formData.endDate" color="indigo">
+                        <template #default="{ togglePopover }">
+                            <button @click="togglePopover" class="btn btn-outline border-neutral/25 font-normal w-40"
+                                :disabled="isPresent">
+                                {{ isPresent ? '' : dayjs(formData.endDate).format('D MMMM YYYY') }}
+                            </button>
+                        </template>
+                    </DatePicker>
+                    <input type="checkbox" v-model="isPresent" @change="handlePresent" /> PRESENT
+                </div>
 
                 <div class="text-error text-right text-sm" v-if="errors.endDate">{{ errors.endDate
                 }}
@@ -112,6 +117,7 @@ const props = defineProps({
 console.log('props.data')
 console.log(props.data)
 
+
 const emits = defineEmits(['close', 'saved']);
 const isLoading = ref(false)
 const show_modal = ref(false);
@@ -130,6 +136,8 @@ watchEffect(() => {
         startDate: new Date(),
         endDate: new Date()
     }
+
+    isPresent.value = props.data ? props.data.endYear == null : false;
 });
 
 const fetchError = ref('');
@@ -139,10 +147,16 @@ const ExpStore = useExperienceStore();
 
 const save = async () => {
     errors.value = {};
-    // fetch.error.value = '';
+    fetch.error.value = '';
 
     try {
         isLoading.value = true;
+
+        // jika isPresent ter-centang
+        if (isPresent.value) {
+            // ubah endDate menjadi null
+            formData.value.endDate = null;
+        }
 
         await ExpStore.create(formData.value)
 
@@ -162,6 +176,17 @@ const save = async () => {
             }
         }
     }
+}
+
+const isPresent = ref(false);
+
+const handlePresent = (e) => {
+    isPresent = e.target.checked;
+
+    if (isPresent) {
+        formData.value.endYear = '';
+    }
+
 }
 
 // EDIT
