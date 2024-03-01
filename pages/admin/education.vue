@@ -13,11 +13,69 @@
 
         <input v-model="filter" type="text" placeholder="Type here" class="input input-sm input-bordered w-full max-w-xs" />
 
-        <div class="lg:hidden flex flex-col gap-2 sm:gap-4">
+        <div class="overflow-x-auto max-lg:hidden">
+            <table class="table table-zebra">
+                <!-- head -->
+                <thead>
+                    <tr>
+                        <th>Institution</th>
+                        <th class="text-center">Periode</th>
+                        <th class="text-center">Major</th>
+                        <th class="text-center">Degree</th>
+                        <th class="text-center">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row 1 -->
+                    <tr v-for="edu in dataTable" :key="edu.id">
+                        <td>{{ edu.institutionName }}</td>
+                        <td class="text-center">{{ edu.startYear }} - {{ edu.endYear || 'Present' }}</td>
+                        <td class="text-center">{{ edu.major }}</td>
+                        <td class="text-center">{{ edu.degree }}</td>
+                        <td>
+                            <div class="flex gap-2 justify-center">
+                                <button @click="editData = edu; showForm = true" class="btn btn-neutral">
+                                    <LucidePencilLine :size="16" />
+                                </button>
+                                <button class="btn btn-error" @click="showRemoveModal = true; removeData = edu">
+                                    <LucideTrash2 :size="16" />
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-2">
             <div v-for="edu in dataTable" :key="edu.id" class="card bg-base-100 shadow-xl">
                 <div class="card-body max-sm:p-4">
-                    <div class="font-semibold">{{ edu.institutionName }}</div>
-                    <div class="text-sm">Periode: {{ edu.startYear }} - {{ edu.endYear || 'Present' }}</div>
+
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="font-semibold">{{ edu.institutionName }}</div>
+                            <div class="text-sm">Periode: {{ edu.startYear }} - {{ edu.endYear || 'Present' }}</div>
+                        </div>
+
+                        <div class="dropdown dropdown-end">
+                            <div tabindex="0" role="button" class="btn m-1">
+                                <LucideMoreVertical :size="16" />
+                            </div>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
+                                <li><button @click="editData = edu; showForm = true" class="btn btn-sm my-1">
+                                        <LucidePencilLine :size="16" />
+                                        Edit
+                                    </button></li>
+                                <li><button @click="removeData = edu; show_remove_modal = true"
+                                        class="btn btn-sm my-1 btn-error">
+                                        <LucideTrash2 :size="16" />
+                                        Remove
+                                    </button></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
                     <div class="grid grid-cols-10 gap-3">
                         <button class="col-span-6 btn flex justify-between">
                             <div>Major:</div>
