@@ -45,10 +45,10 @@
                         <td class="text-center">{{ skill._count.projects }}</td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <button  class="btn btn-circle btn-neutral">
+                                <button @click="editData = skill; showForm = true" class="btn btn-circle btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
-                                <button v-if="skill._count.projects == 0" @click="show_remove_modal = true; removeData = skill"
+                                <button  v-if="skill._count.projects == 0" @click="show_remove_modal = true; removeData = skill"
                                     class="btn btn-circle btn-error">
                                     <LucideTrash-2 :size="16" />
                                 </button>

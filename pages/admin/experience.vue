@@ -76,7 +76,6 @@
                         </div>
                     </div>
 
-
                     <div class="grid grid-cols-10 gap-3">
                         <button class="col-span-6 btn flex justify-between">
                             <div>Title:</div>

@@ -3,52 +3,53 @@
     <!-- MODAL SUCCESS -->
     <input v-model="show_modal" type="checkbox" class="modal-toggle" />
     <div class="modal" role="dialog">
+
         <div class="modal-box">
 
             <form method="dialog">
+                <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">✕</label>
+            </form>
 
-                <h3 class="font-bold text-lg">Create Skill</h3>
-
-                <div>
-                    Avatar
-                    <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl">
-                        <div v-if="!avatar" class="w-full h-full"></div>
-                        <img v-else :src="avatar" class="object-cover min-h-full min-w-full">
-                    </div>
-                    <div class="flex md:justify-center mt-2">
-                        <input @change="handleFile" accept="image/*" type="file"
-                            class="file-input file-input-bordered w-full max-w-xs" />
-                    </div>
+            <h3 class="font-bold text-lg"> {{ data ? `UPDATE : ${data.institutionName}` : 'CREATE EDUCATION' }}</h3>
+            <div>
+                Avatar
+                <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl">
+                    <div v-if="!avatar" class="w-full h-full"></div>
+                    <img v-else :src="avatar" class="object-cover min-h-full min-w-full">
                 </div>
-                <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Title</div>
-                    <input v-model="formData.title" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title }}</div>
-                </label>
-                <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Category</div>
-                    <input v-model="formData.category" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
-                </label>
-                <!-- <label class="form-control w-full max-w-xs">
+                <div class="flex md:justify-center mt-2">
+                    <input @change="handleFile" accept="image/*" type="file"
+                        class="file-input file-input-bordered w-full max-w-xs" />
+                </div>
+            </div>
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Title</div>
+                <input v-model="formData.title" type="text" placeholder="Type Here"
+                    class="input input-bordered w-full max-w-xs" />
+                <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title }}</div>
+            </label>
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Category</div>
+                <input v-model="formData.category" type="text" placeholder="Type Here"
+                    class="input input-bordered w-full max-w-xs" />
+                <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
+            </label>
+            <!-- <label class="form-control w-full max-w-xs">
                     <div class="label label-text">Projects</div>
                     <input v-model="formData.projects" type="text" placeholder="Type Here"
                         class="input input-bordered w-full max-w-xs" />
                     <div class="text-error text-right text-sm" v-if="errors.projects">{{ errors.projects }}</div>
                 </label> -->
 
-                <div class="modal-action">
-                    <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
-                    <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
-                    <label @click="save" class="btn btn-primary">{{ text_confirm || 'Create' }}
-                        <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
-                    </label>
-                    <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
-                </div>
+            <div class="modal-action">
+                <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
+                <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
+                <label @click="save" class="btn btn-primary">{{ text_confirm || 'Create' }}
+                    <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
+                </label>
+                <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
+            </div>
 
-            </form>
 
         </div>
         <!-- click outside -->
@@ -62,8 +63,8 @@
 import Joi from "joi";
 
 const props = defineProps({
+    data: Object,
     show: Boolean,
-    text_confirm: String
 });
 
 const isLoading = ref(false)
@@ -77,9 +78,9 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        svg: '',
-        title: '',
-        category: '',
+        svg:  props.data ? props.data.svg :  '',
+        title:  props.data ? props.data.title :  '',
+        category:  props.data ? props.data.category :  '',
     }
 });
 
