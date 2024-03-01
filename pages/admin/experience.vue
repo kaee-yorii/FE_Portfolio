@@ -79,7 +79,6 @@ const removeData = ref(null);
 
 onBeforeMount(async () => {
     await ExpStore.get();
-    console.log(ExpStore.experiences)
 });
 
 const filter = ref('');
@@ -122,7 +121,12 @@ const handleRemove = async () => {
 
 const showForm = ref(false);
 const editData = ref(null)
-const saved = () => {
+const saved = async () => {
+    console.log('Saved is running...')
+    // tutup modal
+    showForm.value = false;
 
+    // fetch ulang data
+    await ExpStore.get();
 }
 </script>

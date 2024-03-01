@@ -41,10 +41,42 @@
 
             <label class="form-control w-full max-w-xs">
                 <div class="label label-text">Description</div>
-                <textarea class="textarea textarea-bordered" placeholder="Description" rows="6"></textarea>
+                <textarea v-model="formData.description" class="textarea textarea-bordered" placeholder="Description" rows="6"></textarea>
                 <!-- <textarea v-model="formData.description" type="text" placeholder="Description" rows="5"
                     class="input input-bordered w-full max-w-xs" ></textarea> -->
                 <div class="text-error text-right text-sm" v-if="errors.description">{{ errors.description
+                }}
+                </div>
+            </label>
+
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">Start Date</div>
+
+                <DatePicker v-model="formData.startDate" color="indigo">
+                    <template #default="{ togglePopover }">
+                        <button @click="togglePopover" class="btn btn-outline border-neutral/25">
+                            {{ dayjs(formData.startDate).format('D MMMM YYYY') }}
+                        </button>
+                    </template>
+                </DatePicker>
+
+                <div class="text-error text-right text-sm" v-if="errors.startDate">{{ errors.startDate
+                }}
+                </div>
+            </label>
+
+            <label class="form-control w-full max-w-xs">
+                <div class="label label-text">End Date</div>
+
+                <DatePicker v-model="formData.endDate" color="indigo">
+                    <template #default="{ togglePopover }">
+                        <button @click="togglePopover" class="btn btn-outline border-neutral/25">
+                            {{ dayjs(formData.endDate).format('D MMMM YYYY') }}
+                        </button>
+                    </template>
+                </DatePicker>
+
+                <div class="text-error text-right text-sm" v-if="errors.endDate">{{ errors.endDate
                 }}
                 </div>
             </label>
@@ -69,6 +101,8 @@
 
 <script setup>
 import Joi from "joi";
+import dayjs from 'dayjs';
+import { DatePicker } from 'v-calendar';
 
 const props = defineProps({
     data: Object,
@@ -89,10 +123,12 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        company: props.data ? props.data.company : '',
-        title: props.data ? props.data.title : '',
-        description: props.data ? props.data.description : '',
-        location: props.data ? props.data.location : ''
+        company: '',
+        title: '',
+        location: '',
+        description: '',
+        startDate: new Date(),
+        endDate: new Date()
     }
 });
 
@@ -103,10 +139,12 @@ const ExpStore = useExperienceStore();
 
 const save = async () => {
     errors.value = {};
-    fetch.error.value = '';
+    // fetch.error.value = '';
 
     try {
         isLoading.value = true;
+
+        await ExpStore.create(formData.value)
 
         isLoading.value = false;
         // emit saved
