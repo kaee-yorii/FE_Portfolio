@@ -19,22 +19,18 @@ export const useExperienceStore = defineStore('education', {
         async create(data) {
             const Api = useApiStore();
 
-            // validasi
-            // data = Validate(isExperience, data);
+            // validasi data
+            data = Validate(isExperience, data);
 
             await Api.post('/experience', data);
         },
-        // async update(id, data) {
-        //     console.log('masuk method experience update')
-        //     console.log(data)
+        async update(id, data) {
+            const Api = useApiStore();
 
-        //     const Api = useApiStore();
+            // validasi
+            data = Validate(isExperience, data);
 
-        //     // validasi
-        //     data = Validate(isExperience, data);
-
-        //     await Api.put(`/experience/${id}`, data);
-        // }
-
+            await Api.put(`/experience/${id}`, data);
+        }
     }
 });

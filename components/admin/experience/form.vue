@@ -112,7 +112,6 @@ import { DatePicker } from 'v-calendar';
 const props = defineProps({
     data: Object,
     show: Boolean,
-    text_confirm: String
 });
 console.log('props.data')
 console.log(props.data)
@@ -129,15 +128,26 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        company: '',
-        title: '',
-        location: '',
-        description: '',
-        startDate: new Date(),
-        endDate: new Date()
-    }
+        company: props.data ? props.data.company : '',
+        title: props.data ? props.data.title : '',
+        location: props.data ? props.data.location : '',
+        description: props.data ? props.data.description : '',
+        startDate: props.data ? new Date(props.data.startDate) : new Date(),
+        endDate: props.data
+            ? props.data.endDate != null ? new Date(props.data.endDate) : new Date()
+            : new Date()
+        // kondisi 1: props.data = null
+        // kondisi 2: props.data.endDate = null
+    };
 
-    isPresent.value = props.data ? props.data.endYear == null : false;
+    // set is present
+    if (props.data) {
+        // tergantung kondisi endDate
+        isPresent.value = props.data.endDate == null;
+    } else {
+        // default
+        isPresent.value = false;
+    }
 });
 
 const fetchError = ref('');
@@ -147,7 +157,7 @@ const ExpStore = useExperienceStore();
 
 const save = async () => {
     errors.value = {};
-    fetch.error.value = '';
+    // fetch.error.value = '';
 
     try {
         isLoading.value = true;
@@ -158,7 +168,14 @@ const save = async () => {
             formData.value.endDate = null;
         }
 
-        await ExpStore.create(formData.value)
+        if (!props.data) {
+            // handle create
+            await ExpStore.create(formData.value)
+        } else {
+            //update
+            const id = props.data.id;
+            await ExpStore.create(id, formData.value)
+        }
 
         isLoading.value = false;
         // emit saved
@@ -183,9 +200,9 @@ const isPresent = ref(false);
 const handlePresent = (e) => {
     isPresent = e.target.checked;
 
-    if (isPresent) {
-        formData.value.endYear = '';
-    }
+    // if (isPresent) {
+    //     formData.value.endYear = '';
+    // }
 
 }
 
