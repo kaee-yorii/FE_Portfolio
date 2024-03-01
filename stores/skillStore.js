@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { useApiStore } from './apiStore';
 // import { isEducation } from '~/utils/educationVatidation';
 
-export const useSkillStore = defineStore('skills', {
+export const useSkillStore = defineStore('skill', {
     state: () => ({
         skills: null
     }),
@@ -19,14 +19,8 @@ export const useSkillStore = defineStore('skills', {
         async create(data) {
             const Api = useApiStore();
 
-            console.log('data before validation');
-            console.log(data);
-
             // validasi
             data = Validate(isSkill, data);
-
-            console.log('data after validation');
-            console.log(data);
 
             await Api.post('/skill', data);
         }
