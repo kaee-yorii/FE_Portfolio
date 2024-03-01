@@ -116,12 +116,13 @@ const props = defineProps({
 console.log('props.data')
 console.log(props.data)
 
+const formData = ref({})
 
 const emits = defineEmits(['close', 'saved']);
 const isLoading = ref(false)
 const show_modal = ref(false);
 
-const formData = ref({})
+const isPresent = ref(false);
 
 watchEffect(() => {
     show_modal.value = props.show;
@@ -195,7 +196,6 @@ const save = async () => {
     }
 }
 
-const isPresent = ref(false);
 
 const handlePresent = (e) => {
     isPresent = e.target.checked;

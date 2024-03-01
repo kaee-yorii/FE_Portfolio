@@ -13,8 +13,8 @@
 
         <input v-model="filter" type="text" placeholder="Type here" class="input input-sm input-bordered w-full max-w-xs" />
 
-        <div class="overflow-x-auto">
-            <table class="table">
+        <div class="overflow-x-auto max-lg:hidden">
+            <table class="table table-zebra">
                 <!-- head -->
                 <thead>
                     <tr>
@@ -46,6 +46,45 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-2">
+            <div v-for="exp in dataTable" :key="exp.id" class="card bg-base-100 shadow-xl">
+                <div class="card-body max-sm:p-4">
+
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="font-semibold">{{ exp.company }}</div>
+                            <div class="text-sm">Periode: {{ exp.startYear }} - {{ exp.endYear || 'Present' }}</div>
+                        </div>
+
+                        <div class="dropdown dropdown-end">
+                            <div tabindex="0" role="button" class="btn m-1">
+                                <LucideMoreVertical :size="16" />
+                            </div>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
+                                <li><button @click="editData = exp; showForm = true" class="btn btn-sm my-1">
+                                        <LucidePencilLine :size="16" />
+                                        Edit
+                                    </button></li>
+                                <li><button @click="removeData = exp; show_remove_modal = true"
+                                        class="btn btn-sm my-1 btn-error">
+                                        <LucideTrash2 :size="16" />
+                                        Remove
+                                    </button></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="grid grid-cols-10 gap-3">
+                        <button class="col-span-6 btn flex justify-between">
+                            <div>Title:</div>
+                            <div class="font-normal">{{ exp.title }}</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- modal confirmation -->
