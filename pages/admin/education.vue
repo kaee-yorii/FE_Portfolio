@@ -13,40 +13,23 @@
 
         <input v-model="filter" type="text" placeholder="Type here" class="input input-sm input-bordered w-full max-w-xs" />
 
-        <div class="overflow-x-auto">
-            <table class="table">
-                <!-- head -->
-                <thead>
-                    <tr>
-                        <th class="text-center">Institution</th>
-                        <th class="text-center">Periode</th>
-                        <th class="text-center">Major</th>
-                        <th class="text-center">Degree</th>
-                        <th class="text-center">Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- row 1 -->
-                    <tr v-for="edu in dataTable" :key="edu.id">
-                        <th class="text-center">{{ edu.institutionName }}</th>
-                        <td class="text-center">{{ edu.startYear }} - {{ edu.endYear }}</td>
-                        <td class="text-center">{{ edu.major }}</td>
-                        <td class="text-center">{{ edu.degree }}</td>
-                        <td>
-                            <div class="flex justify-center gap-2">
-                                <button @click="editData = edu; showForm = true" class="btn btn-circle btn-neutral">
-                                    <LucidePencilLine :size="16" />
-                                </button>
-                                <button @click="show_remove_modal = true; removeData = edu"
-                                    class="btn btn-circle btn-error">
-                                    <LucideTrash-2 :size="16" />
-                                </button>
-                            </div>
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="lg:hidden flex flex-col gap-2 sm:gap-4">
+            <div v-for="edu in dataTable" :key="edu.id" class="card bg-base-100 shadow-xl">
+                <div class="card-body max-sm:p-4">
+                    <div class="font-semibold">{{ edu.institutionName }}</div>
+                    <div class="text-sm">Periode: {{ edu.startYear }} - {{ edu.endYear || 'Present' }}</div>
+                    <div class="grid grid-cols-10 gap-3">
+                        <button class="col-span-6 btn flex justify-between">
+                            <div>Major:</div>
+                            <div class="font-normal">{{ edu.major }}</div>
+                        </button>
+                        <button class="col-span-4 btn flex justify-between">
+                            <div>Degree:</div>
+                            <div class="font-normal">{{ edu.degree }}</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- modal confirmation -->
