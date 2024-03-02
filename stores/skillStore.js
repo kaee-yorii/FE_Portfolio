@@ -11,14 +11,14 @@ export const useSkillStore = defineStore('skill', {
             const Api = useApiStore();
 
             this.skills = await Api.get('/skills');
-            
+
             // RETURN VOID
         },
         async getCategories() {
             const Api = useApiStore();
 
             this.categories = await Api.get('/skill_categories');
-            
+
             // RETURN VOID
         },
         async remove(id) {
@@ -32,6 +32,14 @@ export const useSkillStore = defineStore('skill', {
             data = Validate(isSkill, data);
 
             await Api.post('/skill', data);
+        },
+        async update(id, data) {
+            const Api = useApiStore();
+
+            // validasi
+            data = Validate(isSkill, data);
+
+            await Api.put(`/skill/${id}`, data);
         }
     }
 });

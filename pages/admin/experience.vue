@@ -11,7 +11,7 @@
             </button>
         </div>
 
-        <input v-model="filter" type="text" placeholder="Type here" class="input input-sm input-bordered w-full max-w-xs" />
+        <input v-model="filter" type="text" placeholder="Search" class="input input-sm input-bordered w-full max-w-xs" />
 
         <div class="overflow-x-auto max-lg:hidden">
             <table class="table table-zebra">
@@ -91,7 +91,7 @@
             @saved="handleRemove">
             are you sure to remove
             <span v-if="removeData" class="font-bold">{{
-                removeData.institutionName }} ?</span>
+                removeData.title }} ?</span>
         </AdminUserModalConfirm>
 
         <!-- modal success alert -->

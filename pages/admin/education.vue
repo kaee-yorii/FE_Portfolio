@@ -37,7 +37,7 @@
                                 <button @click="editData = edu; showForm = true" class="btn btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
-                                <button class="btn btn-error" @click="showRemoveModal = true; removeData = edu">
+                                <button class="btn btn-error" @click="show_remove_modal = true; removeData = edu">
                                     <LucideTrash2 :size="16" />
                                 </button>
                             </div>
@@ -151,7 +151,6 @@ const handleRemove = async () => {
         // hide modal
         show_remove_modal.value = false;
 
-        // TODO success modal
         show_success_modal.value = true
 
         // refresh data
