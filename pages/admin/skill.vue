@@ -13,7 +13,8 @@
 
         <div class="flex gap-3">
 
-            <input v-model="filter" type="text" placeholder="Search" class="input input-sm input-bordered w-full max-w-xs" />
+            <input v-model="filter" type="text" placeholder="Search"
+                class="input input-sm input-bordered w-full max-w-xs" />
 
             <!-- CATEGORY SELECTOR -->
             <select v-model="selectedCategory" @change="filter = ''"
@@ -22,7 +23,6 @@
                 <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
                 <!-- draw categories -->
             </select>
-
 
         </div>
 
@@ -72,7 +72,7 @@
         <!-- modal success alert -->
         <!-- <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" /> -->
 
-        <!-- <AdminSkillForm :show="showForm" :data="updateData" @close="showForm = false" @saved="" /> -->
+        <AdminSkillForm :show="showForm" :data="updateData" @close="showForm = false" @saved="saved" />
 
     </div>
 </template>
@@ -86,11 +86,16 @@ definePageMeta({
 const filter = ref('');
 const SkillStore = useSkillStore();
 
-onBeforeMount(async () => {
+
+const getData = async () => {
     await Promise.all([
         SkillStore.get(),
         SkillStore.getCategories()
     ]);
+}
+
+onBeforeMount(async () => {
+    await getData();
 });
 
 // FORM
@@ -129,4 +134,12 @@ const dataTable = computed(() => {
         }
     }
 });
+
+// handle after create / update data
+const saved = async () => {
+    // tutup form modal
+    showForm.value = false;
+    // fetch ulang data + category
+    await getData();
+}
 </script>

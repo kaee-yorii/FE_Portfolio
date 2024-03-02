@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { useApiStore } from './apiStore';
-// import { isEducation } from '~/utils/educationVatidation';
 
 export const useSkillStore = defineStore('skill', {
     state: () => ({

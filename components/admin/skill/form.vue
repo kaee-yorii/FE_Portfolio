@@ -9,11 +9,55 @@
 
                 <h3 class="font-bold text-lg"> {{ data ? `UPDATE : ${data.skill}` : 'CREATE EDUCATION' }}</h3>
 
+                <label class="form-control w-full max-w-xs">
+                    <div class="label label-text">Title</div>
+                    <input v-model="formData.title" type="text" placeholder="title"
+                        class="input input-bordered w-full max-w-xs" />
+                    <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title
+                    }}
+                    </div>
+                </label>
+
+                <label class="form-control w-full max-w-xs">
+                    <div class="label label-text">Category</div>
+                    <input v-model="formData.category" type="text" placeholder="category"
+                        class="input input-bordered w-full max-w-xs" />
+                    <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category
+                    }}
+                    </div>
+
+                    <!-- CATEGORY SELECTOR -->
+                    <!-- <label class="mt-2 text-sm">Select Category</label> -->
+                    <!-- <select @change="(e) => formData.category = e.target.value"
+                        class="select select-sm select-bordered w-full max-w-xs">
+                        <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
+                    </select> -->
+
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <button v-for="cat in SkillStore.categories" :key="cat.id" @click="formData.category"
+                            class="btn btn-sm w-min text-nowrap">{{ cat.title }}
+                        </button>
+                    </div>
+                </label>
+
+                <label class="form-control w-full max-w-xs">
+                    <div class="label label-text">Avatar</div>
+
+                    <!-- PREVIEW SVG -->
+                    <div v-html="formData.svg" class="w-32 h-32 bg-neutral/10 rounded-full p-6 mc-2 mx-auto"></div>
+
+                    <textarea v-model="formData.svg" class="textarea textarea-bordered" placeholder="SVG"
+                        rows="6"></textarea>
+                    <div class="text-error text-right text-sm" v-if="errors.svg">{{ errors.svg
+                    }}
+                    </div>
+                </label>
+
                 <div class="modal-action">
                     <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
                     <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
-                    <label @click="save" class="btn btn-primary">
-                        {{ data ? 'Update' : 'Save' }}
+                    <label @click="handleSave" class="btn btn-primary">
+                        {{ data ? 'Update' : 'Create' }}
                         <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
                     </label>
                     <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
@@ -39,6 +83,8 @@ const props = defineProps({
 console.log('props.data')
 console.log(props.data)
 
+const SkillStore = useSkillStore();
+
 const emit = defineEmits(['close', 'saved']);
 const isLoading = ref(false)
 const show_modal = ref(false);
@@ -52,11 +98,9 @@ watchEffect(() => {
 
     // reset form
     formData.value = {
-        institutionName: props.data ? props.data.institutionName : '',
-        startYear: props.data ? props.data.startYear : '',
-        endYear: props.data ? props.data.endYear : '',
-        major: props.data ? props.data.major : '',
-        degree: props.data ? props.data.degree : ''
+        title: '',
+        category: '',
+        svg: ''
     }
 
     console.log('props.data')
@@ -66,48 +110,35 @@ watchEffect(() => {
 const fetchError = ref('');
 const errors = ref({});
 
-const EduStore = useEducationStore();
+const handleSave = async () => {
+    // reset error
+    errors.value = {};
+    fetchError.value = '';
+    try {
+        // tampilkan loading
+        isLoading.value = true;
 
-// const save = async () => {
-//     try {
-//         isLoading.value = true;
+        await SkillStore.create(formData.value);
 
-//         if (!formData.value.endYear) formData.value.endYear = null
+        // hilangkan loading
+        isLoading.value = false;
 
-//         if (!props.data) {
-//             // jika g ada data -> create
-//             await EduStore.create(formData.value)
-//         } else {
-//             // jika ada data -> update
-//             await EduStore.update(props.data.id, formData.value)
-//         }
+        emit('saved');
+    } catch (error) {
 
-//         isLoading.value = false;
+        // hilangkan loading
+        isLoading.value = false;
 
-//         // emit saved
-//         emits('saved')
-//     } catch (error) {
-//         isLoading.value = false;
-
-//         if (error instanceof Joi.ValidationError) {
-//             console.log(error)
-//             errors.value = joiError(error);
-//         } else {
-//             if (error.data) {
-//                 fetchError.value = error.data.message
-//             } else {
-//                 console.log(error)
-//             }
-//         }
-//     }
-// }
-
-// const handlePresent = (e) => {
-//     isChecked = e.target.checked;
-
-//     if (isChecked) {
-//         formData.value.endYear = '';
-//     }
-
-// }
+        if (error instanceof Joi.ValidationError) {
+            console.log(error)
+            errors.value = joiError(error);
+        } else {
+            if (error.data) {
+                fetchError.value = error.data.message
+            } else {
+                console.log(error)
+            }
+        }
+    }
+}
 </script>
