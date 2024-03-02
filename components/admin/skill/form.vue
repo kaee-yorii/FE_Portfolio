@@ -3,53 +3,23 @@
     <!-- MODAL SUCCESS -->
     <input v-model="show_modal" type="checkbox" class="modal-toggle" />
     <div class="modal" role="dialog">
-
         <div class="modal-box">
 
             <form method="dialog">
-                <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">✕</label>
+
+                <h3 class="font-bold text-lg"> {{ data ? `UPDATE : ${data.skill}` : 'CREATE EDUCATION' }}</h3>
+
+                <div class="modal-action">
+                    <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
+                    <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
+                    <label @click="save" class="btn btn-primary">
+                        {{ data ? 'Update' : 'Save' }}
+                        <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
+                    </label>
+                    <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
+                </div>
+
             </form>
-
-            <h3 class="font-bold text-lg"> {{ data ? `UPDATE : ${data.institutionName}` : 'CREATE EDUCATION' }}</h3>
-            <div>
-                Avatar
-                <div class="w-60 aspect-square bg-neutral/30 md:mx-auto rounded-xl">
-                    <div v-if="!avatar" class="w-full h-full"></div>
-                    <img v-else :src="avatar" class="object-cover min-h-full min-w-full">
-                </div>
-                <div class="flex md:justify-center mt-2">
-                    <input @change="handleFile" accept="image/*" type="file"
-                        class="file-input file-input-bordered w-full max-w-xs" />
-                </div>
-            </div>
-            <label class="form-control w-full max-w-xs">
-                <div class="label label-text">Title</div>
-                <input v-model="formData.title" type="text" placeholder="Type Here"
-                    class="input input-bordered w-full max-w-xs" />
-                <div class="text-error text-right text-sm" v-if="errors.title">{{ errors.title }}</div>
-            </label>
-            <label class="form-control w-full max-w-xs">
-                <div class="label label-text">Category</div>
-                <input v-model="formData.category" type="text" placeholder="Type Here"
-                    class="input input-bordered w-full max-w-xs" />
-                <div class="text-error text-right text-sm" v-if="errors.category">{{ errors.category }}</div>
-            </label>
-            <!-- <label class="form-control w-full max-w-xs">
-                    <div class="label label-text">Projects</div>
-                    <input v-model="formData.projects" type="text" placeholder="Type Here"
-                        class="input input-bordered w-full max-w-xs" />
-                    <div class="text-error text-right text-sm" v-if="errors.projects">{{ errors.projects }}</div>
-                </label> -->
-
-            <div class="modal-action">
-                <div class="text-xs text-error" v-if="fetchError">{{ fetchError }}</div>
-                <label @click="$emit('close')" class="btn btn-outline btn-error">Cancel</label>
-                <label @click="save" class="btn btn-primary">{{ text_confirm || 'Create' }}
-                    <span v-show="isLoading" class="loading loading-spinner loading-md"></span>
-                </label>
-                <label class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="$emit('close')">×</label>
-            </div>
-
 
         </div>
         <!-- click outside -->
@@ -66,107 +36,78 @@ const props = defineProps({
     data: Object,
     show: Boolean,
 });
+console.log('props.data')
+console.log(props.data)
 
+const emit = defineEmits(['close', 'saved']);
 const isLoading = ref(false)
-const emits = defineEmits(['close', 'saved']);
 const show_modal = ref(false);
 
 const formData = ref({})
+
+const editData = ref(null);
 
 watchEffect(() => {
     show_modal.value = props.show;
 
     // reset form
     formData.value = {
-        svg:  props.data ? props.data.svg :  '',
-        title:  props.data ? props.data.title :  '',
-        category:  props.data ? props.data.category :  '',
+        institutionName: props.data ? props.data.institutionName : '',
+        startYear: props.data ? props.data.startYear : '',
+        endYear: props.data ? props.data.endYear : '',
+        major: props.data ? props.data.major : '',
+        degree: props.data ? props.data.degree : ''
     }
+
+    console.log('props.data')
+    console.log(props.data)
 });
 
 const fetchError = ref('');
 const errors = ref({});
 
-const SkillStore = useSkillStore();
+const EduStore = useEducationStore();
 
-const save = async () => {
-    try {
-        isLoading.value = true;
+// const save = async () => {
+//     try {
+//         isLoading.value = true;
 
-        await SkillStore.create(formData.value)
+//         if (!formData.value.endYear) formData.value.endYear = null
 
-        isLoading.value = false;
+//         if (!props.data) {
+//             // jika g ada data -> create
+//             await EduStore.create(formData.value)
+//         } else {
+//             // jika ada data -> update
+//             await EduStore.update(props.data.id, formData.value)
+//         }
 
-        // emit saved
-        emits('saved')
-    } catch (error) {
-        if (error instanceof Joi.ValidationError) {
-            console.log(error)
-            errors.value = joiError(error);
-        } else {
-            if (error.data) {
-                fetchError.value = error.data.message
-            } else {
-                console.log(error)
-            }
-        }
-    }
-}
+//         isLoading.value = false;
 
-let file_avatar = null;
-const confirm = ref(false)
-const success = ref(false)
+//         // emit saved
+//         emits('saved')
+//     } catch (error) {
+//         isLoading.value = false;
 
-const handleUpdate = async () => {
-    // TODO confirmation, alert success
+//         if (error instanceof Joi.ValidationError) {
+//             console.log(error)
+//             errors.value = joiError(error);
+//         } else {
+//             if (error.data) {
+//                 fetchError.value = error.data.message
+//             } else {
+//                 console.log(error)
+//             }
+//         }
+//     }
+// }
 
-    // loading indicator
-    if (isLoading.value == false) {
-        isLoading.value == true;
+// const handlePresent = (e) => {
+//     isChecked = e.target.checked;
 
-        // reset error
-        errors.value = {};
-        fetchError.value = '';
+//     if (isChecked) {
+//         formData.value.endYear = '';
+//     }
 
-        confirm.value = false;
-
-        try {
-            await SkillStore.update(formData.value, file_avatar);
-            isLoading.value = false;
-            success.value = true;
-
-        } catch (error) {
-            console.log(error)
-            isLoading.value = false;
-
-            if (error instanceof Joi.ValidationError) {
-                errors.value = joiError(error);
-            } else {
-                console.log(error)
-            }
-        }
-    }
-}
-
-const handleFile = (e) => {
-    console.log(e);
-    if (e.target.files.length) {
-        const file = e.target.files[0];
-        file_avatar = file;
-
-        // convert file to dataurl
-        // data yg bisa dibaca di tag <img src= />
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            avatar.value = reader.result;
-        }
-    }
-}
-const avatar = ref(
-    SkillStore.skills.avatar
-        ? apiUri + SkillStore.skills.avatar
-        : null
-)
-
+// }
 </script>
