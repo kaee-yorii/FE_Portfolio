@@ -11,17 +11,19 @@
             </button>
         </div>
 
-        <div class="flex 0 gap-4">
-            <select class="select select-sm select-bordered w-full max-w-xs">
+        <div class="flex gap-3">
+
+            <input v-model="filter" type="text" placeholder="Search" class="input input-sm input-bordered w-full max-w-xs" />
+
+            <!-- CATEGORY SELECTOR -->
+            <select v-model="selectedCategory" @change="filter = ''"
+                class="select select-sm select-bordered w-full max-w-xs">
                 <option value="all">All Categories</option>
                 <option v-for="cat in SkillStore.categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
                 <!-- draw categories -->
             </select>
 
-            <div class="w-full ">
-                <input v-model="filter" type="text" placeholder="Type here"
-                    class="grow input input-sm input-bordered w-full" />
-            </div>
+
         </div>
 
         <div class="overflow-x-auto">
@@ -38,7 +40,7 @@
                 </thead>
                 <tbody>
                     <!-- row 1 -->
-                    <tr v-for="skill in SkillStore.skills" :key="skill.id">
+                    <tr v-for="skill in dataTable" :key="skill.id">
                         <th>
                             <div v-html="skill.svg" class="w-8 overflow-hidden"></div>
                         </th>
@@ -70,7 +72,7 @@
         <!-- modal success alert -->
         <!-- <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" /> -->
 
-        <AdminSkillForm :show="showForm" :data="updateData" @close="showForm = false" @saved="" />
+        <!-- <AdminSkillForm :show="showForm" :data="updateData" @close="showForm = false" @saved="" /> -->
 
     </div>
 </template>
@@ -94,4 +96,37 @@ onBeforeMount(async () => {
 // FORM
 const showForm = ref(false);
 const updateData = ref(null);
+
+// SELECTOR
+const selectedCategory = ref('all');
+
+const dataTable = computed(() => {
+
+    const search = filter.value.toLowerCase();
+
+    const selectedCatID = selectedCategory.value;
+
+    if (search != '') {
+        // jalankan filter
+        return SkillStore.skills.filter(skill => {
+            // pastikan huruf lower
+            const title = skill.title.toLowerCase();
+
+            if (selectedCatID == 'all') {
+                return title.includes(search)
+            } else {
+                return title.includes(search) && skill.skillCategoryId == selectedCatID;
+            }
+        });
+    } else {
+        // return semua data
+        if (selectedCatID == 'all') {
+            return SkillStore.skills;
+        } else {
+            return SkillStore.skills.filter(skill => {
+                return skill.skillCategoryId == selectedCatID;
+            })
+        }
+    }
+});
 </script>
