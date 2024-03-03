@@ -19,19 +19,18 @@
             <div class="grow w-px bg-neutral"></div>
           </div>
           <div class="mb-10">
-            <div class="group-hover:text-secondary">{{ edu.startDate }} - {{ edu.endDate ? edu.endDate : 'Present' }}</div>
+            <div class="group-hover:text-secondary">{{ edu.startYear }} - {{ edu.endYear ? edu.endYear : 'Present' }}</div>
             <div class="flex flex-col gap-4">
               <div>
                 <div
                   class="text-2xl md:text-3xl xl:text-4xl font-semibold mt-5"
                 >
-                  Framer Designer & Developer
+                {{ edu.institutionName }}
                 </div>
-                <div class="text-light">{{ edu.title }}</div>
               </div>
               <div>
                 <div class="text-2xl md:text-3xl xl:text-4xl font-semibold">
-                  {{ edu.intuitionName }}
+                  {{ edu.title }}
                 </div>
                 <div class="font-light">{{ edu.degree }}</div>
               </div>

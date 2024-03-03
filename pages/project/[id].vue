@@ -81,8 +81,6 @@ definePageMeta({
 
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import { IndexProject } from '#build/components';
-
 
 const route = useRoute();
 const projectID = route.params.id;

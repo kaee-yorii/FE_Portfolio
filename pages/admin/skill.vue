@@ -11,7 +11,7 @@
             </button>
         </div>
 
-        <div class="flex gap-3">
+        <div class="flex gap-2">
 
             <input v-model="filter" type="text" placeholder="Search"
                 class="input input-sm input-bordered w-full max-w-xs" />
