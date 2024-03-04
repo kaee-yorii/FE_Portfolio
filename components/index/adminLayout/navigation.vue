@@ -40,6 +40,11 @@ const menus = [
         to: "/admin/skill",
         icon: resolveComponent("LucideWrench"),
     },
+    {
+        title: "Blogs",
+        to: "/admin/blogs",
+        icon: resolveComponent("LucideWrench"),
+    },
 ]
 
 </script>
