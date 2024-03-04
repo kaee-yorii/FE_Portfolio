@@ -12,11 +12,11 @@
         </div>
 
         <div class="flex justify-between">
-            <input @keyup type="text" placeholder="Type here"
+            <input @keyup.enter="page = 1; getData()" v-model="filter" type="text" placeholder="Cari apa ?"
                 class="input input-sm input-bordered w-full max-w-xs" />
             <div class="join mb-2">
                 <button class="join-item  btn btn-sm" @click="prevPage">«</button>
-                <button class="join-item  btn btn-sm">Page {{ page }}</button>
+                <button class="join-item  btn btn-sm">Page {{ page }} of {{ BlogStore.maxPage }}</button>
                 <button class="join-item  btn btn-sm" @click="nextPage">»</button>
             </div>
         </div>
@@ -35,13 +35,18 @@
                     <p class="line-clamp-2 xl:line-clamp-3 ">{{ blog.content }}</p>
                 </div>
             </div>
+        </div>
 
-            <div class="flex justify-end mt-2">
+        <div v-if="BlogStore.blogs.length == 0" class="flex flex-col items-center py-28">
+            <LucideShieldAlert :size="96" />
+            <span class="font-semibold py-4">Data is not found</span>
+        </div>
+
+        <div class="flex justify-end mt-2">
             <div class="join mb-2">
                 <button class="join-item  btn btn-sm" @click="prevPage">«</button>
-                <button class="join-item  btn btn-sm">Page {{ page }}</button>
+                <button class="join-item  btn btn-sm">Page {{ page }} of {{ BlogStore.maxPage }}</button>
                 <button class="join-item  btn btn-sm" @click="nextPage">»</button>
-            </div>
             </div>
         </div>
     </div>
@@ -84,12 +89,9 @@ const nextPage = async () => {
 }
 
 const page = ref(1);
+const filter = ref('')
 
 const getData = async () => {
-    await BlogStore.get(page.value);
+    await BlogStore.get(page.value, filter.value);
 }
-
-watchEffect(() => {
-    console.log(page.value)
-})
 </script>
