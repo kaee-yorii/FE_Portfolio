@@ -6,40 +6,16 @@ export const useBlogStore = defineStore('blog', {
         data: null
     }),
     getters: {
-        // blogs: (state) => {
-        //     if (state) {
-        //         // return klo ada data di state
-        //         return state.data.data;
-        //     }
-        //     // default return
-        //     return [];
-        // },
-        // limit: (state) => {
-        //     if (state) {
-        //         return state.data.limit
-        //     }
-
-        //     // default
-        //     return 10;
-        // },
-        // maxPage: (state) => {
-        //     if (state) {
-        //         return state.data.maxPage
-        //     }
-
-        //     // default
-        //     return 1;
-        // },
-        blogs: (state) => state ? state.data.blogs : 0,
-        limit: (state) => state ? state.data.limit : 0,
-        maxPage: (state) => state ? state.data.maxPage : 0,
-        total: (state) => state ? state.data.total : 0,
+        blogs: (state) => state.data ? state.data.data : [],
+        limit: (state) => state.data ? state.data.limit : 10,
+        maxPage: (state) => state.data ? state.data.maxPage : 1,
+        total: (state) => state.data ? state.data.total : 0,
     },
     actions: {
-        async get() {
+        async get(page = 1) {
             const Api = useApiStore();
 
-            this.data = await Api.get('/blogs')
+            this.data = await Api.get(`/blogs?limit=12&page=${page}`)
         }
     }
 })
