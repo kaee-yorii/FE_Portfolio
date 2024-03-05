@@ -36,7 +36,7 @@
                             </button>
                         </li>
                         <li>
-                            <button class="btn btn-sm my-1 btn-error">
+                            <button @click="removeData = blog; show_remove_modal = true" class="btn btn-sm my-1 btn-error">
                                 <LucideTrash2 :size="16" />
                                 Remove
                             </button>
@@ -55,12 +55,13 @@
                     <h2 class="card-title">{{ blog.title }}</h2>
                     <p class="line-clamp-2 xl:line-clamp-3 ">{{ blog.content }}</p>
 
-                    <div class="max-lg:hiddenflex gap-2 justify-end">
-                        <button class="btn btn-xs xl:btn-md my-1">
+                    <div class="max-lg:hidden flex gap-2 justify-end">
+                        <button class="btn btn-xs xl:btn-md my-1 pr-2">
                             <LucidePencilLine :size="16" />
                             Edit
                         </button>
-                        <button class="btn btn-xs xl:btn-md my-1 btn-error">
+                        <button @click="removeData = blog; show_remove_modal = true"
+                            class="btn btn-xs xl:btn-md my-1 btn-error">
                             <LucideTrash2 :size="16" />
                             Remove
                         </button>
@@ -83,6 +84,15 @@
             </div>
         </div>
 
+        <AdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
+            @saved="handleRemove">
+            are you sure to remove
+            <span v-if="removeData" class="font-bold">{{
+                    removeData.title }} ?</span>
+        </AdminUserModalConfirm>
+
+        <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
+
         <!-- <AdminExperienceForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" /> -->
 
     </div>
@@ -91,8 +101,10 @@
 <script setup>
 definePageMeta({
     layout: 'admin',
-    middleware: 'auth'
+    middleware: ['auth']
 });
+
+
 
 const editData = ref(null);
 
@@ -131,5 +143,29 @@ const filter = ref('')
 
 const getData = async () => {
     await BlogStore.get(page.value, filter.value);
+}
+
+// REMOVE
+const show_success_modal = ref(false);
+const show_remove_modal = ref(false);
+const removeData = ref(null);
+const handleRemove = async (id) => {
+
+    if (!removeData.value) return;
+
+    try {
+        // do remove
+        await BlogStore.remove(removeData.value.id);
+
+        // tutup konfirmasi
+        show_remove_modal.value = false;
+        // tampilkan alert sukses
+        show_success_modal.value = true;
+
+        // load ulang data
+        await getData();
+    } catch (error) {
+        console.log(error);
+    }
 }
 </script>
