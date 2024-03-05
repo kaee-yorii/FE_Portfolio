@@ -21,6 +21,35 @@ export const useBlogStore = defineStore('blog', {
             const Api = useApiStore();
 
             await Api.delete('/blog/' + id)
+        },
+        async update(data, avatar) {
+
+            const Api = useApiStore();
+
+            // validasi
+            data = Validate(isUpdateBlog, data);
+            console.log(data)
+
+            // CARA PERTAMA
+            const formData = new FormData();
+            for (const [key, value] of Object.entries(data)) {
+                console.log('key -> ' + key)
+                console.log('value ->' + value)
+
+                // append to formData
+                // tidak boleh taruh data selain string
+                if (value == null) {
+                    value = '';
+                }
+                formData.append(key, value);
+            }
+
+            if (avatar) {
+                // append avatar jika != null
+                formData.append('avatar', avatar)
+            }
+
+            this.blog = await Api.put('/blog', formData);
         }
     }
 })
