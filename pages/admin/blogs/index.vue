@@ -5,10 +5,10 @@
                 <LucideGraduationCap :size="26" />
                 Blog
             </div>
-            <button @click="editData = null; showForm = true" class="btn btn-sm btn-neutral">
+            <NuxtLink to="/admin/blogs/new" @click="editData = null; showForm = true" class="btn btn-sm btn-neutral">
                 <LucidePlus :size="16" />
                 Add Blog
-            </button>
+            </NuxtLink>
         </div>
 
         <div class="flex max-sm:flex-col max-sm:items-end sm:justify-between gap-2">

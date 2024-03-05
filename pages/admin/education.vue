@@ -108,7 +108,7 @@
 <script setup>
 definePageMeta({
     layout: 'admin',
-    middleware: 'auth'
+    middleware: ['auth']
 });
 
 const show_success_modal = ref(false)
