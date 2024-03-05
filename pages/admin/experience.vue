@@ -107,7 +107,7 @@ definePageMeta({
     middleware: 'auth'
 });
 
-const show_success_modal = ref(false)
+const show_success_modal = ref(false);
 
 const ExpStore = useExperienceStore();
 

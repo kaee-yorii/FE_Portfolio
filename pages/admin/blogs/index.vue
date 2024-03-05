@@ -5,13 +5,13 @@
                 <LucideGraduationCap :size="26" />
                 Blog
             </div>
-            <button class="btn btn-sm btn-neutral">
+            <button @click="editData = null; showForm = true" class="btn btn-sm btn-neutral">
                 <LucidePlus :size="16" />
                 Add Blog
             </button>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex max-sm:flex-col max-sm:items-end sm:justify-between gap-2">
             <input @keyup.enter="page = 1; getData()" v-model="filter" type="text" placeholder="Cari apa ?"
                 class="input input-sm input-bordered w-full max-w-xs" />
             <div class="join mb-2">
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <div v-for="blog in BlogStore.blogs" :key="blog.id" class="card card-compact bg-base-100 shadow-xl">
                 <figure>
                     <!-- kalau ada foto minimal 1 -->
@@ -49,6 +49,9 @@
                 <button class="join-item  btn btn-sm" @click="nextPage">»</button>
             </div>
         </div>
+
+        <AdminExperienceForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
+
     </div>
 </template>
 
@@ -57,6 +60,8 @@ definePageMeta({
     layout: 'admin',
     middleware: 'auth'
 });
+
+const editData = ref(null);
 
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
