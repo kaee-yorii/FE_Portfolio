@@ -33,7 +33,7 @@
                             <ul tabindex="0"
                                 class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
                                 <li>
-                                    <button @click="photo_previews.splice(index, 1);"
+                                    <button @click="photo_previews.splice(index, 1); file_photos.splice(index, 1)"
                                         class="btn btn-sm my-1 btn-error">
                                         <LucideTrash2 :size="16" />
                                         Remove
@@ -66,12 +66,18 @@
             <NuxtLink to="/admin/blogs" class="btn">
                 Cancel
             </NuxtLink>
-            <button class="btn btn-neutral">
+            <button @click="showCreateConfirmation = true" class="btn btn-neutral">
                 Save
             </button>
         </div>
-
     </div>
+
+    <!-- modal confirmation -->
+    <AdminUserModalConfirm :show="showCreateConfirmation" text_confirm="Save" @close="showCreateConfirmation = false"
+        @saved="handleSave">
+        Are you sure to save this new blog ?
+    </AdminUserModalConfirm>
+
 </template>
 
 <script setup>
@@ -79,6 +85,8 @@ definePageMeta({
     layout: 'admin',
     middleware: ['auth']
 });
+
+import Joi from 'joi';
 
 const config = useRuntimeConfig();
 const apiUri = config.public.apiUri;
@@ -92,8 +100,9 @@ const formData = ref({
     content: ''
 })
 
+// PHOTO PREVIEW
 const photo_previews = ref([]);
-
+const file_photos = [];
 const handleFile = (e) => {
     for (const file of e.target.files) {
 
@@ -101,20 +110,46 @@ const handleFile = (e) => {
         reader.readAsDataURL(file);
         reader.onload = () => {
             if (photo_previews.value.length < 10) {
+                // tampung file
+                file_photos.push(file);
+
+                // tampung preview
                 photo_previews.value.push(reader.result);
             }
         }
     }
 
-    // reset
+    // reset input file selector
     e.target.value = ''
 }
 
-const removePhotoPreview = (index) => {
+// HANDLE SAVE
+const BlogStore = useBlogStore();
+const showCreateConfirmation = ref(false);
+const fetchError = ref('');
+const isLoading = ref(false);
+const handleSave = async () => {
+    // reset error
+    errors.value = {};
+    fetchError.value = '';
 
+    // hide confirmation
+    showCreateConfirmation.value = false;
+    try {
+        isLoading.value = true;
+        await BlogStore.create(formData.value, file_photos)
+
+        // balik ke halaman
+        navigateTo('/admin/blogs')
+
+    } catch (error) {
+        isLoading.value = false;
+
+        if (error instanceof Joi.ValidationError) {
+            errors.value = joiError(error);
+        } else {
+            console.log(error);
+        }
+    }
 }
-
-watchEffect(() => {
-    console.log(photo_previews.value)
-})
 </script>

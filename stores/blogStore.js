@@ -17,39 +17,27 @@ export const useBlogStore = defineStore('blog', {
 
             this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`)
         },
+        async create(data, photos) {
+            const Api = useApiStore();
+
+            data = Validate(isCreateBlog, data);
+
+            // buat FORM DATA
+            const formData = new FormData();
+            formData.append("title", data.title);
+            formData.append("content", data.content);
+
+            // appent foto dgn loop
+            for (const photo of photos) {
+                formData.append("photos", photo)
+            }
+
+            await Api.post('/blog', formData);
+        },
         async remove(id) {
             const Api = useApiStore();
 
             await Api.delete('/blog/' + id)
-        },
-        async update(data, avatar) {
-
-            const Api = useApiStore();
-
-            // validasi
-            data = Validate(isUpdateBlog, data);
-            console.log(data)
-
-            // CARA PERTAMA
-            const formData = new FormData();
-            for (const [key, value] of Object.entries(data)) {
-                console.log('key -> ' + key)
-                console.log('value ->' + value)
-
-                // append to formData
-                // tidak boleh taruh data selain string
-                if (value == null) {
-                    value = '';
-                }
-                formData.append(key, value);
-            }
-
-            if (avatar) {
-                // append avatar jika != null
-                formData.append('avatar', avatar)
-            }
-
-            this.blog = await Api.put('/blog', formData);
         }
     }
 })
