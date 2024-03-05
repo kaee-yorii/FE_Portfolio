@@ -21,8 +21,29 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div v-for="blog in BlogStore.blogs" :key="blog.id" class="card card-compact bg-base-100 shadow-xl">
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div v-for="blog in BlogStore.blogs" :key="blog.id"
+                class="card card-compact bg-base-100 shadow-xl overflow-hidden relative">
+                <div class="lg:hidden dropdown dropdown-end absolute right-0 top-0">
+                    <div tabindex="0" role="button" class="btn btn-sm px-1 bg-opacity-70 rounded-md m-1 border-0">
+                        <LucideMoreVertical :size="16" />
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
+                        <li>
+                            <button class="btn btn-sm my-1">
+                                <LucidePencilLine :size="16" />
+                                Edit
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-sm my-1 btn-error">
+                                <LucideTrash2 :size="16" />
+                                Remove
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
                 <figure>
                     <!-- kalau ada foto minimal 1 -->
                     <img v-if="blog.photos.length" :src="apiUri + blog.photos[0].path" />
@@ -33,6 +54,18 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ blog.title }}</h2>
                     <p class="line-clamp-2 xl:line-clamp-3 ">{{ blog.content }}</p>
+
+                    <div class="max-lg:hiddenflex gap-2 justify-end">
+                        <button class="btn btn-xs xl:btn-md my-1">
+                            <LucidePencilLine :size="16" />
+                            Edit
+                        </button>
+                        <button class="btn btn-xs xl:btn-md my-1 btn-error">
+                            <LucideTrash2 :size="16" />
+                            Remove
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -50,7 +83,7 @@
             </div>
         </div>
 
-        <AdminExperienceForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
+        <!-- <AdminExperienceForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" /> -->
 
     </div>
 </template>
