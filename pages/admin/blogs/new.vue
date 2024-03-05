@@ -15,18 +15,41 @@
         </label>
 
         <div>
-            <div class="label label-text pbto">Photos</div>
+            <div class="label label-text pb-0">Photos</div>
 
             <div class="overflow-auto">
-                <div class="flex flex-nowrap gap-4">
-                    <img v-for="photo in photo_previews" :src="photo" :key="photo"
-                        class="h-40 aspect-video rounded bg-neutral/20">
+                <!-- loop photo preview -->
+                <div class="flex flex-nowrap gap-4 overflow-x-auto">
+                    <div v-for="(photo, index) in photo_previews" :src="photo" :key="index"
+                        class="min-w-60 aspect-video overflow-hidden rounded bg-neutral/10 justify-center items-center relative">
+                        <img :src="photo" class="max-h-full max-w-full">
+
+                        <!-- actions button -->
+                        <div class="dropdown dropdown-end absolute right-0 top-0">
+                            <div tabindex="0" role="button"
+                                class="btn btn-sm px-1 bg-opacity-70 rounded-md m-1 border-0">
+                                <LucideMoreVertical :size="16" />
+                            </div>
+                            <ul tabindex="0"
+                                class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
+                                <li>
+                                    <button @click="photo_previews.splice(index, 1);"
+                                        class="btn btn-sm my-1 btn-error">
+                                        <LucideTrash2 :size="16" />
+                                        Remove
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
 
+                <!-- dummy -->
                 <div v-if="!photo_previews.length" class="h-32 lg-h-40 aspect-video rounded bg-neutral"></div>
             </div>
 
-            <input @change="handleFile" accept="image/*" type="file"
+            <input @change="handleFile" multiple accept="image/*" :disabled="photo_previews.length >= 10" type="file"
                 class="file-input file-input-bordered w-full max-w-xs" />
         </div>
 
@@ -77,9 +100,18 @@ const handleFile = (e) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-            photo_previews.value.push(reader.result);
+            if (photo_previews.value.length < 10) {
+                photo_previews.value.push(reader.result);
+            }
         }
     }
+
+    // reset
+    e.target.value = ''
+}
+
+const removePhotoPreview = (index) => {
+
 }
 
 watchEffect(() => {
