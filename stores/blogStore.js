@@ -17,6 +17,11 @@ export const useBlogStore = defineStore('blog', {
 
             this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`)
         },
+        async getById(id) {
+            const Api = useApiStore();
+
+            return await Api.get('/blog/' + id)
+        },
         async create(data, photos) {
             const Api = useApiStore();
 

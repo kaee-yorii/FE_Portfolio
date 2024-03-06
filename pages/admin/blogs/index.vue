@@ -2,7 +2,7 @@
     <div>
         <div class="font-semibold text-lg mb-4 border-b-neutral/25 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <LucideGraduationCap :size="26" />
+                <LucideAlbum :size="26" />
                 Blog
             </div>
             <NuxtLink to="/admin/blogs/new" @click="editData = null; showForm = true" class="btn btn-sm btn-neutral">
@@ -30,10 +30,10 @@
                     </div>
                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
                         <li>
-                            <button class="btn btn-sm my-1">
+                            <NuxtLink to="/admin/blogs/update" class="btn btn-sm my-1">
                                 <LucidePencilLine :size="16" />
                                 Edit
-                            </button>
+                            </NuxtLink>
                         </li>
                         <li>
                             <button @click="removeData = blog; show_remove_modal = true" class="btn btn-sm my-1 btn-error">
@@ -56,10 +56,10 @@
                     <p class="line-clamp-2 xl:line-clamp-3 ">{{ blog.content }}</p>
 
                     <div class="max-lg:hidden flex gap-2 justify-end">
-                        <button class="btn btn-xs xl:btn-md my-1 pr-2">
+                        <NuxtLink to="/admin/blogs/update" class="btn btn-xs xl:btn-md my-1 pr-2">
                             <LucidePencilLine :size="16" />
                             Edit
-                        </button>
+                        </NuxtLink>
                         <button @click="removeData = blog; show_remove_modal = true"
                             class="btn btn-xs xl:btn-md my-1 btn-error">
                             <LucideTrash2 :size="16" />

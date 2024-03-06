@@ -86,6 +86,15 @@ definePageMeta({
     middleware: ['auth']
 });
 
+const BlogStore = useBlogStore();
+const route = useRoute();
+const { id } = route.query;
+
+const data = await BlogStore.getById(id);
+console.log(data)
+
+// cehck query
+
 import Joi from 'joi';
 
 const config = useRuntimeConfig();
@@ -124,7 +133,6 @@ const handleFile = (e) => {
 }
 
 // HANDLE SAVE
-const BlogStore = useBlogStore();
 const showCreateConfirmation = ref(false);
 const fetchError = ref('');
 const isLoading = ref(false);
@@ -136,11 +144,11 @@ const handleSave = async () => {
     // hide confirmation
     showCreateConfirmation.value = false;
     try {
-        isLoading.value = true;
-        await BlogStore.create(formData.value, file_photos)
+        // isLoading.value = true;
+        // await BlogStore.create(formData.value, file_photos)
 
-        // balik ke halaman
-        navigateTo('/admin/blogs')
+        // // balik ke halaman
+        // navigateTo('/admin/blogs')
 
     } catch (error) {
         isLoading.value = false;

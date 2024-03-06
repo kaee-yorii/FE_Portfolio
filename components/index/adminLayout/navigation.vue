@@ -43,7 +43,7 @@ const menus = [
     {
         title: "Blogs",
         to: "/admin/blogs",
-        icon: resolveComponent("LucideWrench"),
+        icon: resolveComponent("LucideAlbum"),
     },
 ]
 
