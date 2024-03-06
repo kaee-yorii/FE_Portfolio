@@ -30,13 +30,14 @@
                     </div>
                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
                         <li>
-                            <NuxtLink to="/admin/blogs/update" class="btn btn-sm my-1">
+                            <NuxtLink :to="`/admin/blogs/update?id=${blog.id}`" class="btn btn-sm my-1">
                                 <LucidePencilLine :size="16" />
                                 Edit
                             </NuxtLink>
                         </li>
                         <li>
-                            <button @click="removeData = blog; show_remove_modal = true" class="btn btn-sm my-1 btn-error">
+                            <button @click="removeData = blog; show_remove_modal = true"
+                                class="btn btn-sm my-1 btn-error">
                                 <LucideTrash2 :size="16" />
                                 Remove
                             </button>
@@ -56,7 +57,7 @@
                     <p class="line-clamp-2 xl:line-clamp-3 ">{{ blog.content }}</p>
 
                     <div class="max-lg:hidden flex gap-2 justify-end">
-                        <NuxtLink to="/admin/blogs/update" class="btn btn-xs xl:btn-md my-1 pr-2">
+                        <NuxtLink :to="`/admin/blogs/update?id=${blog.id}`" class="btn btn-xs xl:btn-md my-1 pr-2">
                             <LucidePencilLine :size="16" />
                             Edit
                         </NuxtLink>
@@ -103,8 +104,6 @@ definePageMeta({
     layout: 'admin',
     middleware: ['auth']
 });
-
-
 
 const editData = ref(null);
 

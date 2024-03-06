@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div v-if="data">
         <div class="font-semibold">
             <div class="flex items-center gap-2">
-                <LucideGraduationCap :size="30" /> Create Blog
+                <LucideGraduationCap :size="30" /> Update Blog: " {{ data.title }} "
             </div>
         </div>
 
@@ -22,7 +22,7 @@
                 <div class="flex flex-nowrap gap-4 overflow-x-auto">
                     <div v-for="(photo, index) in photo_previews" :src="photo" :key="index"
                         class="min-w-60 aspect-video overflow-hidden rounded bg-neutral/10 justify-center items-center relative">
-                        <img :src="photo" class="max-h-full max-w-full">
+                        <img :src="photo.path" class="max-h-full max-w-full">
 
                         <!-- actions button -->
                         <div class="dropdown dropdown-end absolute right-0 top-0">
@@ -90,27 +90,47 @@ const BlogStore = useBlogStore();
 const route = useRoute();
 const { id } = route.query;
 
-const data = await BlogStore.getById(id);
+
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
+
+const fetchData = await BlogStore.getById(id);
+const data = ref(fetchData);
 console.log(data)
 
 // cehck query
 
 import Joi from 'joi';
 
-const config = useRuntimeConfig();
-const apiUri = config.public.apiUri;
-
 const errors = ref({
     title: '',
     content: ''
 })
 const formData = ref({
-    title: '',
-    content: ''
+    title: data.value ? data.value.title : '',
+    content: data.value ? data.value.content : ''
+});
+
+// map photo
+const currentPhotos = data.value.photos.map(photo => {
+    return {
+        path: apiUri + photo.path,
+        id: photo.id
+    }
 })
 
+console.log(currentPhotos);
+
+// PHOTO REVIEW
+// [
+//     {
+//         path: 'http://',
+
+//     }
+// ]
+
 // PHOTO PREVIEW
-const photo_previews = ref([]);
+const photo_previews = ref(currentPhotos);
 const file_photos = [];
 const handleFile = (e) => {
     for (const file of e.target.files) {
@@ -123,7 +143,10 @@ const handleFile = (e) => {
                 file_photos.push(file);
 
                 // tampung preview
-                photo_previews.value.push(reader.result);
+                photo_previews.value.push({
+                    path: reader.result,
+                    // tanpa id, krn foto baru
+                });
             }
         }
     }
@@ -131,6 +154,11 @@ const handleFile = (e) => {
     // reset input file selector
     e.target.value = ''
 }
+
+watchEffect(() => {
+    const previews = photo_previews.value
+    console.table(previews)
+})
 
 // HANDLE SAVE
 const showCreateConfirmation = ref(false);
@@ -144,11 +172,24 @@ const handleSave = async () => {
     // hide confirmation
     showCreateConfirmation.value = false;
     try {
-        // isLoading.value = true;
-        // await BlogStore.create(formData.value, file_photos)
+        isLoading.value = true;
+        const dataUpdate = { ...formData.value };
 
-        // // balik ke halaman
-        // navigateTo('/admin/blogs')
+        // tambahin foto lama
+        dataUpdate.photos = [];
+        for (const p of photo_previews.value) {
+            if (p.id != undefined) {
+                dataUpdate.photos.push(p.id)
+            }
+        }
+
+        console.log(data.value.id);
+        console.log(dataUpdate);
+        console.log(file_photos);
+
+        await BlogStore.update(data.value.id, dataUpdate, file_photos)
+
+        navigateTo('/admin/blogs')
 
     } catch (error) {
         isLoading.value = false;

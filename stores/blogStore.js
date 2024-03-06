@@ -19,8 +19,7 @@ export const useBlogStore = defineStore('blog', {
         },
         async getById(id) {
             const Api = useApiStore();
-
-            return await Api.get('/blog/' + id)
+            return Api.get('/blog/' + id)
         },
         async create(data, photos) {
             const Api = useApiStore();
@@ -38,6 +37,32 @@ export const useBlogStore = defineStore('blog', {
             }
 
             await Api.post('/blog', formData);
+        },
+        async update(id, data, new_photos) {
+            const Api = useApiStore();
+
+            data = Validate(isUpdateBlog, data);
+
+            // buat FORM DATA
+            const formData = new FormData();
+            formData.append("title", data.title);
+            formData.append("content", data.content);
+
+            // append photo lama by looping
+            for (let i = 0; i < data.photos.length; i++) {
+                const id = data.photos[i];
+                formData.append(`photos[${i}]`, id)
+            }
+
+            console.log(formData.get('title'))
+            console.log(formData.get('content'))
+
+            for (const photo of new_photos){
+                formData.append('photos', photo);
+            }
+
+            await Api.put(`/blog/${id}`, formData);
+
         },
         async remove(id) {
             const Api = useApiStore();
