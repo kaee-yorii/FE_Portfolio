@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="font-semibold">
+        <div class="font-semibold text-xl mb-4 pb-2 border-b border-b-neutral/10 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <LucideGraduationCap :size="30" /> Create Blog
             </div>

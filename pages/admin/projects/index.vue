@@ -5,10 +5,10 @@
                 <LucideBriefcase :size="26" />
                 Projects
             </div>
-            <!-- <NuxtLink to="/admin/projects/new" @click="editData = null; showForm = true" class="btn btn-sm btn-neutral">
+            <NuxtLink to="/admin/projects/new" @click="editData = null; showForm = true" class="btn btn-sm btn-neutral">
                 <LucidePlus :size="16" />
                 Add project
-            </NuxtLink> -->
+            </NuxtLink>
         </div>
 
         <div class="flex max-sm:flex-col max-sm:items-end sm:justify-between gap-2">
