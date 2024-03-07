@@ -23,14 +23,14 @@
                 </template>
             </div>
 
-            <!-- PAGINATION BOTTOM -->
+            <!-- PAGINATION BOTTOM
             <div class="flex justify-end items-end my-5">
                 <div class="join my-2">
                     <button class="join-item btn" :class="{ 'btn-disabled': page == 1 }" @click="page--">«</button>
                     <button class="join-item btn">Page {{ projects.page }}</button>
                     <button class="join-item btn" :class="{ 'btn-disabled': page == maxPage }" @click="page++">»</button>
                 </div>
-            </div>s
+            </div> -->
         </template>
 
     </div>
@@ -41,42 +41,42 @@ definePageMeta({
     middleware: ['profile']
 })
 
-// SEO and META
-const { value: useProfile } = useState('profile');
-const fullname = `${useProfile.lastName} ${useProfile.firstName}`
-const config = useRuntimeConfig();
-const apiUri = config.public.apiUri;
+// // SEO and META
+// const { value: useProfile } = useState('profile');
+// const fullname = `${useProfile.lastName} ${useProfile.firstName}`
+// const config = useRuntimeConfig();
+// const apiUri = config.public.apiUri;
 
-useSeoMeta({
-    title: useProfile.lastName + ' Projects !',
-    description: useProfile.bio,
-    ogTitle: fullname + ' Projects !',
-    ogDescription: useProfile.bio,
-    ogImage: apiUri + useProfile.avatar,
-    twitterCard: 'summary_large_image',
+// useSeoMeta({
+//     title: useProfile.lastName + ' Projects !',
+//     description: useProfile.bio,
+//     ogTitle: fullname + ' Projects !',
+//     ogDescription: useProfile.bio,
+//     ogImage: apiUri + useProfile.avatar,
+//     twitterCard: 'summary_large_image',
 
-})
-// END: // SEO and META
+// })
+// // END: // SEO and META
 
-// ambil data projects melalui server nuxt
-const projects = ref(null);
-const maxPage = ref(1);
-const page = ref(1);
+// // ambil data projects melalui server nuxt
+// const projects = ref(null);
+// const maxPage = ref(1);
+// const page = ref(1);
 
-const fetchData = async () => {
-    projects.value = await $fetch('/api/project?page=' + page.value);
-    maxPage.value = projects.value.maxPage;
-}
+// const fetchData = async () => {
+//     projects.value = await $fetch('/api/project?page=' + page.value);
+//     maxPage.value = projects.value.maxPage;
+// }
 
-// registration on before mount
-onBeforeMount(async () => {
-    await fetchData();
-});
+// // registration on before mount
+// onBeforeMount(async () => {
+//     await fetchData();
+// });
 
-// watch effect
-watchEffect(async () => {
-    await fetchData();
-});
+// // watch effect
+// watchEffect(async () => {
+//     await fetchData();
+// });
 
 
 </script>

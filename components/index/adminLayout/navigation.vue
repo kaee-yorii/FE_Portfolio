@@ -27,7 +27,7 @@ const menus = [
     },
     {
         title: "Project",
-        to: "/admin/project",
+        to: "/admin/projects",
         icon: resolveComponent("LucideBriefcase"),
     },
     {
