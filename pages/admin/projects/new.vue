@@ -2,7 +2,7 @@
     <div>
         <div class="font-semibold text-xl mb-4 pb-2 border-b border-b-neutral/10 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <LucideBriefCase :size="30" /> New Project
+                <LucideBriefcase :size="30" /> New Project
             </div>
         </div>
 
@@ -18,25 +18,57 @@
         <div class="flex gap-2">
             <div class="form-control">
                 <label class="label cursor-pointer flex justify-start gap-2">
-                    <input v-model="formData.status" type="radio" name="status" value="ON_PROGRESS" class="radio checked:bg-red-500" checked />
+                    <input v-model="formData.status" type="radio" name="status" value="ON_PROGRESS"
+                        class="radio checked:bg-red-500" checked />
                     <span class="label-text">ON PROGRESS</span>
                 </label>
             </div>
-    
+
             <div class="form-control">
                 <label class="label cursor-pointer flex justify-start gap-2">
-                    <input v-model="formData.status" type="radio" name="status" value="MAINTENANCE" class="radio checked:bg-red-500" checked />
+                    <input v-model="formData.status" type="radio" name="status" value="MAINTENANCE"
+                        class="radio checked:bg-red-500" checked />
                     <span class="label-text">MAINTENANCE</span>
                 </label>
             </div>
-    
+
             <div class="form-control">
                 <label class="label cursor-pointer flex justify-start gap-2">
-                    <input v-model="formData.status" type="radio" name="status" value="COMPLETE" class="radio checked:bg-red-500" checked />
+                    <input v-model="formData.status" type="radio" name="status" value="COMPLETE"
+                        class="radio checked:bg-red-500" checked />
                     <span class="label-text">COMPLETE</span>
                 </label>
             </div>
         </div>
+
+        <div class="flex gap-3">
+            <div class="form-control w-min text-nowrap">
+                <div class="label label-text pb-0">Start Project</div>
+                <DatePicker v-model="formData.startDate" color="indigo">
+                    <template #default="{ togglePopover }">
+                        <button @click="togglePopover" class="btn btn-outline border-neutral/25">
+                            {{ dayjs(formData.startDate).format('D MMMM YYYY') }}
+                        </button>
+                    </template>
+                </DatePicker>
+            </div>
+            <div class="form-control w-min text-nowrap">
+                <div class="label label-text pb-0">End Project</div>
+                <div class="flex items-center gap-3">
+                </div>
+                <DatePicker v-model="formData.endDate" color="indigo">
+
+                    <template #default="{ togglePopover }">
+                        <button @click="togglePopover" class="btn btn-outline border-neutral/25" :disabled="isPresent">
+                            {{ isPresent ? "-" : dayjs(formData.endDate).format('D MMMM YYYY') }}
+                        </button>
+                    </template>
+                </DatePicker>
+                <input type="checkbox" v-model="isPresent" class="checkbox" @change="handlePresent" /> Present
+            </div>
+
+        </div>
+
 
         <div class="grid sm:grid-cols-2 gap-2">
             <label class="form-control w-full max-w-xs gap-4">
@@ -84,6 +116,7 @@
 
 <script setup>
 import dayjs from 'dayjs';
+import { DatePicker } from 'v-calendar';
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
@@ -95,12 +128,17 @@ const formData = ref({
     title: '',
     description: '',
     startDate: new Date(),
-    endDate: null,
+    endDate: new Date(),
     status: 'ON_PROGRESS',
     url: '',
     github: '',
     gitlab: '',
     company: ''
-
 })
+
+const isPresent = ref(true);
+const handlePresent = (e) => {
+    const checked = r.target.checked;
+    formData.value.endDate = checked ? null : new Date()
+}
 </script>
