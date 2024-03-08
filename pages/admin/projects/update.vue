@@ -22,7 +22,7 @@
                 <div class="flex flex-nowrap gap-4 overflow-x-auto">
                     <div v-for="(photo, i) in photo_previews" :key="(photo, i)"
                         class="min-w-60 aspect-video overflow-hidden rounded bg-neutral/10 justify-center items-center relative">
-                        <img :src="photo" class="max-h-full max-w-full">
+                        <img :src="photo.path" class="max-h-full max-w-full">
 
                         <!-- actions button -->
                         <div class="dropdown dropdown-end absolute right-0 top-0">
@@ -201,6 +201,9 @@ const ProjectStore = useProjectStore();
 const route = useRoute();
 const { id } = route.query;
 
+const config = useRuntimeConfig();
+const apiUri = config.public.apiUri;
+
 const data = await ProjectStore.getById(id);
 console.log(data)
 
@@ -209,22 +212,21 @@ definePageMeta({
     middleware: ['auth']
 });
 
-
 const SkillStore = useSkillStore();
 onBeforeMount(async () => {
     await SkillStore.getSkillsByCategory();
 });
 
 const formData = ref({
-    title: data ? data.title : '',
-    description: data ? data.description : '',
-    startDate: data ? data.startDate : new Date(),
-    endDate: data ? data.endDate : new Date(),
-    status: data ? data.status : 'ON_PROGRESS',
-    url: data ? data.url : '',
-    github: data ? data.github : '',
-    gitlab: data ? data.gitlab : '',
-    company: data ? data.company : ''
+    title: data.title || '',
+    description: data.description || '',
+    startDate: data.startDate || new Date(),
+    endDate: data.endDate || new Date(),
+    status: data.status || 'ON_PROGRESS',
+    url: data.url || '',
+    github: data.github || '',
+    gitlab: data.gitlab || '',
+    company: data.company || ''
 })
 
 const isPresent = ref(true);
@@ -235,7 +237,7 @@ const handlePresent = (e) => {
 
 const errors = ref({})
 const showSkillSelector = ref(false);
-const selectedSkills = ref([])
+const selectedSkills = ref(data.skills)
 const addSkill = (skill) => {
     const index = selectedSkills.value.findIndex(s => {
         return s.id == skill.id
@@ -253,8 +255,16 @@ const addSkill = (skill) => {
     console.log(index)
 }
 
+// map photo
+const currentPhotos = data.photos.map(photo => {
+    return {
+        path: apiUri + photo.path,
+        id: photo.id
+    }
+})
+
 // PHOTO PREVIEW
-const photo_previews = ref([]);
+const photo_previews = ref(currentPhotos);
 const file_photos = [];
 const handleFile = (e) => {
     for (const file of e.target.files) {
@@ -267,7 +277,9 @@ const handleFile = (e) => {
                 file_photos.push(file);
 
                 // tampung preview
-                photo_previews.value.push(reader.result);
+                photo_previews.value.push({
+                    path: reader.result
+                });
             }
         }
     }
@@ -291,15 +303,27 @@ const handleSave = async () => {
 
     try {
         isLoading.value = false
-        const dataSave = { ...formData.value };
+        const dataUpdate = { ...formData.value };
 
         // end data jika null, jadikan
-        if (!dataSave.endDate) dataSave.endDate = '';
+        if (!dataUpdate.endDate) dataUpdate.endDate = '';
 
         // skill -> array of id
         const skill_ids = selectedSkills.value.map(s => s.id);
 
-        await ProjectStore.create(dataSave, skill_ids, file_photos)
+        // tambahin foto lama
+        dataUpdate.photos = [];
+        for (const p of photo_previews.value) {
+            if (p.id != undefined) {
+                dataUpdate.photos.push(p.id)
+            }
+        }
+
+        console.log(dataUpdate)
+        console.log(skill_ids)
+        console.log(file_photos)
+
+        await ProjectStore.create(id, dataUpdate, skill_ids, file_photos)
 
         // balik ke halaman
         navigateTo('/admin/projects')

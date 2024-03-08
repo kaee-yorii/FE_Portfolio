@@ -21,66 +21,50 @@ export const useProjectStore = defineStore('project', {
             const Api = useApiStore();
             return Api.get('/project/' + id)
         },
-        async create(data, skills, photos) {
-            console.log(photos)
+        async update(id, data, skills, photos) {
             const Api = useApiStore();
 
+            // validasi
             data = Validate(isCreateProject, data);
+
+            // photo lama 
+            const old_photos = data.photos;
+            delete data.photos
 
             // buat FORM DATA
             const formData = new FormData();
-            // key -> value
-            const array_keys = Object.keys(data);
-            console.log(array_keys);
 
+            // key => value
+            const array_keys = Object.keys(data);
             for (const key of array_keys) {
-                // append by key & value
-                formData.append(key, data[key])
+                // append by key and value
+                formData.append(key, data[key]);
+            }
+
+            // append old photos
+            for (let i = 0; i < old_photos.length; i++) {
+                const photo_id = old_photos[i];
+                formData.append(`photos[${i}]`, photo_id)
             }
 
             for (let i = 0; i < skills.length; i++) {
                 const id = skills[i];
-                
                 formData.append(`skills[${i}]`, id)
             }
 
-            // append foto dgn loop
+            // append foto baru
             for (const photo of photos) {
-            formData.append("photos", photo)
+                formData.append('photos', photo);
             }
 
-            await Api.post('/project', formData);
+            await Api.put(`/project/${id}`, formData)
+
         },
-        // async update(id, data, new_photos) {
-        //     const Api = useApiStore();
+    },
+    async remove(id) {
+        const Api = useApiStore();
 
-        //     data = Validate(isUpdateProject, data);
-
-        //     // buat FORM DATA
-        //     const formData = new FormData();
-        //     formData.append("title", data.title);
-        //     formData.append("content", data.content);
-
-        //     // append photo lama by looping
-        //     for (let i = 0; i < data.photos.length; i++) {
-        //         const id = data.photos[i];
-        //         formData.append(`photos[${i}]`, id)
-        //     }
-
-        //     console.log(formData.get('title'))
-        //     console.log(formData.get('content'))
-
-        //     for (const photo of new_photos){
-        //         formData.append('photos', photo);
-        //     }
-
-        //     await Api.put(`/project/${id}`, formData);
-
-        // },
-        async remove(id) {
-            const Api = useApiStore();
-
-            await Api.delete('/project/' + id)
-        }
+        await Api.delete('/project/' + id)
     }
-})
+}
+)

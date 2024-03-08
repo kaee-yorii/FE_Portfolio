@@ -59,7 +59,7 @@
 
                     <div v-else class="bg-neutral/20 aspect-video w-full"></div>
 
-                    <div class="absolute badge-sm left-1 bottom-1" v-if="project.skills.length">{{ project.skills.length }} Skills</div>
+                    <div class="absolute badge badge-accent left-1 bottom-1" v-if="project.skills.length">{{ project.skills.length }} Skills</div>
                 </figure>
                 <div class="card-body">
                     <h2 class="card-title" v-if="project.company">{{ project.company }}</h2>
@@ -83,7 +83,7 @@
 
         <div v-if="ProjectStore.projects.length == 0" class="flex flex-col items-center py-28">
             <LucideShieldAlert :size="96" />
-            <span class="font-semibold py-4">Data is not found</span>
+            <span class="font-semibold py-4">Dianya udh sama org lain :v</span>
         </div>
 
         <div class="flex justify-end mt-2">
