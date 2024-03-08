@@ -17,27 +17,40 @@ export const useProjectStore = defineStore('project', {
 
             this.data = await Api.get(`/projects?limit=12&page=${page}&search=${search}`)
         },
-        // async getById(id) {
-        //     const Api = useApiStore();
-        //     return Api.get('/project/' + id)
-        // },
-        // async create(data, photos) {
-        //     const Api = useApiStore();
+        async getById(id) {
+            const Api = useApiStore();
+            return Api.get('/project/' + id)
+        },
+        async create(data, skills, photos) {
+            console.log(photos)
+            const Api = useApiStore();
 
-        //     data = Validate(isCreateProject, data);
+            data = Validate(isCreateProject, data);
 
-        //     // buat FORM DATA
-        //     const formData = new FormData();
-        //     formData.append("title", data.title);
-        //     formData.append("content", data.content);
+            // buat FORM DATA
+            const formData = new FormData();
+            // key -> value
+            const array_keys = Object.keys(data);
+            console.log(array_keys);
 
-        //     // appent foto dgn loop
-        //     for (const photo of photos) {
-        //         formData.append("photos", photo)
-        //     }
+            for (const key of array_keys) {
+                // append by key & value
+                formData.append(key, data[key])
+            }
 
-        //     await Api.post('/project', formData);
-        // },
+            for (let i = 0; i < skills.length; i++) {
+                const id = skills[i];
+                
+                formData.append(`skills[${i}]`, id)
+            }
+
+            // append foto dgn loop
+            for (const photo of photos) {
+            formData.append("photos", photo)
+            }
+
+            await Api.post('/project', formData);
+        },
         // async update(id, data, new_photos) {
         //     const Api = useApiStore();
 

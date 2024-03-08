@@ -14,7 +14,7 @@
             </div>
         </label>
 
-        <div>
+        <div class="my-4">
             <div class="label label-text pb-0">Photos</div>
 
             <div class="overflow-auto">
@@ -62,7 +62,7 @@
             </div>
         </label>
 
-        <div class="flex justify-end gap-2 my-4">
+        <div >
             <NuxtLink to="/admin/blogs" class="btn">
                 Cancel
             </NuxtLink>

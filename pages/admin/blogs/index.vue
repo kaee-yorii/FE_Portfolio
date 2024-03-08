@@ -74,7 +74,7 @@
 
         <div v-if="BlogStore.blogs.length == 0" class="flex flex-col items-center py-28">
             <LucideShieldAlert :size="96" />
-            <span class="font-semibold py-4">Data is not found</span>
+            <span class="font-semibold py-4">Dianya udh sama org lain :v</span>
         </div>
 
         <div class="flex justify-end mt-2">

@@ -32,10 +32,10 @@
 
                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
                         <li>
-                            <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1">
+                            <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-sm my-1">
                                 <LucidePencilLine :size="16" />
                                 Edit
-                            </NuxtLink> -->
+                            </NuxtLink>
                         </li>
                         <li>
                             <button @click="removeData = project; show_remove_modal = true"
@@ -66,10 +66,10 @@
                     <p class="line-clamp-2">{{ project.description }}</p>
 
                     <div class="max-lg:hidden flex gap-2 justify-end">
-                        <!-- <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-xs xl:btn-md my-1 pr-2">
+                        <NuxtLink :to="`/admin/projects/update?id=${project.id}`" class="btn btn-xs xl:btn-md my-1 pr-2">
                             <LucidePencilLine :size="16" />
                             Edit
-                        </NuxtLink> -->
+                        </NuxtLink>
                         <button @click="removeData = project; show_remove_modal = true"
                             class="btn btn-xs xl:btn-md my-1 btn-error">
                             <LucideTrash2 :size="16" />
@@ -101,7 +101,6 @@
                     removeData.title }} ?</span>
         </AdminUserModalConfirm>
 
-        <!-- <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" /> -->
     </div>
 </template>
 

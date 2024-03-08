@@ -54,9 +54,7 @@ export const useBlogStore = defineStore('blog', {
                 formData.append(`photos[${i}]`, id)
             }
 
-            console.log(formData.get('title'))
-            console.log(formData.get('content'))
-
+            // appent foto dgn loop
             for (const photo of new_photos){
                 formData.append('photos', photo);
             }

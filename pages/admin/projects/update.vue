@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div v-if="data">
         <div class="font-semibold text-xl mb-4 pb-2 border-b border-b-neutral/10 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <LucideBriefcase :size="30" /> New Project
+                <LucideBriefcase :size="30" /> Update Project: " {{ data.title }} "
             </div>
         </div>
 
@@ -197,12 +197,18 @@ import dayjs from 'dayjs';
 import { DatePicker } from 'v-calendar';
 import Joi from 'joi';
 
+const ProjectStore = useProjectStore();
+const route = useRoute();
+const { id } = route.query;
+
+const data = await ProjectStore.getById(id);
+console.log(data)
+
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
 });
 
-const ProjectStore = useProjectStore();
 
 const SkillStore = useSkillStore();
 onBeforeMount(async () => {
@@ -210,15 +216,15 @@ onBeforeMount(async () => {
 });
 
 const formData = ref({
-    title: '',
-    description: '',
-    startDate: new Date(),
-    endDate: new Date(),
-    status: 'ON_PROGRESS',
-    url: '',
-    github: '',
-    gitlab: '',
-    company: ''
+    title: data ? data.title : '',
+    description: data ? data.description : '',
+    startDate: data ? data.startDate : new Date(),
+    endDate: data ? data.endDate : new Date(),
+    status: data ? data.status : 'ON_PROGRESS',
+    url: data ? data.url : '',
+    github: data ? data.github : '',
+    gitlab: data ? data.gitlab : '',
+    company: data ? data.company : ''
 })
 
 const isPresent = ref(true);
