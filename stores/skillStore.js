@@ -10,8 +10,18 @@ export const useSkillStore = defineStore('skill', {
     actions: {
         async get() {
             const Api = useApiStore();
+            const delayMinimal = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 2000);
+            })
 
-            this.skills = await Api.get('/skills');
+            const response = await Promise.all([
+                Api.get('/skills'),
+                delayMinimal
+            ]);
+
+            this.skills = response[0];
 
             // RETURN VOID
         },
@@ -31,7 +41,7 @@ export const useSkillStore = defineStore('skill', {
         },
         async remove(id) {
             const Api = useApiStore();
-            
+
             await Api.delete('/skill/' + id);
         },
         async create(data) {

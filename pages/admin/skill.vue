@@ -38,7 +38,7 @@
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="SkillStore.skills">
                     <!-- row 1 -->
                     <tr v-for="skill in dataTable" :key="skill.id">
                         <th>
@@ -47,7 +47,8 @@
                         <td class="text-center">{{ skill.title }}</td>
                         <td class="text-center">{{ skill.category.title }}</td>
                         <div class="pl-6">
-                            <td class="btn btn-transparent btn-circle shadow-md">{{ skill._count.projects }}</td>
+                            <td class="btn btn-transparent btn-circle shadow-md md:mx-auto">{{ skill._count.projects }}
+                            </td>
                         </div>
                         <td>
                             <div class="flex justify-center gap-2">
@@ -63,6 +64,35 @@
                         </td>
                     </tr>
                 </tbody>
+
+                <!-- SKELETON TABLE -->
+                <tbody v-else>
+                    <!-- tampilkan skeleton -->
+                    <tr v-for="n in 10" :key="n">
+                        <th>
+                            <div class="skeleton rounded-full"></div>
+                        </th>
+                        <td>
+                            <div class="flex gap-3 justify-center">
+                                <div class="skeleton w-20 h-6"></div>
+                                <div class="skeleton w-20 h-6"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="skeleton w-20 h-6 mx-auto"></div>
+                        </td>
+                        <td>
+                            <div class="skeleton w-20 h-6 mx-auto"></div>
+                        </td>
+                        <td>
+                            <div class="flex justify-center gap-3">
+                                <div class="skeleton rounded-full w-8 h-8"></div>
+                                <div class="skeleton rounded-full w-8 h-8"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
             </table>
         </div>
 

@@ -11,7 +11,8 @@
             </button>
         </div>
 
-        <input v-model="filter" type="text" placeholder="Type here" class="input input-sm input-bordered w-full max-w-xs" />
+        <input v-model="filter" type="text" placeholder="Type here"
+            class="input input-sm input-bordered w-full max-w-xs" />
 
         <div class="overflow-x-auto max-lg:hidden">
             <table class="table table-zebra">
@@ -25,7 +26,7 @@
                         <th class="text-center">Remove</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="EduStore.educations">
                     <!-- row 1 -->
                     <tr v-for="edu in dataTable" :key="edu.id">
                         <td>{{ edu.institutionName }}</td>
@@ -34,20 +35,23 @@
                         <td class="text-center">{{ edu.degree }}</td>
                         <td>
                             <div class="flex gap-2 justify-center">
-                                <button @click="editData = edu; showForm = true" class="btn btn-neutral">
+                                <button @click="editData = edu; showForm = true" class="btn btn-circle btn-neutral">
                                     <LucidePencilLine :size="16" />
                                 </button>
-                                <button class="btn btn-error" @click="show_remove_modal = true; removeData = edu">
+                                <button class="btn btn-circle btn-error"
+                                    @click="show_remove_modal = true; removeData = edu">
                                     <LucideTrash2 :size="16" />
                                 </button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
+                <!-- SKELETON TABLE -->
+                <AdminEducationSkeletonTable v-else />
             </table>
         </div>
-
-        <div class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-2">
+        <!-- SKELETON MOBILE -->
+        <div v-if="EduStore.educations" class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-2">
             <div v-for="edu in dataTable" :key="edu.id" class="card bg-base-100 shadow-xl">
                 <div class="card-body max-sm:p-4">
 
@@ -61,7 +65,8 @@
                             <div tabindex="0" role="button" class="btn m-1">
                                 <LucideMoreVertical :size="16" />
                             </div>
-                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
+                            <ul tabindex="0"
+                                class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32">
                                 <li><button @click="editData = edu; showForm = true" class="btn btn-sm my-1">
                                         <LucidePencilLine :size="16" />
                                         Edit
@@ -74,8 +79,6 @@
                             </ul>
                         </div>
                     </div>
-
-
                     <div class="grid grid-cols-10 gap-3">
                         <button class="col-span-6 btn flex justify-between">
                             <div>Major:</div>
@@ -89,19 +92,20 @@
                 </div>
             </div>
         </div>
+        <AdminEducationSkeletonMobile v-else />
 
         <!-- modal confirmation -->
         <AdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
             @saved="handleRemove">
             are you sure to remove
             <span v-if="removeData" class="font-bold">{{
-                removeData.institutionName }} ?</span>
+                    removeData.institutionName }} ?</span>
         </AdminUserModalConfirm>
 
         <!-- modal success alert -->
-        <LazyAdminModalSuccess v-if="showForm" :show="show_success_modal" @close="show_success_modal = false" />
+        <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
 
-        <LazyAdminEducationForm v-if="showForm" :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
+        <AdminEducationForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
     </div>
 </template>
 
