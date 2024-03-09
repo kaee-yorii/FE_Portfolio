@@ -38,7 +38,7 @@
                     <button class="join-item btn">Page {{ blogs.page }}</button>
                     <button class="join-item btn" :class="{ 'btn-disabled': page == maxPage }" @click="page++">»</button>
                 </div>
-            </div>s
+            </div>
         </template>
 
     </div>

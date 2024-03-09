@@ -87,17 +87,17 @@
         </div>
 
         <!-- modal confirmation -->
-        <AdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
+        <LazyAdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
             @saved="handleRemove">
             are you sure to remove
             <span v-if="removeData" class="font-bold">{{
                 removeData.title }} ?</span>
-        </AdminUserModalConfirm>
+        </LazyAdminUserModalConfirm>
 
         <!-- modal success alert -->
-        <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
+        <LazyAdminModalSuccess v-if="showForm" :show="show_success_modal" @close="show_success_modal = false" />
 
-        <AdminExperienceForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
+        <LazyAdminExperienceForm v-if="showForm" :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
     </div>
 </template>
 

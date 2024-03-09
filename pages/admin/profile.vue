@@ -10,7 +10,7 @@
 
             <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Social Media" />
             <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-                <AdminProfileSocialMedia v-if="ProfileStore.profile != null" />
+                <LazyAdminProfileSocialMedia v-if="ProfileStore.profile != null" />
             </div>
 
         </div>

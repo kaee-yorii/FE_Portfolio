@@ -99,9 +99,9 @@
         </AdminUserModalConfirm>
 
         <!-- modal success alert -->
-        <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
+        <LazyAdminModalSuccess v-if="showForm" :show="show_success_modal" @close="show_success_modal = false" />
 
-        <AdminEducationForm :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
+        <LazyAdminEducationForm v-if="showForm" :data="editData" :show="showForm" @close="showForm = false" @saved="saved" />
     </div>
 </template>
 

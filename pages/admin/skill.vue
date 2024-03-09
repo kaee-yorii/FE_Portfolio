@@ -108,16 +108,16 @@
         </div>
 
         <!-- modal confirmation -->
-        <AdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
+        <LazyAdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
             @saved="handleRemove">
             Are You Sure To Remove
             <span v-if="removeData" class="font-bold">{{ removeData.title }} ? </span>
-        </AdminUserModalConfirm>
+        </LazyAdminUserModalConfirm>
 
         <!-- modal success alert -->
-        <AdminModalSuccess :show="show_success_modal" @close="show_success_modal = false" />
+        <AdminModalSuccess v-if="showForm" :show="show_success_modal" @close="show_success_modal = false" />
 
-        <AdminSkillForm :show="showForm" :data="editData" @close="showForm = false" @saved="saved" />
+        <LazyAdminSkillForm v-if="showForm" :data="editData" @close="showForm = false" @saved="saved" />
 
     </div>
 </template>
