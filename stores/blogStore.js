@@ -13,9 +13,21 @@ export const useBlogStore = defineStore('blog', {
     },
     actions: {
         async get(page = 1, search = '') {
-            const Api = useApiStore();
+            const Api = useApiStore(); 
+            const delayMinimal = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 2000);
+            })
 
-            this.data = await Api.get(`/blogs?limit=12&page=${page}&search=${search}`)
+            const response = await Promise.all([
+                Api.get(`/blogs?limit=12&page=${page}&search=${search}`),
+                delayMinimal
+            ]);
+
+            this.blogs = response[0];
+
+            // RETURN VOID
         },
         async getById(id) {
             const Api = useApiStore();

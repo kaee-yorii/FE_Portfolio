@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div v-if="false" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
             <div v-for="blog in BlogStore.blogs" :key="blog.id"
                 class="card card-compact bg-base-100 shadow-xl overflow-hidden relative">
                 <div class="lg:hidden dropdown dropdown-end absolute right-0 top-0">
@@ -71,6 +71,7 @@
                 </div>
             </div>
         </div>
+        <Admin v-else/>
 
         <div v-if="BlogStore.blogs.length == 0" class="flex flex-col items-center py-28">
             <LucideShieldAlert :size="96" />
@@ -97,6 +98,7 @@
 </template>
 
 <script setup>
+
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
