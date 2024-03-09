@@ -64,39 +64,11 @@
                         </td>
                     </tr>
                 </tbody>
-
-                <!-- SKELETON TABLE -->
-                <tbody v-else>
-                    <!-- tampilkan skeleton -->
-                    <tr v-for="n in 10" :key="n">
-                        <th>
-                            <div class="skeleton rounded-full"></div>
-                        </th>
-                        <td>
-                            <div class="flex gap-3 justify-center">
-                                <div class="skeleton w-20 h-6"></div>
-                                <div class="skeleton w-20 h-6"></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="skeleton w-20 h-6 mx-auto"></div>
-                        </td>
-                        <td>
-                            <div class="skeleton w-20 h-6 mx-auto"></div>
-                        </td>
-                        <td>
-                            <div class="flex justify-center gap-3">
-                                <div class="skeleton rounded-full w-8 h-8"></div>
-                                <div class="skeleton rounded-full w-8 h-8"></div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-
+                <AdminSkillSkeletonTable v-else />
             </table>
         </div>
 
-        <div class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-2">
+        <div v-if="SkillStore.skills" class="lg:hidden flex flex-col gap-2 sm:gap-4 pt-2">
             <div v-for="skill in dataTable" :key="skill.id" class="card bg-base-100 shadow-xl">
                 <div class="card-body max-sm:p-4">
                     <div class="flex justify-between">
@@ -126,7 +98,6 @@
                             </ul>
                         </div>
                     </div>
-
                     <div class="flex grow justify-between items-center px-2">
                         <div>Amount projects :</div>
                         <div
@@ -136,6 +107,7 @@
                 </div>
             </div>
         </div>
+        <AdminSkillSkeletonMobile v-else />
 
         <!-- modal confirmation -->
         <LazyAdminUserModalConfirm :show="show_remove_modal" text_confirm="Remove" @close="show_remove_modal = false"
