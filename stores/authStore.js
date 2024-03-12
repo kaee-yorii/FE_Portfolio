@@ -51,6 +51,24 @@ export const useAuthStore = defineStore('auth', {
 
             // fetch user update, dan update statenya 
             this.user = await Api.put('/user', data);
+        },
+        async isUserExist(){
+            const Api = useApiStore();
+
+            const {isExist} = await Api.get('/is_user_exist');
+
+            return isExist;
+        },
+        async createFirstUser(data){
+            const Api = useApiStore();
+
+            // validasi
+            data= Validate(createUserValidation, data);
+
+            // fetch
+            await Api.post('/first_user', data);
+
+            // RETURN VOID
         }
     }
 });
